@@ -290,3 +290,124 @@
         }
     }
 }
+@media screen and(min-width:768px) and (max-width: 992px) {
+    .functionMobile {
+        display: block;
+    }
+    .headerFunctionMobile {
+        display: flex !important;
+    }
+    .headerContainer {
+        display: flex;
+        justify-content: space-between;
+        flex-flow: wrap;
+        position: relative;
+       
+        .headerFunction {
+            display: none !important;
+        }
+    }
+    .functionMobile {
+        button {
+            font-size: 25px;
+            margin-right: 10px;
+            padding: 0 10px;
+            padding-left: 20px;
+            background: #642ab5;
+            border: none;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    .functionContainer {
+        .link {
+            padding: 5px 20px;
+            font-size: 15px;
+            background: #642ab5;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            transform: translateY(10px) !important;
+            a {
+                color: white;
+            }
+        }
+    }
+    .navbarChoice {
+        display: none;
+    }
+    .logobrand {
+        display: none;
+    }
+    .logobrandMobile {
+        padding-top: 5px;
+        font-size: 25px;
+        font-weight: bold;
+        color: white;
+        &:hover {
+            color: white;
+        }
+    }
+    .helloUserMobile {
+        margin-bottom: 0;
+        font-size: 15px;
+        font-weight: bold;
+        padding-top: 15px;
+        padding-right: 0px;
+    }
+    .login{
+        padding-top:10px ;
+        font-size: 18px;
+      
+        &:hover{
+            background: #642ab5;
+            color: white;
+            
+        }
+    }
+    .cart {
+        font-size: 20px;
+        color: white;
+        padding: 10px 10px;
+        padding-right: 20px;
+        &:hover {
+            background: none;
+            color: white;
+        }
+    }
+    .flexBreak {
+        width: 100%;
+    }
+    .searchGroupMobile {
+        width: 100%;
+        padding: 5px 20px;
+
+        .search {
+            position: relative;
+            input {
+                width: 100%;
+                height: 40px;
+                border-radius: 10px;
+                color: rgb(70, 69, 69);
+                padding-left: 20px;
+                padding-right: 50px;
+                border: none;
+                &:focus {
+                    outline: none;
+                }
+            }
+            .searchIcon {
+                position: absolute;
+                top: 0px;
+                line-height: 40px;
+                height: 100%;
+                border-left: 1px solid rgb(70, 69, 69);
+                padding-left: 10px;
+                right: 10px;
+                font-size: 20px;
+                color: rgb(70, 69, 69);
+            }
+        }
+    }
+}

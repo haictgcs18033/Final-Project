@@ -49,8 +49,14 @@
         display: none;
     }
 }
-@media screen and(min-width:375px) and (max-width: 767px) {
+@media screen  and (max-width: 767px) {
     .carouselContainer {
         display: none;
     }
 }
+@media screen  and (max-width: 576px) {
+    .carouselContainer {
+        display: none;
+    }
+}
+
