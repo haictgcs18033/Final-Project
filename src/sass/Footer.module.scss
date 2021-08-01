@@ -1,0 +1,253 @@
+.footerContainer {
+    background: #3e2069;
+    display: flex;
+    justify-content: space-around;
+    padding: 5em 0;
+    h1 {
+        margin-bottom: 0;
+    }
+    h3,
+    p {
+        margin-bottom: 0;
+    }
+    h3 {
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+    p {
+        font-size: 15px;
+    }
+    .contact {
+        p {
+            font-size: 15px;
+            margin-top: 12px;
+        }
+    }
+    .info,
+    .service,
+    .account,
+    .newsletter {
+        h3 {
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+    }
+    .newsletter {
+        .signupBox {
+            display: flex;
+            position: relative;
+            margin: 20px 0;
+            i {
+                position: absolute;
+                top: 0;
+                left: 10px;
+                color: rgb(70, 69, 69);
+                font-size: 20px;
+                line-height: 40px;
+            }
+            input {
+                padding-left: 40px;
+                width: 200px;
+                height: 40px;
+                border: none;
+                color: rgb(70, 69, 69);
+                &:focus {
+                    outline: none;
+                }
+            }
+            button {
+                width: 80px;
+                background: #177ddc;
+                height: 40px;
+                border: none;
+                font-weight: bold;
+            }
+        }
+        .social {
+            margin-top: 10px;
+            i {
+                margin-right: 15px;
+                font-size: 30px;
+            }
+        }
+    }
+}
+.footerContainerMobile {
+    display: none;
+    background: #3e2069;
+    padding: 5em 0;
+    .contact {
+        padding:0 30px;
+        p {
+            font-size: 15px;
+            margin-top: 12px;
+        }
+    }
+  
+    .newsletter {
+        .signupBox {
+            display: flex;
+            position: relative;
+            margin: 20px 0;
+            i {
+                position: absolute;
+                top: 0;
+                left: 10px;
+                color: rgb(70, 69, 69);
+                font-size: 20px;
+                line-height: 40px;
+            }
+            input {
+                padding-left: 40px;
+                width: 90%;
+                height: 40px;
+                border: none;
+                color: rgb(70, 69, 69);
+                &:focus {
+                    outline: none;
+                }
+            }
+            button {
+                width: 80px;
+                background: #177ddc;
+                height: 40px;
+                border: none;
+                font-weight: bold;
+            }
+        }
+        .social {
+            margin-top: 10px;
+            i {
+                margin-right: 15px;
+                font-size: 30px;
+            }
+        }
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .footerContainer {
+        .contact,
+        .info,
+        .service,
+        .account,
+        .newsletter {
+            margin: 0 10px;
+        }
+        .contact {
+            width: 240px;
+            p {
+                font-size: 14px;
+            }
+        }
+        .info,
+        .service,
+        .account,
+        .newsletter {
+            h3 {
+                font-size: 16px;
+            }
+            p {
+                font-size: 14px;
+            }
+        }
+    }
+}
+@media screen and (min-width: 800px) and (max-width: 991px) {
+    // Ki thuat tach flex ra 1 hang moi
+    .footerContainer {
+        display: flex;
+        flex-flow: wrap;
+        .flexBreak {
+            width: 100%;
+        }
+        .contact,
+        .info,
+        .service,
+        .account {
+            width: 400px;
+            margin-bottom: 40px;
+        }
+        .newsletter {
+            padding: 0 30px;
+            width: 100%;
+            .signupBox {
+                input {
+                    width: 90%;
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 799px) {
+    .footerContainer {
+        display: flex;
+        flex-flow: wrap;
+        .flexBreak {
+            width: 100%;
+        }
+        .contact,
+        .info,
+        .service,
+        .account {
+            width: 300px;
+            margin-bottom: 40px;
+        }
+
+        .newsletter {
+            padding: 0 30px;
+            width: 100%;
+            .signupBox {
+                input {
+                    width: 90%;
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .footerContainer {
+        display: flex;
+        flex-flow: wrap;
+        .flexBreak {
+            width: 100%;
+        }
+        .contact {
+            p {
+                font-size: 13px;
+            }
+        }
+        .contact,
+        .info,
+        .service,
+        .account {
+            width: 200px;
+            margin-bottom: 40px;
+            h3 {
+                font-size: 15px;
+            }
+            p {
+                font-size: 13px;
+            }
+        }
+
+        .newsletter {
+            padding: 0 30px;
+            width: 100%;
+            .signupBox {
+                input {
+                    width: 90%;
+                }
+            }
+        }
+    }
+}
+@media screen and(max-width:575px) {
+    .footerContainer{
+        display: none;
+    }
+    .footerContainerMobile{
+        display: block;
+    }
+}

@@ -1,0 +1,248 @@
+.allProductContainer {
+    height: 100%;
+    margin: 30px auto;
+    .productTitle {
+        font-size: 30px;
+        color: white;
+        border-bottom: 2px solid white;
+        padding-bottom: 10px;
+    }
+    .productPosition {
+        display: flex;
+        .productFilter {
+            flex-grow: 0.5;
+            margin-right: 20px;
+        }
+        .product {
+            width: 765px;
+            flex-grow: 1;
+            .productSort {
+                display: flex;
+                justify-content: space-between;
+                border-bottom: 1px solid white;
+                padding-bottom: 10px;
+                p {
+                    line-height: 32px;
+                    font-size: 18px;
+                }
+            }
+            .productListContainer {
+                margin: 20px 0;
+                .productList {
+                    // display: none;
+                    .itemWarning{
+                        height:200px;
+                        margin:30px 0;
+                        border-radius: 30px;
+                        width: 100%;
+                        text-align: center;
+                        border:5px solid #FF9F00;
+                        i{
+                            margin: 30px 0 10px;
+                            font-size: 40px;
+                            color: #FF9F00;
+                            width: 80px;
+                            height:80px;
+                            border: 2px solid #FF9F00;
+                            line-height: 80px;
+                            border-radius: 50%;
+                            background: black;
+                        }
+                        p{
+                           font-size: 18px;
+                        }
+                    }
+                    .productCard {
+                        border: none;
+                        transition: all 0.5s;
+                        border-radius: 0;
+                        position: relative;
+                        overflow: hidden;
+                        height: 385px;
+                      
+                        &:hover {
+                            box-shadow: 0 0 10px 8px #642ab5;
+                            height: 560px;
+                            .cardImage {
+                                .viewProduct {
+                                    transform: translateY(0);
+                                }
+                            }
+                            .cardBody {
+                                transform: translateY(0);
+                            }
+                        }
+                        .cardImage {
+                            position: relative;
+                            overflow: hidden;
+                            .viewProduct {
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                width: 100%;
+                                display: flex;
+                                justify-content: center;
+                                padding: 20px 0;
+                                transition: all 0.5s;
+
+                                transform: translateY(110px);
+                                button {
+                                    width: 200px;
+                                    height: 40px;
+                                    background: #642ab5;
+                                    text-transform: uppercase;
+                                    color: white;
+                                    letter-spacing: 2px;
+                                    border: none;
+                                    a{
+                                        color:white;
+                                    }
+                                    &:hover {
+                                        cursor: pointer;
+                                    }
+                                    &:focus{
+                                        outline: none;
+                                    }
+                                }
+                            }
+                        }
+                        .cardBody {
+                            background: #1f1f1f;
+                            position: absolute;
+                            width: 100%;
+                            transform: translateY(178px);
+                            bottom: 0;
+                            left: 0;
+                            transition: all 0.5s;
+                            h4 {
+                                font-size: 18px;
+                            }
+                            p {
+                                font-size: 15px;
+                            }
+                            .redColor,
+                            .greenColor,
+                            .blueColor {
+                                width: 20px;
+                                height: 20px;
+                                margin-right: 10px;
+                                border-radius: 50%;
+                                background: red;
+                                margin-bottom: 1rem;
+                            }
+                            .greenColor {
+                                background: green;
+                            }
+                            .blueColor {
+                                background: blue;
+                            }
+                            .size {
+                                width: 35px;
+                                height: 35px;
+                                text-align: center;
+                                line-height: 34px;
+                                margin-right: 10px;
+                                border-radius: 50%;
+                                border: 2px solid #642ab5;
+                                color: #642ab5;
+                                font-weight: bold;
+                                &:hover {
+                                    cursor: context-menu;
+                                }
+                            }
+                        }
+                    }
+                }
+                .paginateContainer {
+                    margin-bottom: 20px;
+                    .paginateGroup {
+                        width: 100%;
+                        p {
+                            margin-bottom: 0;
+                            color: #68728c;
+                        }
+                     
+                        margin-left: 15px;
+                       
+                        display: flex;
+                        justify-content: center;
+                        button {
+                            background: none;
+                            margin-right: 10px;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            border: none;
+                            outline: none;
+                            border: 2px solid #642ab5;
+                            color: #642ab5;
+                            font-weight: bold;
+                            transition: all 0.5s;
+                            &:hover {
+                                cursor: pointer;
+                                background: #642ab5;
+                                color: white;
+                            }
+                        }
+    
+                        .activeClassName {
+                            background: #642ab5;
+                            color: white;
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .product{
+            .filterCollection{
+                display: flex;
+                margin:20px 0;
+                height:30px;
+                button{
+                    width:120px;
+                    border: none;
+                    background: black;
+                    border: 2px solid #642ab5;
+                    font-weight: bold;
+                    color: #642ab5;
+                    border-radius: 6px;
+                    transition: all 0.5s;
+                    &:focus{
+                        outline: none;
+                    }
+                    &:hover{
+                        background:#642ab5;
+                        color: white;
+                        cursor: pointer;
+                    }
+                    
+                }
+                .filterGroup{
+                    flex-grow: 1;
+                    display: flex;
+                    p{
+                        margin-bottom: 0;
+                        width: 140px;
+                        margin-left: 10px;
+                       
+                        border-radius: 30px;
+                        background:#642ab5;
+                        text-align: center;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+    }
+    .review{
+       i{
+          color:#ffc107
+       }
+       .nonStar{
+           color: white;
+       }
+    }
+}

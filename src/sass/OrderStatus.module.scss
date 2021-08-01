@@ -1,0 +1,218 @@
+.orderStatusWrapper {
+    margin: 30px auto;
+    h2 {
+        font-size: 25px;
+        font-weight: bold;
+        color: white;
+    }
+}
+.orderStatusContainer {
+    display: flex;
+    border: 2px solid white;
+    border-top: 2px solid #642ab5;
+    margin: 20px 0;
+    h3 {
+        text-align: center;
+        border-bottom: 2px solid white;
+        padding: 20px 0;
+        color: #642ab5;
+        margin-bottom: 0;
+    }
+    .address {
+        width: 20%;
+        border-right: 2px solid white;
+        .addressInfo {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            padding-top: 70px;
+        }
+    }
+    .orderStatus {
+        width: 20%;
+        p {
+            width: 60px;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .orderTimeLine {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 20px;
+        }
+    }
+    .orderProduct {
+        width: 60%;
+        border-right: 2px solid white;
+        .tableProduct {
+        }
+        table {
+            background: #1f1f1f;
+            width: 100%;
+            height: 100%;
+
+            img {
+                width: 50px;
+                height: 50px;
+                object-fit: contain;
+            }
+        }
+        tbody {
+            display: block;
+            height: 270px;
+            width: 100%;
+            overflow: auto;
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: #642ab5;
+                border-radius: 20px;
+            }
+            &::-webkit-scrollbar-thumb:hover {
+                background: white;
+            }
+        }
+        thead,
+        tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+        th {
+            border-bottom: 1px solid white;
+            padding: 20px 0;
+        }
+        th,
+        td {
+            text-align: center;
+            padding: 10px 0;
+            height: 40px;
+        }
+    }
+}
+.orderStatusMobile {
+    display: none;
+}
+.orderStatusTablet {
+    display: none;
+}
+@media screen and(min-width:375px) and(max-width:767px) {
+    .orderStatusContainer {
+        display: none;
+    }
+    .titleOrderStatus {
+        display: none;
+    }
+    .orderStatusMobile {
+        display: block;
+        .address,
+        .productList {
+            margin-bottom: 10px;
+        }
+        .cardHeader {
+            background: #1f1f1f;
+            border: none;
+            border-bottom: 2px solid #642ab5;
+            h4 {
+                margin-bottom: 0;
+                color: #642ab5;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+        .cardBody {
+            background: #1f1f1f;
+        }
+        .productList {
+            .cardBody {
+                height: 300px;
+                overflow: auto;
+            }
+            .tableProduct {
+                .product {
+                    display: flex;
+                    background: #642ab5;
+                    padding: 10px;
+                    border-radius: 6px;
+                    p {
+                        margin-bottom: 5px;
+                    }
+                }
+                .imageProduct {
+                    width: 30%;
+                    display: flex;
+                    justify-content: center;
+                    img {
+                        width: 100%;
+                        object-fit: contain;
+                    }
+                }
+                .productDetail {
+                    padding: 0 20px;
+                    width: 70%;
+                }
+            }
+        }
+        .status {
+            .cardBody {
+                height: 200px;
+                overflow: auto;
+            }
+        }
+    }
+}
+@media screen and(min-width:768px) and(max-width:1024px) {
+    .titleOrderStatus {
+        display: none;
+    }
+    .orderStatusTablet {
+        display: block;
+        .addressContainer,
+        .statusContainer {
+            margin: 0 40px;
+        }
+        .productContainer {
+            table {
+                background: #1f1f1f;
+                width: 100%;
+                height: 100%;
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: contain;
+                }
+            }
+            // Overflow table
+            tbody {
+                display: block;
+                height: 300px;
+                width: 100%;
+                overflow: auto;
+            }
+            thead,
+            tbody tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+            th {
+                border-bottom: 1px solid white;
+                padding: 20px 0;
+            }
+            th,
+            td {
+                text-align: center;
+                padding: 30px 0;
+                height: 40px;
+            }
+        }
+    }
+    .orderStatusContainer {
+        display: none;
+    }
+}

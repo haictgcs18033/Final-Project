@@ -1,0 +1,74 @@
+.navbar {
+    background: #2370f4;
+    position: fixed;
+    color: white;
+    z-index: 500;
+    width: 100%;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-between;
+    .adminRoute {
+        position: relative;
+        margin-right: 20px;
+        .dropdown,
+        .dropdownHide {
+            position: absolute;
+           border: 1px solid #e9e9e9;
+            background: white;
+            width: 200px;
+            padding: 10px 0;
+            transition: all 0.5s;
+            border-radius: 6px;
+         
+            top: 28px;
+            text-align: center;
+            right: 28px;
+            transition: all 0.5s;
+            .linkItem {
+                margin: 10px 0;
+                transition: all 0.5s;
+                a {
+                    color: black;
+                    font-weight: bold;
+                    &:hover {
+                        text-decoration: none;
+                        color:#2370f4
+                    }
+                }
+            }
+        }
+        .dropdownHide {
+            max-height: 0;
+            padding: 0;
+            border: none;
+            overflow: hidden;
+        }
+        .adminName {
+            font-weight: bold;
+            line-height: 33px;
+            color: white;
+            transition: all 0.5s;
+            &:hover {
+                cursor: pointer;
+                color: white;
+            }
+
+            .arrowDropdown,
+            .arrow {
+                transition: all 0.5s;
+                transform: rotate(-180deg);
+            }
+            .arrow {
+                transform: rotate(0);
+            }
+        }
+    }
+}
+.templateContent {
+    position: relative;
+    top:90px;
+    background: white;
+    max-width: 100%;
+    height: 950px;
+   
+}

@@ -1,0 +1,371 @@
+.placeOrderContainer {
+    margin: 30px 30px 0;
+    .userAccount,
+    .address,
+    .productList,
+    .payment {
+        position: relative;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        background: #1f1f1f;
+        .successStep,
+        .step {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            background: rgb(4, 233, 4);
+            height: 100%;
+        }
+        .successStep {
+            padding: 0 34px;
+        }
+        .step {
+            background: #642ab5;
+        }
+        h3 {
+            font-size: 25px;
+        }
+        h3,
+        p {
+            margin-bottom: 0;
+        }
+        .detail {
+            width: 100%;
+            padding: 10px 0;
+            padding-left: 120px;
+            padding-right: 20px;
+            h4 {
+                color: white;
+            }
+        }
+    }
+
+    .address {
+        .detail {
+            width: 100%;
+            .addAddress {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+    .address {
+        .chooseAddress,
+        .addressUser {
+            display: flex;
+        }
+
+        .infor {
+            padding-left: 30px;
+        }
+    }
+    .addressContainer {
+        max-height: 300px;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #642ab5;
+            border-radius: 20px;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: white;
+        }
+    }
+    .checkValue,
+    .notCheckValue {
+        transition: all 0.5s;
+        background: none;
+        padding: 10px 20px;
+        background: black;
+        margin: 10px 0;
+        border-radius: 6px;
+        .addressInfo {
+            display: flex;
+            align-items: center;
+            .chooseAddress,
+            .addressUser {
+                width: 90%;
+            }
+            .functionAddress {
+                display: flex;
+                justify-content: flex-end;
+                width: 10%;
+                .editAddress,
+                .deliver {
+                    padding: 5px 24px;
+                    font-weight: bold;
+                    border-radius: 2px;
+                    background: #d8bd14;
+                    border: none;
+                    &:focus {
+                        outline: none;
+                    }
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+                .deliver {
+                    background: rgb(4, 233, 4);
+                }
+            }
+        }
+    }
+
+    .selectedAddress {
+        margin: 20px 0;
+        button {
+            margin-top: 5px;
+            padding: 5px 20px;
+            background: #642ab5;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            &:focus {
+                outline: none;
+            }
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    // Product List
+    .productList {
+        .detail {
+            width: 100%;
+        }
+    }
+    .productListContainer {
+        max-height: 350px;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #642ab5;
+            border-radius: 20px;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: white;
+        }
+    }
+    .productListConfirm {
+        margin: 10px 0;
+        button {
+            background: #642ab5;
+            border-radius: 6px;
+            border: none;
+            padding: 4px 15px;
+            font-weight: bold;
+            transition: all 0.5s;
+            &:focus {
+                outline: none;
+            }
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    .productItem {
+        display: flex;
+        margin-bottom: 5px;
+        background: black;
+        border-radius: 6px;
+        padding: 10px;
+        width: 100%;
+
+        .productImg {
+            display: flex;
+            align-items: center;
+            img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+            }
+        }
+        .productItemDetail {
+            margin-left: 50px;
+            h5 {
+                font-size: 18px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .quantity {
+                line-height: 30px;
+                button {
+                    font-size: 14px;
+                    border: none;
+                    background: #642ab5;
+                    color: white;
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+
+                    &:focus {
+                        outline: none;
+                    }
+                    &:hover {
+                        background: white;
+                        color: #642ab5;
+                    }
+                }
+            }
+        }
+    }
+    .confirmButton {
+        button {
+            background: #642ab5;
+            border-radius: 6px;
+            border: none;
+            padding: 4px 15px;
+            font-weight: bold;
+            transition: all 0.5s;
+            &:focus {
+                outline: none;
+            }
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    .userCard{
+        margin: 20px 0;
+        border:2px solid #642ab5;
+        padding:20px;
+        border-radius: 6px;
+    }
+    .backToHome,
+    .buyAgain {
+        background: #642ab5;
+        color: white;
+        font-weight: bold;
+        border-radius: 6px;
+        border: none;
+        padding: 10px 20px;
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .buyAgain {
+        background: none;
+        border: 2px solid #642ab5;
+        color: #642ab5;
+    }
+}
+@media screen and (max-width: 576px) {
+    .placeOrderContainer {
+        .checkValue,
+        .notCheckValue {
+            .addressInfo {
+                display: flex;
+                flex-flow: wrap;
+                .chooseAddress,
+                .addressUser {
+                    width: 100%;
+                }
+                .breakdownFlex {
+                    width: 100%;
+                }
+                .functionAddress {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    margin: 20px 0;
+                    .editAddress,
+                    .deliver {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+        .addressContainer{
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: #642ab5;
+                border-radius: 20px;
+            }
+            &::-webkit-scrollbar-thumb:hover {
+                background: white;
+            }
+        }
+        .productItem {
+            .productImg {
+                display: flex;
+                margin: 0 20px;
+                align-items: center;
+                img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                }
+            }
+            .productItemDetail {
+                margin-left: 10px;
+                h5 {
+                    font-size: 15px;
+                }
+                p {
+                    font-size: 13px;
+                }
+                .quantity {
+                    line-height: 25px;
+                    button {
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width: 375px) and (max-width: 500px) {
+    .placeOrderContainer {
+        .userAccount,
+        .address,
+        .productList,
+        .payment {
+            border-radius: 6px;
+            .step,
+            .successStep {
+                display: none;
+            }
+            .detail{
+                padding: 10px 20px;
+            }
+        }
+        .checkValue,
+        .notCheckValue {
+            .addressInfo {
+               
+                .functionAddress {
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-start;
+                    margin: 20px 0;
+                    .deleteAddress
+                    .editAddress,
+                    .deliver {
+                        padding: 5px 10px !important;
+                    }
+                    .editAddress{
+                        margin-left: 0 !important;
+                        margin-right: 3px !important;
+                    }
+                }
+            }
+        }
+     
+    }
+}

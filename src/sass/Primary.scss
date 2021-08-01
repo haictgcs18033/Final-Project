@@ -1,0 +1,419 @@
+#root {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+.ant-checkbox {
+    margin-top: 40px !important;
+}
+.ant-checkbox {
+    height: 16px !important;
+}
+.ant-checkbox-wrapper {
+    margin-left: 0 !important;
+}
+// ant Button
+.ant-btn {
+    background: red !important;
+    border: 1px solid red !important;
+    font-weight: bold !important;
+    color: white !important;
+    &:hover {
+        color: white !important;
+    }
+}
+.ant-btn-primary {
+    font-weight: bold !important;
+    background: #642ab5 !important;
+    border: 1px solid #642ab5 !important;
+}
+// ant-spin
+.ant-spin-dot-item {
+    background: white !important;
+}
+// Ant result
+.ant-result-title {
+    font-weight: bold !important;
+    color: #642ab5 !important;
+}
+.ant-result-subtitle {
+    color: white !important;
+}
+// ant Drawer
+@media screen and (min-width: 375px) and(max-width:414px) {
+}
+// Ant Progess
+.progressRatingMobile {
+    .ant-progress-text {
+        margin-left: 20px !important;
+    }
+    .ant-progress-show-info .ant-progress-outer {
+        margin-right: calc(-2em - 50px) !important;
+        padding-right: calc(2em + 50px) !important;
+    }
+}
+// Ant Time Line
+.ant-timeline-item-head-green {
+    border-color: rgb(4, 233, 4) !important;
+}
+.ant-timeline-item-head-red {
+    border-color: red !important;
+}
+.ant-scrolling-effect {
+    width: 100% !important;
+}
+// Ant Rating
+.ant-rate {
+    margin-left: 30px !important;
+}
+// ant select
+.productSort {
+    .ant-select{
+        color: #642ab5;
+        font-weight: bold !important;
+    }
+    .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+        border: 1px solid #642ab5 !important;
+    }
+    .ant-select-arrow{
+        color: #642ab5 !important;
+    }
+}
+// Ant radio
+.ant-radio-checked .ant-radio-inner{
+    border-color: #642ab5 !important;
+}
+.ant-radio-inner::after{
+    background: #642ab5 !important;
+}
+// Slick Carousel
+
+.slick-prev {
+    width: 40px !important;
+    height: 40px !important;
+    left: -50px !important;
+    background: #642ab5 !important;
+    border-radius: 50% !important;
+    transition: all 0.5s;
+    &:hover {
+        background: white !important;
+    }
+}
+.slick-prev:before {
+    // Muon thay doi content before or after bang font awesome ta can chu y them 3 dong code sau:
+    //  font-family: "Font Awesome 5 Free" !important;
+    //  font-weight:900 !important;
+    //  content: '\f104' !important; ma code cua font awesome co the tham khao tai font awesome cheatsheet
+    position: relative;
+    font-family: "Font Awesome 5 Free" !important;
+    content: "\f104" !important;
+    font-weight: 900 !important;
+    border-radius: 50%;
+    font-size: 20px;
+    transition: all 0.5s !important;
+}
+
+.slick-next {
+    width: 40px !important;
+    height: 40px !important;
+    right: -50px !important;
+    background: #642ab5 !important;
+    border-radius: 50% !important;
+    transition: all 0.5s;
+    &:hover {
+        background: white !important;
+    }
+}
+.slick-next:before {
+    position: relative;
+    font-family: "Font Awesome 5 Free" !important;
+    content: "\f105" !important;
+    font-weight: 900 !important;
+    border-radius: 50%;
+    font-size: 20px;
+    transition: all 0.5s !important;
+}
+.slick-prev:hover:before,
+.slick-next:hover:before {
+    color: #642ab5 !important;
+}
+.categorySlider {
+    .slick-dots {
+        display: none !important;
+    }
+    // make space between item in slick
+    .slick-slide {
+        margin: 10px 10px;
+        max-height: 100%;
+    }
+    /* the parent */
+    .slick-list {
+        margin: -10px -10px;
+    }
+    // make slick item fix height
+    .slick-track {
+        display: flex !important;
+    }
+    .slick-slide {
+        height: inherit !important;
+    }
+}
+
+@media screen and (min-width: 375px) and(max-width:576px) {
+    .slick-next,
+    .slick-prev {
+        display: none !important;
+    }
+    .categorySlider {
+        .slick-slide {
+            margin: 5px 5px;
+            max-height: 100%;
+        }
+        .slick-list {
+            margin: -5px -5px;
+        }
+    }
+}
+@media screen and (min-width: 768px) and(max-width: 1024px) {
+    .slick-prev {
+        left: -25px !important;
+        z-index: 2;
+    }
+    .slick-next {
+        right: -25px !important;
+        z-index: 2;
+    }
+}
+@media screen and(min-width:375px) and (max-width: 767px) {
+    .productImgMobile {
+        .slick-next,
+        .slick-prev {
+            display: block !important;
+            &:hover {
+                background: #642ab5 !important;
+            }
+        }
+
+        .slick-prev:hover:before,
+        .slick-next:hover:before {
+            color: white !important;
+        }
+        .slick-prev {
+            left: 0px !important;
+            z-index: 2;
+        }
+        .slick-next {
+            right: 0px !important;
+            z-index: 2;
+        }
+        .slick-dots {
+            bottom: -40px;
+        }
+        .slick-dots li button:before {
+            color: white !important;
+            font-size: 15px;
+            opacity: 1 !important;
+        }
+        .slick-dots li.slick-active button:before {
+            color: #642ab5 !important;
+        }
+    }
+}
+// Boostrap Carousel
+#carouselMenProduct,
+#carouselWomenProduct,
+#carouselKidProduct {
+    .carousel-indicators {
+        display: none;
+    }
+    .carousel-control-next,
+    .carousel-control-prev {
+        width: 40px;
+        height: 40px;
+        background: #1f1f1f;
+        color: #642ab5;
+        font-size: 20px;
+        opacity: 0;
+        border-radius: 50%;
+        top: 45%;
+        left: -10px;
+        transition: all 0.5s;
+    }
+    .carousel-control-prev {
+        &:hover {
+            box-shadow: 0 0 5px 5px;
+        }
+    }
+    .carousel-control-next {
+        left: unset;
+        right: -10px;
+        &:hover {
+            box-shadow: 0 0 5px 5px;
+        }
+    }
+    &:hover {
+        .carousel-control-next,
+        .carousel-control-prev {
+            opacity: 1;
+        }
+    }
+}
+@media screen and (min-width: 992px) {
+    #carouselMenIndicators,
+    #carouselWomenIndicators,
+    #carouselKidIndicators {
+        .carousel-indicators {
+            z-index: 1;
+        }
+    }
+}
+@media screen and(min-width:768px) and(max-width:1200px) {
+    #carouselMenProduct,
+    #carouselWomenProduct,
+    #carouselKidProduct {
+        .carousel-item.active {
+        }
+        .carousel-control-next,
+        .carousel-control-prev {
+            opacity: 1;
+            &:hover {
+                box-shadow: none;
+            }
+        }
+    }
+}
+// Navlink Boostrap
+.nav-pills {
+    border-bottom: 1px solid #e9e9e9;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #642ab5;
+    background: none;
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        display: block;
+        background: #642ab5;
+    }
+}
+
+.nav-pills .nav-link {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 10px 40px;
+    color: white;
+    &:hover {
+        color: #642ab5;
+    }
+}
+@media screen and (min-width: 768px) and(max-width:1024px) {
+    .orderStatusTablet {
+        .nav-pills .nav-link {
+            &:hover {
+                color: white;
+            }
+        }
+        .nav-pills .nav-link.active {
+            color: #642ab5;
+        }
+    }
+}
+@media screen and(min-width:375px) and(max-width:414px) {
+    .userProfileMobile{
+        .nav-pills {
+            border-bottom: none;
+        }
+        .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+            background:#642ab5;
+            color:white;
+            &::before{
+                display: none;
+            }
+        }
+        .nav-pills .nav-link {
+            font-weight: bold;
+            font-size: 13px;
+            padding: 5px 15px ;
+            border-radius: 6px;
+            color: white;
+            &:hover {
+                color: white;
+            }
+        }
+    }
+}
+
+// Arcordion Boostrap
+#accordion {
+    .card {
+        border: none;
+        position: relative;
+    }
+    .card-header {
+        background: #3e2069;
+        border-radius: 0;
+        border-bottom: 1px solid white;
+        border-top: 1px solid white;
+        .btn-link {
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            &:hover {
+                text-decoration: none;
+            }
+            &:focus {
+                text-decoration: none;
+                outline: none;
+            }
+            &:active {
+                text-decoration: none;
+            }
+        }
+    }
+    .card-body {
+        background: #3e2069;
+        color: white;
+        padding: 10px 35px;
+    }
+}
+// Modal
+.modal-content {
+    transform: translateY(50px);
+}
+
+.modal-open {
+    padding-right: 0 !important;
+}
+.modal-header {
+    h5 {
+        color: #2370f4;
+    }
+    .close {
+        color: #68728c;
+        opacity: 1;
+        transition: all 0.5s;
+        &:hover {
+            color: #2370f4;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}
+// React checkbox tree
+.react-checkbox-tree {
+    li {
+        margin-bottom: 10px;
+        .rct-text {
+            margin-top: 10px;
+        }
+    }
+}
+

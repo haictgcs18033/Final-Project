@@ -1,0 +1,29 @@
+.introContainer{
+    background:#642ab5;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 15px;
+    .faq,.welcome,.contactUs{
+        padding:5px 20px;
+        border-left: 1px solid #e8e8e8 ;
+    }
+    .contactUs{
+        border-right: 1px solid #e8e8e8;
+    }
+}
+@media screen and (max-width:1024px){
+    .introContainer{
+        padding-right: 10px;
+        .faq,.welcome,.contactUs{
+            padding:5px 10px;
+        }
+    }
+}
+@media screen and (max-width:768px){
+    .introContainer{
+      display: none;
+    }
+}

@@ -1,0 +1,192 @@
+.signupContainer {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signupIntro {
+    background: #642ab5;
+    width: 400px;
+    border-radius: 12px 0 0 12px;
+    height: 500px;
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h2 {
+        padding-left: 0;
+        font-size: 25px;
+        border-bottom: 0;
+    }
+}
+.signupForm {
+    padding: 20px 40px;
+    border-radius: 0 12px 12px 0;
+    width: 600px;
+    height: 500px;
+    background-color: #1f1f1f;
+    h3 {
+        text-align: center;
+    }
+    .titleMobile {
+        display: none;
+    }
+    .navigateGroup {
+        display: flex;
+        margin: 10px 0;
+        justify-content: center;
+        .login,
+        .signup {
+            margin-right: 20px;
+            color: white;
+            &:hover {
+                color: #642ab5;
+            }
+        }
+    }
+    .formGroup {
+        .fullName {
+            display: flex;
+        }
+        .firstNameContainer,
+        .lastNameContainer {
+            margin: 10px 0;
+            padding: 10px 0;
+            label {
+                font-size: 15px;
+                margin: 0 10px;
+            }
+        }
+        .firstNameContainer {
+            .firstName {
+                border: none;
+                border: 1px solid #979696;
+                width: 100%;
+                border-radius: 6px;
+                margin-top: 10px;
+                padding-left: 10px;
+                background: #1f1f1f;
+                padding: 10px;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        .lastNameContainer {
+            margin-left: 20px;
+            .lastName {
+                border: none;
+                border: 1px solid #979696;
+                width: 100%;
+                border-radius: 6px;
+                margin-top: 10px;
+               
+                background: #1f1f1f;
+                padding: 10px;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        .emailContainer,
+        .passwordContainer {
+            margin: 10px 0;
+            p {
+                font-size: 15px;
+                margin: 0 10px;
+            }
+        }
+        .emailContainer {
+            .email {
+                margin: 10px 0;
+                width: 100%;
+                background: #1f1f1f;
+                padding: 10px;
+                border-radius: 6px;
+                border: none;
+                border: 1px solid #979696;
+               &:focus{
+                   outline: none;
+               }
+            }
+        }
+        .passwordContainer {
+            .password {
+                margin: 10px 0;
+                width: 100%;
+                background: #1f1f1f;
+                padding: 10px;
+                border-radius: 6px;
+                border: none;
+                border: 1px solid #979696;
+               &:focus{
+                   outline: none;
+               }
+            }
+        }
+        .groupButton {
+            button {
+                padding: 10px 40px;
+                width: 100%;
+                border: none;
+                background: #642ab5;
+                color: white;
+                font-size: 15px;
+                transition: all 0.5s;
+                border-radius: 6px;
+                &:hover {
+                    cursor: pointer;
+                    background: #177ddc;
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width:375px) and(max-width:414px){
+    .signupIntro {
+        display: none;
+    }
+    
+    .signupForm {
+        border-radius: 6px;
+        margin: 0 20px;
+        height: 500px;
+        h3 {
+            font-size: 20px;
+        }
+        .navigateGroup {
+            margin-left: 20px;
+        }
+        .formGroup{
+            .groupButton{
+                button{
+                    &:hover{
+                        background: #642ab5;
+                    }
+                }
+            }
+        }
+        .titleMobile {
+            color: #642ab5;
+            font-size: 30px;
+            letter-spacing: 5px;
+        }
+    }
+}
+@media screen and(min-width:768px) and(max-width:1024px) {
+    .signupContainer{
+       margin: 30px;
+    }
+    .signupForm{
+        .formGroup{
+            .groupButton{
+                button{
+                    &:hover{
+                        background: #642ab5;
+                    }
+                }
+            }
+        }
+    }
+}

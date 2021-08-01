@@ -1,0 +1,404 @@
+.homeContainer {
+    // height: 600vh;
+}
+.categorySlider {
+    margin: 50px auto;
+    h3 {
+        border-bottom: 1px solid white;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+    }
+    .item {
+        padding: 10px 0;
+        border-radius: 6px;
+        display: block !important;
+        text-align: center;
+        border: 2px solid white;
+        transition: all 0.5s;
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        p {
+            margin: 10px 0;
+            transition: all 0.5s;
+            font-size: 20px;
+           color: white;
+        }
+        &:hover {
+            cursor: pointer;
+            p {
+                color: #642ab5;
+            }
+        }
+    }
+}
+// Porpular fashion
+.popularFashion,
+.menFashion,
+.womenFashion,
+.kidFashion {
+    margin: 50px auto;
+    position: relative;
+    display: flex;
+    border: 1px solid #e9e9e9;
+    border-top: 1px solid red;
+    height: 550px;
+    overflow: hidden;
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: red;
+        display: block;
+        z-index: 3;
+    }
+    .category {
+        border: 1px solid #e9e9e9;
+
+        border-left: none;
+        text-align: center;
+        .title {
+            padding: 20px 45px;
+            border-bottom: 1px solid #e9e9e9;
+            h3 {
+                text-transform: uppercase;
+                font-weight: bold;
+                color: red;
+                font-size: 20px;
+                margin-bottom: 0;
+            }
+        }
+        .categoryItem {
+            padding: 20px 0;
+            a {
+                display: block;
+                font-size: 15px;
+                font-weight: bold;
+                color: white;
+                margin: 10px 0;
+                transition: all 0.5s;
+                &:hover {
+                    background: white;
+                    color: #642ab5;
+                }
+            }
+        }
+    }
+    .introSlider {
+        width: 475px;
+        img {
+            width: 100%;
+            height: 560px;
+            object-fit: contain;
+        }
+    }
+    .product {
+        width: 600px;
+        padding: 10px;
+        .card {
+            margin: 0 5px;
+            background-color: #5e5e5e;
+            color: white;
+            h4 {
+                color: white;
+                font-size: 15px;
+                font-weight: bold;
+            }
+            &:hover {
+                background: white;
+                h4,
+                p {
+                    color: #642ab5;
+                }
+            }
+        }
+    }
+}
+.popularFashion {
+    .productList {
+        padding: 20px;
+        .card {
+            margin: 0 5px;
+            background-color: #5e5e5e;
+            color: white;
+            transition: all 0.5s;
+            h4 {
+                color: white;
+                font-size: 15px;
+                font-weight: bold;
+                transition: all 0.5s;
+            }
+            &:hover {
+                background: white;
+                h4,
+                p {
+                    color: #642ab5;
+                }
+            }
+        }
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #642ab5;
+            border-radius: 20px;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: white;
+        }
+    }
+}
+// Men fashion
+.menFashion {
+    border-top: 1px solid blue;
+    &::before {
+        background: blue;
+    }
+    .category {
+        .title {
+            padding: 20px 40px;
+            h3 {
+                color: blue;
+            }
+        }
+    }
+}
+// Women fashion
+.womenFashion {
+    border-top: 1px solid #cb2b83;
+    &::before {
+        background: #cb2b83;
+    }
+    .category {
+        .title {
+            padding: 20px 25px;
+            h3 {
+                color: #cb2b83;
+            }
+        }
+    }
+    .introSlider {
+        img {
+            object-fit: unset;
+        }
+    }
+}
+// Kid Fashion
+.kidFashion {
+    border-top: 1px solid #49aa19;
+    &::before {
+        background: #49aa19;
+    }
+    .category {
+        .title {
+            padding: 20px 45px;
+            h3 {
+                color: #49aa19;
+            }
+        }
+    }
+    .introSlider {
+        img {
+            object-fit: unset;
+        }
+    }
+}
+// Mobile Layout
+.mobileLayoutProduct {
+    display: none;
+}
+@media screen and(min-width:375px) and(max-width:767px) {
+    .categorySlider {
+        margin: 40px auto;
+        h3 {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .item {
+            padding: 10px;
+            display: block !important;
+            text-align: center;
+            box-shadow: none;
+            transition: all 0.5s;
+            img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+            }
+            p {
+                transition: all 0.5s;
+                font-size: 20px;
+            }
+            &:hover {
+                p {
+                    color: #642ab5;
+                }
+            }
+        }
+    }
+}
+@media screen and(min-width:375px) and(max-width:767px) {
+    .mobileLayoutProduct {
+        display: block;
+    }
+    .menFashion,
+    .popularFashion,
+    .kidFashion,
+    .womenFashion {
+        display: none;
+    }
+    .popularFashionMobile,
+    .menFashionMobile,
+    .womenFashionMobile,
+    .kidFashionMobile {
+        border: 2px solid white;
+        border-top: 2px solid red;
+        margin-bottom: 30px;
+        h5 {
+            padding: 20px 0;
+            text-align: center;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: red;
+            font-weight: bold;
+            margin-bottom: 0;
+            border-bottom: 2px solid white;
+        }
+        .categoryItem {
+            border-bottom: 2px solid white;
+            a {
+                font-weight: bold;
+                color: white;
+            }
+        }
+        .productList {
+            padding: 20px;
+            max-height: 350px;
+            overflow: auto;
+            .card {
+                margin: 0 5px;
+                background-color: #1f1f1f;
+                color: white;
+                transition: all 0.5s;
+                h4 {
+                    color: white;
+                    font-size: 15px;
+                    font-weight: bold;
+                    transition: all 0.5s;
+                }
+                &:hover {
+                    background: white;
+                    h4,
+                    p {
+                        color: #642ab5;
+                    }
+                }
+            }
+        }
+    }
+    .menFashionMobile {
+        border-top: 2px solid blue;
+        h5 {
+            color: blue;
+        }
+    }
+    .womenFashionMobile {
+        border-top: 2px solid #cb2b83;
+        h5 {
+            color: #cb2b83;
+        }
+    }
+    .kidFashionMobile {
+        border-top: 2px solid #49aa19;
+        h5 {
+            color: #49aa19;
+        }
+    }
+}
+
+@media screen and(min-width:768px) and(max-width:1200px) {
+    .popularFashion,
+    .menFashion,
+    .womenFashion,
+    .kidFashion {
+        height: 465px;
+        margin: 30px auto;
+        .introSlider {
+            display: none;
+        }
+        .category {
+            .title {
+                padding: 20px 45px;
+            }
+        }
+        .product {
+            width: 100%;
+            .card {
+                h4 {
+                    color: white;
+                    font-size: 13px;
+                    font-weight: bold;
+                }
+                &:hover {
+                    background: #5e5e5e;
+                    h4,
+                    p {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+    .womenFashion {
+        .category {
+            .title {
+                padding: 20px 30px;
+                h3 {
+                    color: #cb2b83;
+                }
+            }
+        }
+    }
+    .kidFashion {
+        .category {
+            .title {
+                padding: 20px 48px;
+                h3 {
+                    color: #49aa19;
+                }
+            }
+        }
+    }
+}
+@media screen and(min-width:992px) and(max-width:1024px) {
+    .popularFashion,
+    .menFashion,
+    .womenFashion,
+    .kidFashion {
+        height: 590px;
+        .product {
+            width: 100%;
+            .card {
+                h4 {
+                    color: white;
+                    font-size: 15px;
+                    font-weight: bold;
+                }
+                &:hover {
+                    background: #5e5e5e;
+                    h4,
+                    p {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}

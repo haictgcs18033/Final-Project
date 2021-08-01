@@ -1,0 +1,292 @@
+.headerContainer {
+    background: #642ab5;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+}
+.logobrand,
+.cart {
+    color: white;
+}
+.logobrand {
+    font-size: 30px;
+    &:hover {
+        color: white;
+    }
+}
+.helloUser,
+.login,
+.cart {
+    margin-bottom: 0;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.5s;
+
+    &:hover {
+        cursor: pointer;
+        background: white;
+        color: #642ab5;
+    }
+}
+.login {
+    color: white;
+}
+.category {
+    .dropdown {
+        font-weight: bold;
+        border-radius: 6px;
+        &:hover {
+            background: white;
+            color: #642ab5;
+        }
+    }
+}
+.searchGroup {
+    .search {
+        position: relative;
+        input {
+            width: 350px;
+            height: 40px;
+            border-radius: 10px;
+            color: rgb(70, 69, 69);
+            padding-left: 20px;
+            border: none;
+            &:focus {
+                outline: none;
+            }
+        }
+        .searchIcon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: rgb(70, 69, 69);
+        }
+        .searchResult,.searchResultNone{
+            position: absolute;
+            top:40px;
+          
+            left:0;
+            background: #1f1f1f;
+            width: 100%;
+            z-index: 30;
+            a{
+                display: block;
+                padding: 10px;
+                transition: all 0.5s;
+                color: white;
+                &:hover{
+                   background: #642ab5;
+                  
+                }
+            }
+          
+        }
+       
+    }
+}
+.dropdown {
+    position: relative;
+    transition: all 0.5s;
+    &:hover {
+        cursor: pointer;
+    }
+    .arrowUp,
+    .arrowDown {
+        transition: all 0.5s;
+        transform: rotate(-180deg);
+    }
+    .arrowDown {
+        transform: rotate(0);
+    }
+}
+.categoriesContainer,
+.categoriesContainerHide {
+    position: absolute;
+    background: #e8e8e8;
+    top: 90px;
+    z-index: 3;
+    display: block;
+    width: 300px;
+    max-height: 200px;
+}
+.categoriesContainerHide {
+    display: none;
+}
+
+.categoriesContainer > ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.childCategory {
+    position: relative;
+    a {
+        text-decoration: none;
+    }
+    &:hover {
+        background: rgb(182, 181, 181);
+        cursor: pointer;
+        .childContainer {
+            display: block;
+        }
+    }
+    .childContainer {
+        background: #e8e8e8;
+        display: none;
+        list-style-type: none;
+        padding-left: 0;
+        .childCategory {
+            &:hover {
+                background: rgb(192, 189, 189);
+                cursor: pointer;
+                .childContainer {
+                    display: block;
+                }
+            }
+            .childContainer {
+                display: none;
+            }
+        }
+    }
+}
+
+.childContainer {
+    position: absolute;
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+}
+.functionMobile {
+    display: none;
+}
+.headerFunctionMobile {
+    display: none !important;
+}
+.searchGroupMobile {
+    display: none;
+}
+.flexBreak {
+    display: none;
+}
+@media screen and (min-width: 375px) and (max-width: 991px) {
+    .functionMobile {
+        display: block;
+    }
+    .headerFunctionMobile {
+        display: flex !important;
+    }
+    .headerContainer {
+        display: flex;
+        justify-content: space-between;
+        flex-flow: wrap;
+        position: relative;
+       
+        .headerFunction {
+            display: none !important;
+        }
+    }
+    .functionMobile {
+        button {
+            font-size: 25px;
+            margin-right: 10px;
+            padding: 0 10px;
+            padding-left: 20px;
+            background: #642ab5;
+            border: none;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    .functionContainer {
+        .link {
+            padding: 5px 20px;
+            font-size: 15px;
+            background: #642ab5;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            transform: translateY(10px) !important;
+            a {
+                color: white;
+            }
+        }
+    }
+    .navbarChoice {
+        display: none;
+    }
+    .logobrand {
+        display: none;
+    }
+    .logobrandMobile {
+        padding-top: 5px;
+        font-size: 25px;
+        font-weight: bold;
+        color: white;
+        &:hover {
+            color: white;
+        }
+    }
+    .helloUserMobile {
+        margin-bottom: 0;
+        font-size: 15px;
+        font-weight: bold;
+        padding-top: 15px;
+        padding-right: 0px;
+    }
+    .login{
+        padding-top:10px ;
+        font-size: 18px;
+      
+        &:hover{
+            background: #642ab5;
+            color: white;
+            
+        }
+    }
+    .cart {
+        font-size: 20px;
+        color: white;
+        padding: 10px 10px;
+        padding-right: 20px;
+        &:hover {
+            background: none;
+            color: white;
+        }
+    }
+    .flexBreak {
+        width: 100%;
+    }
+    .searchGroupMobile {
+        width: 100%;
+        padding: 5px 20px;
+
+        .search {
+            position: relative;
+            input {
+                width: 100%;
+                height: 40px;
+                border-radius: 10px;
+                color: rgb(70, 69, 69);
+                padding-left: 20px;
+                padding-right: 50px;
+                border: none;
+                &:focus {
+                    outline: none;
+                }
+            }
+            .searchIcon {
+                position: absolute;
+                top: 0px;
+                line-height: 40px;
+                height: 100%;
+                border-left: 1px solid rgb(70, 69, 69);
+                padding-left: 10px;
+                right: 10px;
+                font-size: 20px;
+                color: rgb(70, 69, 69);
+            }
+        }
+    }
+}
