@@ -214,7 +214,7 @@
 .mobileLayoutProduct {
     display: none;
 }
-@media screen and(min-width:375px) and(max-width:767px) {
+@media screen  and(max-width:767px) {
     .categorySlider {
         margin: 40px auto;
         h3 {
@@ -244,7 +244,7 @@
         }
     }
 }
-@media screen and(min-width:375px) and(max-width:767px) {
+@media screen and(max-width:479px) {
     .mobileLayoutProduct {
         display: block;
     }

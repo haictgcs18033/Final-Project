@@ -100,7 +100,72 @@
 .orderStatusTablet {
     display: none;
 }
-@media screen and(min-width:375px) and(max-width:767px) {
+@media screen and(max-width:479px) {
+    .orderStatusContainer {
+        display: none;
+    }
+    .titleOrderStatus {
+        display: none;
+    }
+    .orderStatusMobile {
+        display: block;
+        .address,
+        .productList {
+            margin-bottom: 10px;
+        }
+        .cardHeader {
+            background: #1f1f1f;
+            border: none;
+            border-bottom: 2px solid #642ab5;
+            h4 {
+                margin-bottom: 0;
+                color: #642ab5;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+        .cardBody {
+            background: #1f1f1f;
+        }
+        .productList {
+            .cardBody {
+                height: 300px;
+                overflow: auto;
+            }
+            .tableProduct {
+                .product {
+                    display: flex;
+                    background: #642ab5;
+                    padding: 10px;
+                    border-radius: 6px;
+                    p {
+                        margin-bottom: 5px;
+                    }
+                }
+                .imageProduct {
+                    width: 30%;
+                    display: flex;
+                    justify-content: center;
+                    img {
+                        width: 100%;
+                        object-fit: contain;
+                    }
+                }
+                .productDetail {
+                    padding: 0 20px;
+                    width: 70%;
+                }
+            }
+        }
+        .status {
+            .cardBody {
+                height: 200px;
+                overflow: auto;
+            }
+        }
+    }
+}
+@media screen and(max-width:767px) {
     .orderStatusContainer {
         display: none;
     }

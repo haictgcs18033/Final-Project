@@ -187,7 +187,7 @@ h2 {
 .purchaseMobile {
     display: none;
 }
-@media screen and(min-width:375px) and(max-width:767px) {
+@media screen  and(max-width:767px) {
     h2 {
         padding-left: 0;
         padding-bottom: 10px;

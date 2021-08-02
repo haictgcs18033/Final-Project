@@ -184,7 +184,7 @@
         z-index: 2;
     }
 }
-@media screen and(min-width:375px) and (max-width: 767px) {
+@media screen  and (max-width: 767px) {
     .productImgMobile {
         .slick-next,
         .slick-prev {
@@ -324,7 +324,7 @@
         }
     }
 }
-@media screen and(min-width:375px) and(max-width:414px) {
+@media screen  and(max-width:414px) {
     .userProfileMobile{
         .nav-pills {
             border-bottom: none;
