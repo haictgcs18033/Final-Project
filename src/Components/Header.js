@@ -77,7 +77,7 @@ export default function Header() {
             let userLogin = JSON.parse(localStorage.getItem('USER_LOGIN'))
             return <Dropdown overlay={menu} trigger={['click']}>
                 <p className={`ant-dropdown-link nav-link ${classes.helloUser}`} onClick={e => e.preventDefault()}>
-                   {userLogin.fullName}
+                   {userLogin.firstName} {userLogin.lastName}
                 </p>
             </Dropdown>
 
