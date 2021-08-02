@@ -75,10 +75,9 @@ export default function Header() {
     let renderLogin = () => {
         if (localStorage.getItem("USER_LOGIN")) {
             let userLogin = JSON.parse(localStorage.getItem('USER_LOGIN'))
-
             return <Dropdown overlay={menu} trigger={['click']}>
                 <p className={`ant-dropdown-link nav-link ${classes.helloUser}`} onClick={e => e.preventDefault()}>
-                    Hello {userLogin.fullName}
+                  Hello {userLogin.firstName}
                 </p>
             </Dropdown>
 
@@ -89,10 +88,10 @@ export default function Header() {
     }
     let renderLoginMobile = () => {
         if (localStorage.getItem("USER_LOGIN")) {
-            let userLogin = JSON.parse(localStorage.getItem('USER_LOGIN'))
+         
             return <p className={`ant-dropdown-link nav-link ${classes.helloUserMobile}`} onClick={e => e.preventDefault()}>
                 <i className="fas fa-user mr-2" />
-                Welcome {userLogin.fullName}
+                Welcome back !
             </p>
         } else {
             return <NavLink className={` nav-link ${classes.login}`} to="/login">Login<span className="sr-only">(current)</span></NavLink>
