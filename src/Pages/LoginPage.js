@@ -120,6 +120,7 @@ export default function LoginPage(props) {
                         <div className={classes.socialMedia}>
                             <FacebookLogin
                                 appId="351123113411927"
+                                isMobile={false}
                                 autoLoad={false}
                                 fields="name,email,picture"
                                 callback={responseFacebook} />
