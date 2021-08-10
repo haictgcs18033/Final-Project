@@ -217,6 +217,33 @@ export const signupUser = (user) => {
         }
     }
 }
+export const forgetPassword = (emailUser) => {
+    return async dispatch => {
+        try {
+            await axios({
+                url: 'https://fes-backend-server.herokuapp.com/user/forget-password',
+                method: 'POST',
+                data: emailUser
+            })
+        } catch (error) {
+            console.log(error.response?.data);
+        }
+    }
+}
+export const resetPassword= (passwordReset,token) =>{
+    return async dispatch => {
+          try{
+            await axios({
+                url:`https://fes-backend-server.herokuapp.com/user/reset-password/${token}`,
+                method:"POST",
+                data:passwordReset
+            })
+            alert('Change password successfully')
+         }catch(error){
+             console.log(error.response?.data);
+         }
+    }
+}
 export const loginAdmin = (admin, props) => {
     return async dispatch => {
         try {
@@ -265,7 +292,7 @@ export const updateUserData = (userUpdate, history) => {
     for (let item in userUpdate) {
         formData.append(item, userUpdate[item])
     }
-
+   
     return async dispatch => {
         try {
             await axios({
@@ -274,10 +301,11 @@ export const updateUserData = (userUpdate, history) => {
                 data: formData,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
-            history.push('/login')
-            localStorage.clear()
+            dispatch(getUserDetail())
+            // history.push('/login')
+            // localStorage.clear()
         } catch (error) {
-            console.log(error.response?.data);
+            console.log(error);
         }
     }
 }

@@ -1,5 +1,5 @@
 import { Skeleton } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as action from '../../../redux/action/AdminAction'
 import classes from '../Admin Email/AdminEmail.module.scss'
@@ -14,26 +14,28 @@ export default function UserTable(props) {
         handleSetActiveClass,
         activeClass,
         handleSetActiveNextAndPrevious,
-        mailContent
+        handleSendSpecificMail
+      
     } = props
     const dispatch = useDispatch()
     const paginateUser = useSelector(state => state.adminReducer.paginateUser)
     const loading = useSelector(state => state.adminReducer.loading)
     useEffect(() => {
+
         dispatch(action.getUserPaginate(curPage, userPerPage, searchTerm))
     }, [dispatch, curPage, userPerPage, searchTerm])
 
-    // Data specific email
-    const [specificMail, setSpecificMail] = useState({
-        title: '',
-        description: '',
-        type: '',
-        emailUser: ''
-    })
-    useEffect(() => {
-        // dung use effect without array for handling success situation on onClick event
-      dispatch(action.sendSpecificEmail(specificMail))
-    },[dispatch,specificMail])
+  
+    // useEffect(() => {
+    //     // dung use effect without array for handling success situation on onClick event
+    
+      
+    //         console.log(specificMail);
+    //         // dispatch(action.sendSpecificEmail(specificMail))
+       
+        
+    // }, [dispatch, specificMail])
+   
     // Handle active class  
     const handleActiveClass = (index) => {
         handleSetActiveClass(index)
@@ -71,7 +73,11 @@ export default function UserTable(props) {
         </div>
     }
 
-   
+    let handleSetUser = (user) => {
+        handleSendSpecificMail(user)
+       
+    }
+
     return (
         <div className={`${classes.userTableGroup}`}>
             <div className={`${classes.paginateGroup}`}>
@@ -124,14 +130,8 @@ export default function UserTable(props) {
                             <td>{user.role}</td>
                             <td>
                                 <button className={`mr-2 ${classes.update}`}
-                                    onClick={async () => {
-                                        await setSpecificMail(
-                                            { 
-                                                title:mailContent.title, 
-                                                description:mailContent.description,
-                                                type:'specific',
-                                                emailUser: user.email ,
-                                            });
+                                    onClick={() => {
+                                        handleSetUser(user)
                                     }}
                                 >Send mail</button>
                             </td>

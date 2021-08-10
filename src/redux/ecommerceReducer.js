@@ -16,6 +16,7 @@ const stateDefault = {
     },
     userImage:'',
   
+  
     // Product
     productAll:[],
     productPaginated:{},
@@ -114,7 +115,8 @@ export const ecommerceReducer = (state = stateDefault, action) => {
             return {...state,cartArray:cartArrayUpdate}
         }
         case 'GET_USER_DETAIL':{
-            return {...state,userDetail:action.userDetail}
+           
+            return {...state,userDetail:action.userDetail,userImage:action.userDetail.profilePicture}
         }
         case 'INPUT_UPDATE_USER':{
             return {...state,userDetail:action.value}

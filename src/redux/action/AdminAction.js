@@ -339,7 +339,7 @@ export const getProductPaginate = (page, limit, searchTerm, sortObject) => {
                 method: 'GET',
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
-            console.log(result.data);
+          
             dispatch({
                 type: 'GET_PRODUCT_PAGINATE',
                 payload: result.data

@@ -1,9 +1,9 @@
-import { notification, Skeleton } from 'antd'
+import {  Skeleton } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as action from '../../../redux/action/AdminAction'
 import classes from '../AdminProduct/AdminProduct.module.scss'
-import { WarningOutlined } from '@ant-design/icons';
+
 const AdminProductItem = React.memo((props) => {
     let { curPage,
         productPerPage,
@@ -36,6 +36,27 @@ const AdminProductItem = React.memo((props) => {
         color: [],
         size: []
     })
+    // Error validation
+    let [error, setError] = useState({
+        name: '',
+        price: '',
+        quantity: '',
+        description: '',
+        category: '',
+        productPictures: '',
+        color: '',
+        size: '',
+    })
+    let initialValue = {
+        name: '',
+        price: '',
+        quantity: '',
+        description: '',
+        category: '',
+        productPictures: '',
+        color: '',
+        size: '',
+    }
     let [inputFileKey, setInputFileKey] = useState({
         inputKey: ''
     })
@@ -230,39 +251,106 @@ const AdminProductItem = React.memo((props) => {
         setProductUpdate({ ...productUpdate, size: sizeUpdate })
         setSizeKey(Math.random(14).toString())
     }
-    let handleUpdateProduct = (productUpdate) => {
+    // Validation and update
+    let validation = () => {
+        let nameMessage = ''
+        let categoryMessage = ''
+        let colorMessage = ''
+        let sizeMessage = ''
+        let quantityMessage = ''
+        let priceMessage = ''
+        let productPictureMessage = ''
+        let descriptionMessage = ''
+        if (!productUpdate.name) {
+            nameMessage = 'Product Name is not empty'
+        }
+        if (productUpdate.name.startsWith(" ") || productUpdate.name.endsWith(" ")) {
+            nameMessage = 'Not white space'
+        }
+        if (productUpdate.name.length > 30) {
+            nameMessage = 'Less than 30 character'
+        }
+        if (!productUpdate.category) {
+            categoryMessage = "Please choose suitable category"
+        }
         if (productUpdate.color.length === 0) {
-            notification.open({
-                message: 'Error',
-                description: 'You must ensure that the product color, size and image are fully up to date',
-                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
-            });
-        } else if (productUpdate.size.length === 0) {
-            notification.open({
-                message: 'Error',
-                description: 'You must ensure that the product color, size and image are fully up to date',
-                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
-            });
-        } else if (productUpdate.productPictures.length === 0) {
-            notification.open({
-                message: 'Error',
-                description: 'You must ensure that the product color, size and image are fully up to date',
-                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
-            });
-        } else {
+            colorMessage = "Please choose color"
+        }
+        if (productUpdate.size.length === 0) {
+            sizeMessage = "Please choose size"
+        }
+        // Quantity and price
+        let regex = /^[0-9]*$/
+        if (!regex.test(productUpdate.price)) {
+            priceMessage = 'Please input only number'
+        }
+        if (!productUpdate.price) {
+            priceMessage = "Please input product's price"
+        }
+        if (productUpdate.price.toString().startsWith(" ") || productUpdate.price.toString().endsWith(" ")) {
+            priceMessage = 'Not white space'
+        }
+        if (productUpdate.price.length > 15) {
+            priceMessage = "Less than 15 character"
+        }
+        // Quantity
+        if (!regex.test(productUpdate.quantity)) {
+            quantityMessage = 'Please input only number'
+        }
+        if (!productUpdate.quantity) {
+            quantityMessage = "Please input product's quantity"
+        }
+        if (productUpdate.quantity.toString().startsWith(" ") || productUpdate.quantity.toString().endsWith(" ")) {
+            quantityMessage = 'Not white space'
+        }
+        if (productUpdate.quantity.length > 15) {
+            quantityMessage = "Less than 15 character"
+        }
+        if (productUpdate.productPictures.length === 0) {
+            productPictureMessage = "Please choose product image"
+        }
+        if (!productUpdate.description) {
+            descriptionMessage = 'Product description is not empty'
+        }
+        if (productUpdate.description.startsWith(" ") || productUpdate.description.endsWith(" ")) {
+            descriptionMessage = 'Not white space'
+        }
+        if (nameMessage || categoryMessage || colorMessage || sizeMessage || quantityMessage || priceMessage || productPictureMessage || descriptionMessage) {
+            setError({
+                name: nameMessage,
+                category: categoryMessage,
+                color: colorMessage,
+                size: sizeMessage,
+                quantity: quantityMessage,
+                price: priceMessage,
+                productPictures: productPictureMessage,
+                description: descriptionMessage
+            })
+            return false
+        }
+        return true
+    }
+    let handleUpdateProduct = (productUpdate) => {
+        let isValid = validation()
+        if (isValid) {
+            console.log(productUpdate);
+            window.$('#exampleModalUpdate').modal('hide'); 
             dispatch(action.updateProduct(productUpdate, curPage, productPerPage))
             setProductUpdate({
                 ...productUpdate, color: [], size: [], productPictures: []
             })
+            setError(initialValue)
         }
+
+
     }
-   
+
     // Delete Product
     let handleDeleteProduct = (id) => {
         dispatch(action.deleteProduct(id, curPage, productPerPage))
     }
     // console.log(productPictures);
-    console.log(paginateProduct);
+
     return (
         <div className={`${classes.productItemContainer}`}>
             <div className={`${classes.paginateGroup}`}>
@@ -398,6 +486,7 @@ const AdminProductItem = React.memo((props) => {
                                             <label className={`font-weight-bold`}>Product Name</label>
                                             <input className={`form-control`} name="name" value={name}
                                                 onChange={handleInputUpdate}></input>
+                                            {error.name ? <div style={{ color: 'red', margin: '10px 0' }}>{error.name}</div> : ''}
                                         </div>
                                         <div className={`form-group  w-100`}>
                                             <label className={`font-weight-bold`}>Category</label>
@@ -412,6 +501,7 @@ const AdminProductItem = React.memo((props) => {
                                                 }
 
                                             </select>
+                                            {error.category ? <div style={{ color: 'red', margin: '10px 0' }}>{error.category}</div> : ''}
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
@@ -445,6 +535,7 @@ const AdminProductItem = React.memo((props) => {
 
                                                     }) : ''
                                             }
+                                            {error.color ? <div style={{ color: 'red', margin: '10px 0' }}>{error.color}</div> : ''}
                                         </div>
                                         <div className={`form-group  w-100`}>
                                             <label className={`font-weight-bold`}>Size</label>
@@ -476,6 +567,7 @@ const AdminProductItem = React.memo((props) => {
 
                                                     }) : ''
                                             }
+                                            {error.size ? <div style={{ color: 'red', margin: '10px 0' }}>{error.size}</div> : ''}
                                         </div>
                                     </div>
                                     <div className={`d-flex`}>
@@ -484,6 +576,7 @@ const AdminProductItem = React.memo((props) => {
                                             <input className={`form-control`} onChange={handleInputUpdate}
                                                 name="price"
                                                 value={price}></input>
+                                            {error.price ? <div style={{ color: 'red', margin: '10px 0' }}>{error.price}</div> : ''}
                                         </div>
                                         <div className={`form-group  w-100`}>
                                             <label>Product Quantity</label>
@@ -491,6 +584,7 @@ const AdminProductItem = React.memo((props) => {
                                                 name="quantity"
                                                 value={quantity}
                                                 onChange={handleInputUpdate}></input>
+                                            {error.quantity ? <div style={{ color: 'red', margin: '10px 0' }}>{error.quantity}</div> : ''}
                                         </div>
                                     </div>
                                     <div >
@@ -505,7 +599,7 @@ const AdminProductItem = React.memo((props) => {
                                             />
                                             {productPictures.length > 0 ?
                                                 productPictures.map((img, index) => {
-                                                    console.log(img);
+                                                    
                                                     return <div className={`d-flex justify-content-between`} key={index}>
                                                         <p className={`mb-0`}
                                                             style={{ lineHeight: '31px' }}
@@ -525,7 +619,7 @@ const AdminProductItem = React.memo((props) => {
                                                 ''
                                             }
 
-
+                                            {error.productPictures ? <div style={{ color: 'red', margin: '10px 0' }}>{error.productPictures}</div> : ''}
                                         </div>
 
                                     </div>
@@ -543,7 +637,7 @@ const AdminProductItem = React.memo((props) => {
 
                                                 />
                                             </div>
-
+                                            {error.description ? <div style={{ color: 'red', margin: '10px 0' }}>{error.description}</div> : ''}
                                         </div>
                                     </div>
                                 </div>
@@ -551,7 +645,7 @@ const AdminProductItem = React.memo((props) => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-primary" data-dismiss="modal"
+                                <button type="submit" className="btn btn-primary"
                                     onClick={() => {
                                         handleUpdateProduct(productUpdate)
                                     }}

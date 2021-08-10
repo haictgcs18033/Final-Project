@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import classes from '../AdminUser/AdminUser.module.scss'
 import * as action from '../../../redux/action/AdminAction'
 import AdminUserTable from './AdminUserTable'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+
 export default function AdminUser() {
     const userArray = useSelector(state => state.adminReducer.userArray)
-    const createUser = useSelector(state => state.adminReducer.createUser)
-    let { firstName, lastName, email } = createUser
+    // const createUser = useSelector(state => state.adminReducer.createUser)
+    // let { firstName, lastName, email } = createUser
     let [curPage, setCurpage] = useState(1)
     const userPerPage = 3
 
@@ -35,30 +38,62 @@ export default function AdminUser() {
         setActiveClass({ ...activeClass, activeObject: pageNumber[index] })
 
     }
-    console.log(activeClass.activeObject);
+
     let handleSetActiveNextAndPrevious = (number) => {
         setActiveClass({ ...activeClass, activeObject: number })
     }
     let handleActivePaginate = (number) => {
         setCurpage(curPage = number)
     }
-    let handleNextPaginate =  (number) => {
-         setCurpage(curPage = number)
+    let handleNextPaginate = (number) => {
+        setCurpage(curPage = number)
     }
     let handlePreviousPaginate = (number) => {
         setCurpage(curPage = number)
     }
-    let handleChangeInputCreate = (e) => {
-        let { name, value } = e.target
-        const newsValue = { ...createUser }
-        newsValue[name] = value
-        dispatch(action.handleInputAdminUser(newsValue))
-    }
+    // Create User
+    // Input and validation
+    let validation = Yup.object({
+        firstName: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .max(15, 'Less than 15 character')
+            .required('First Name is not empty'),
+        lastName: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .max(15, 'Less than 15 character')
+            .required('Last Name is not empty'),
+        email: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .email('Invalid email')
+            .max(50, 'Less than 50 character')
+            .required('Email is not empty')
+    })
+    let formik = useFormik({
+        initialValues: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            role: 'customer'
+        },
+        validationSchema:validation,
+        onSubmit: values => {
+             dispatch(action.createUser(values, curPage, userPerPage))
+        }
+    })
+    // let handleChangeInputCreate = (e) => {
+    //     let { name, value } = e.target
+    //     const newsValue = { ...createUser }
+    //     newsValue[name] = value
+    //     dispatch(action.handleInputAdminUser(newsValue))
+    // }
 
-    let handleCreate = () => {
-        let userData = { ...createUser }
-        dispatch(action.createUser(userData, curPage, userPerPage))
-    }
+    // let handleCreate = () => {
+    //     let userData = { ...createUser }
+    //     // dispatch(action.createUser(userData, curPage, userPerPage))
+    // }
 
     // Search User
     let handleSearchTerm = (e) => {
@@ -105,8 +140,7 @@ export default function AdminUser() {
             dispatch(action.getUserPaginate(curPage, userPerPage, searchTerm.text, sortType))
         }
     }
-    console.log(searchTerm)
-    console.log(sortObject);
+
     return (
         <div className={`container-fluid ${classes.userContainer}`}>
             <div className={classes.userTitle}>
@@ -119,6 +153,7 @@ export default function AdminUser() {
                     id="exampleModalCreate"
                     role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true"
+                    onSubmit={formik.handleSubmit}
                 >
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -131,19 +166,33 @@ export default function AdminUser() {
                             <div className="modal-body">
                                 <div className="form-group">
                                     <label>First Name</label>
-                                    <input className={`form-control`} name="firstName" value={firstName} onChange={handleChangeInputCreate} />
+                                    <input className={`form-control`} name="firstName" value={formik.values.firstName}
+                                        onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                    {formik.errors.firstName && formik.touched.firstName ?
+                                        <div style={{ color: 'red', margin: "10px 0" }}>{formik.errors.firstName}</div> : null
+                                    }
                                 </div>
                                 <div className="form-group">
                                     <label>Last Name</label>
-                                    <input className={`form-control`} name="lastName" value={lastName} onChange={handleChangeInputCreate} />
+                                    <input className={`form-control`} name="lastName" value={formik.values.lastName}
+                                        onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                    {formik.errors.lastName && formik.touched.lastName ?
+                                        <div style={{ color: 'red', margin: "10px 0" }}>{formik.errors.lastName}</div> : null
+                                    }
                                 </div>
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input className={`form-control`} name="email" value={email} onChange={handleChangeInputCreate} />
+                                    <input className={`form-control`} name="email" value={formik.values.email}
+                                        onChange={formik.handleChange} onBlur={formik.handleBlur}
+                                    />
+                                    {formik.errors.email && formik.touched.email ?
+                                        <div style={{ color: 'red', margin: "10px 0" }}>{formik.errors.email}</div> : null
+                                    }
                                 </div>
                                 <div className="form-group">
                                     <label>Role</label>
-                                    <select className="custom-select" name="role" onChange={handleChangeInputCreate}>
+                                    <select className="custom-select" name="role"
+                                        onChange={formik.handleChange} >
                                         <option value={`customer`}>Customer</option>
                                         <option value={`admin`}>Admin</option>
                                     </select>
@@ -151,7 +200,10 @@ export default function AdminUser() {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-primary" onClick={() => { handleCreate() }} data-dismiss="modal">Save changes</button>
+                                <button type="submit" className="btn btn-primary"
+                                // onClick={() => { handleCreate() }} 
+                                // data-dismiss="modal"
+                                >Save changes</button>
                             </div>
                         </div>
                     </div>

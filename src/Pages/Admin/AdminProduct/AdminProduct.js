@@ -8,7 +8,7 @@ export default function AdminProduct() {
     const product = useSelector(state => state.adminReducer.product)
 
     const categoryList = useSelector(state => state.adminReducer.categoryList)
-   
+
 
     const productList = useSelector(state => state.adminReducer.productList)
     let { name, price, quantity, description, productPictures, color, size } = product
@@ -33,6 +33,27 @@ export default function AdminProduct() {
     })
     let [colorKey, setColorKey] = useState('')
     let [sizeKey, setSizeKey] = useState('')
+    // Error validation
+    let [error, setError] = useState({
+        name: '',
+        price: '',
+        quantity: '',
+        description: '',
+        category: '',
+        productPictures: '',
+        color: '',
+        size: '',
+    })
+    let initialValue = {
+        name: '',
+        price: '',
+        quantity: '',
+        description: '',
+        category: '',
+        productPictures: '',
+        color: '',
+        size: '',
+    }
     // Product Paginate
     const [activeClass, setActiveClass] = useState({
         activeObject: 0,
@@ -98,10 +119,91 @@ export default function AdminProduct() {
     // console.log(productPictures);
 
     // Create Product
+    let validation = () => {
+        let nameMessage = ''
+        let categoryMessage = ''
+        let colorMessage = ''
+        let sizeMessage = ''
+        let quantityMessage = ''
+        let priceMessage = ''
+        let productPictureMessage = ''
+        let descriptionMessage = ''
+        if (!product.name) {
+            nameMessage = 'Product Name is not empty'
+        }
+        if (product.name.startsWith(" ") || product.name.endsWith(" ")) {
+            nameMessage = 'Not white space'
+        }
+        if (product.name.length > 30) {
+            nameMessage = 'Less than 30 character'
+        }
+        if (!product.category) {
+            categoryMessage = "Please choose suitable category"
+        }
+        if (product.color.length === 0) {
+            colorMessage = "Please choose color"
+        }
+        if (product.size.length === 0) {
+            sizeMessage = "Please choose size"
+        }
+        // Quantity and price
+        let regex = /^[0-9]*$/
+        if (!regex.test(product.price)) {
+            priceMessage = 'Please input only number'
+        }
+        if (!product.price) {
+            priceMessage = "Please input product's price"
+        }
+        if (product.price.startsWith(" ") || product.price.endsWith(" ")) {
+            priceMessage = 'Not white space'
+        }
+        if (product.price.length > 15) {
+            priceMessage = "Less than 15 character"
+        }
+        // Quantity
+        if (!regex.test(product.quantity)) {
+            quantityMessage = 'Please input only number'
+        }
+        if (!product.quantity) {
+            quantityMessage = "Please input product's quantity"
+        }
+        if (product.quantity.startsWith(" ") || product.quantity.endsWith(" ")) {
+            quantityMessage = 'Not white space'
+        }
+        if (product.quantity.length > 15) {
+            quantityMessage = "Less than 15 character"
+        }
+        if (product.productPictures.length === 0) {
+            productPictureMessage = "Please choose product image"
+        }
+        if (!product.description) {
+            descriptionMessage = 'Product description is not empty'
+        }
+        if (product.description.startsWith(" ") || product.description.endsWith(" ")) {
+            descriptionMessage = 'Not white space'
+        }
+        if (nameMessage || categoryMessage || colorMessage || sizeMessage || quantityMessage || priceMessage || productPictureMessage || descriptionMessage) {
+            setError({
+                name: nameMessage,
+                category: categoryMessage,
+                color: colorMessage,
+                size: sizeMessage,
+                quantity: quantityMessage,
+                price: priceMessage,
+                productPictures: productPictureMessage,
+                description: descriptionMessage
+            })
+            return false
+        }
+        return true
+    }
     let handleSubmit = () => {
-
-        let productInfo = { ...product }
-        dispatch(action.createProduct(productInfo, curPage, limit))
+        let isValid = validation()
+        if (isValid) {
+            let productInfo = { ...product }
+            dispatch(action.createProduct(productInfo, curPage, limit))
+            setError(initialValue)
+        }
 
     }
     // Search Product
@@ -164,6 +266,7 @@ export default function AdminProduct() {
         document.getElementById('selected').selected = true
         setColorKey(Math.random().toString(10))
         setSizeKey(Math.random().toString(10))
+        setError(initialValue)
         setInputFileKey({
             inputKey: Math.random().toString(10)
         })
@@ -219,7 +322,6 @@ export default function AdminProduct() {
     ]
 
     let handleSelectColor = (e) => {
-
         if (e.target.value !== "Choose color") {
 
             dispatch({
@@ -245,14 +347,13 @@ export default function AdminProduct() {
 
     }
     let handleDeleteSize = (size) => {
-     
         setSizeKey(Math.random().toString(20))
         dispatch({
             type: 'DELETE_SIZE',
             data: size
         })
     }
-    
+
     return (
         <div className={classes.productContainer}>
             <div className={`d-flex justify-content-between ${classes.createProduct}`}>
@@ -281,6 +382,7 @@ export default function AdminProduct() {
                                         <label className={`font-weight-bold`}>Product Name</label>
                                         <input className={`form-control`} name="name" value={name}
                                             onChange={handleInput} />
+                                        {error.name ? <div style={{ color: 'red', margin: '10px 0' }}>{error.name}</div> : ''}
                                     </div>
                                     <div className={`form-group  w-100`}>
                                         <label className={`font-weight-bold`}>Category</label>
@@ -295,9 +397,7 @@ export default function AdminProduct() {
                                                 })
                                             }
                                         </select>
-                                        {
-
-                                        }
+                                        {error.category ? <div style={{ color: 'red', margin: '10px 0' }}>{error.category}</div> : ''}
                                     </div>
 
 
@@ -315,6 +415,7 @@ export default function AdminProduct() {
                                                 })
                                             }
                                         </select>
+
                                         {
                                             color?.length > 0 ?
                                                 color.map((color, index) => {
@@ -333,6 +434,7 @@ export default function AdminProduct() {
 
                                                 }) : ''
                                         }
+                                        {error.color ? <div style={{ color: 'red', margin: '10px 0' }}>{error.color}</div> : ''}
                                     </div>
                                     <div className={`form-group  w-100`}>
                                         <label className={`font-weight-bold`}>Size</label>
@@ -346,6 +448,7 @@ export default function AdminProduct() {
                                                 })
                                             }
                                         </select>
+
                                         {
                                             size?.length > 0 ?
                                                 size.map((size, index) => {
@@ -364,6 +467,7 @@ export default function AdminProduct() {
 
                                                 }) : ''
                                         }
+                                        {error.size ? <div style={{ color: 'red', margin: '10px 0' }}>{error.size}</div> : ''}
                                     </div>
                                 </div>
 
@@ -377,6 +481,7 @@ export default function AdminProduct() {
                                             value={price}
                                             onChange={handleInput}
                                         />
+                                        {error.price ? <div style={{ color: 'red', margin: '10px 0' }}>{error.price}</div> : ''}
                                     </div>
                                     <div className="form-group w-100">
                                         <label className={`font-weight-bold ${classes.thumbnailTitle}`}>Quantity</label>
@@ -387,6 +492,8 @@ export default function AdminProduct() {
                                             value={quantity}
                                             onChange={handleInput}
                                         />
+                                        {error.quantity ? <div style={{ color: 'red', margin: '10px 0' }}>{error.quantity}</div> : ''}
+
                                     </div>
                                 </div>
                                 <div className="form-group">
@@ -399,6 +506,7 @@ export default function AdminProduct() {
                                         name="productPictures"
                                         onChange={handleInput}
                                     />
+
                                     {
                                         productPictures?.length > 0 ?
                                             productPictures.map((img, index) => {
@@ -421,6 +529,7 @@ export default function AdminProduct() {
 
                                             }) : ''
                                     }
+                                    {error.productPictures ? <div style={{ color: 'red', margin: '10px 0' }}>{error.productPictures}</div> : ''}
                                 </div>
                                 <div className="form-group">
                                     <label className={`font-weight-bold ${classes.thumbnailTitle}`}>Description</label>
@@ -433,13 +542,14 @@ export default function AdminProduct() {
                                             onChange={handleInput}
                                         />
                                     </div>
+                                    {error.description ? <div style={{ color: 'red', margin: '10px 0' }}>{error.description}</div> : ''}
                                 </div>
 
 
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-primary" data-dismiss="modal"
+                                <button type="submit" className="btn btn-primary"
                                     onClick={() => {
                                         handleSubmit()
                                     }}
@@ -515,7 +625,8 @@ export default function AdminProduct() {
                         handleActivePaginate={handleActivePaginate}
                         handleNextPaginate={handleNextPaginate}
                         handlePreviousPaginate={handlePreviousPaginate}
-                        productPerPage={limit} />
+                        productPerPage={limit}
+                    />
                 </div>
 
             </div>

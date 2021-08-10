@@ -5,11 +5,32 @@ import * as action from '../../../redux/action/AdminAction'
 import CheckboxTree from 'react-checkbox-tree';
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 
-
 export default function AdminCategory() {
     const categoryList = useSelector(state => state.adminReducer.categoryList)
     const loading = useSelector(state => state.adminReducer.loading)
     const category = useSelector(state => state.adminReducer.category)
+    let [error, setError] = useState({
+        name: '',
+        categoryImage: '',
+    })
+
+    let initialError = {
+        name: '',
+        categoryImage: ''
+    }
+    // Validation Update
+    let [valueUpdate, setValueUpdate] = useState({
+        errorName: '',
+        errorSelect: ''
+    })
+    let [valueUpdateExpand, setValueUpdateExpand] = useState({
+        errorName: '',
+        errorSelect: ''
+    })
+    let initialValueUpdate = {
+        errorName: '',
+        errorSelect: ''
+    }
     let [checked, setChecked] = useState([])
     let [expanded, setExpanded] = useState([])
     let [checkedArray, setCheckedArray] = useState([])
@@ -62,13 +83,40 @@ export default function AdminCategory() {
         dispatch(action.handleInputAdmin(newValues))
     }
 
+    let validation = () => {
+        let nameMessage = ''
+        let imageMessage = ''
+        // First Name
+        if (!category.name) {
+            nameMessage = "Category name is not empty"
+        }
+        if (category.name.startsWith(" ") || category.name.endsWith(" ")) {
+            nameMessage = "Not white space"
+        }
+        if (category.name.length > 30) {
+            nameMessage = "Less than 30 character"
+        }
+        if (!category.categoryImage) {
+            imageMessage = "Please choose image for category"
+        }
+        if (nameMessage || imageMessage) {
+            setError({ name: nameMessage, categoryImage: imageMessage })
+            return false
+        }
+        return true
+    }
     let handleSubmit = (e) => {
         e.preventDefault();
-        let categoryInput = { ...category }
-        dispatch(action.createCategory(categoryInput))
-        dispatch({
-            type: 'RESET_FORM'
-        })
+        let isValid = validation()
+        if (isValid) {
+            let categoryInput = { ...category }
+            setError(initialError)
+            dispatch(action.createCategory(categoryInput))
+            dispatch({
+                type: 'RESET_FORM'
+            })
+        }
+
     }
 
     let renderCategoryList = (categoryList, option = []) => {
@@ -110,9 +158,8 @@ export default function AdminCategory() {
             return setExpandedArray(expandedArray)
         })
     }
-    console.log(categoryList);
     let handleUpdateCategoryInput = (key, value, indexExpanded, type) => {
-      
+
         if (type === 'checked') {
             const checkedUpdatedArray = checkedArray.map((item, index) => index === indexExpanded ? { ...item, [key]: value } : item)
             setCheckedArray(checkedUpdatedArray)
@@ -121,33 +168,69 @@ export default function AdminCategory() {
             setExpandedArray(expandedUpdatedArray)
         }
     }
-    console.log({ checkedArray, expanded });
-    let handleUpdateCategory = (check,expand) => {
-        for(let value of check){
-            if(value.value===value.parentId){
-                alert('You can not update the category by itself')
-                return false
+    let validationUpdate = (check, expand) => {
+        let nameMessage = ''
+        let selectMessage = ''
+        // Expand
+        let nameMessageExpand=''
+        let selectMessageExpand=''
+        for (let value of check) {
+            if (!value.name) {
+                nameMessage = "Category name is not empty"
+            }
+            if (value.name.startsWith(" ") || value.name.endsWith(" ")) {
+                nameMessage = "Not white space"
+            }
+            if (value.name.length > 30) {
+                nameMessage = "Less than 30 character"
+            }
+            if (value.value === value.parentId) {
+                selectMessage = "You can not update the category by itself"
             }
         }
-        for(let value of expand){
-            if(value.value===value.parentId){
-                alert('You can not update the category by itself')
-                return false
+        for (let value of expand) {
+            if (!value.name) {
+                nameMessageExpand = "Category name is not empty"
+            }
+            if (value.name.startsWith(" ") || value.name.endsWith(" ")) {
+                nameMessageExpand = "Not white space"
+            }
+            if (value.name.length > 30) {
+                nameMessageExpand = "Less than 30 character"
+            }
+            if (value.value === value.parentId) {
+                selectMessageExpand = "You can not update the category by itself"
             }
         }
-        dispatch(action.UpdateCategory(check, expand))
-        setCheckedArray([])
-        setExpandedArray([])
-        setExpanded([])
-        setChecked([])
+        if(nameMessageExpand || selectMessageExpand){
+            setValueUpdateExpand({ errorName: nameMessageExpand, errorSelect: selectMessageExpand })
+            return false
+        }
+        if (nameMessage || selectMessage) {
+            setValueUpdate({ errorName: nameMessage, errorSelect: selectMessage })
+            return false
+        }
+        return true
     }
-    console.log({ categoryOption });
+    let handleUpdateCategory = (check, expand) => {
+        let isValid = validationUpdate(check, expand);
+        if (isValid) {
+            dispatch(action.UpdateCategory(check, expand))
+            setCheckedArray([])
+            setExpandedArray([])
+            setExpanded([])
+            setChecked([])
+            setValueUpdateExpand(initialValueUpdate)
+            setValueUpdate(initialValueUpdate)
+        }
+    }
+  
     let renderUpdateModal = () => {
         return <div className="modal fade " id="exampleModalUpdate"
             tabIndex={-1} role="dialog"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
-            // onSubmit={handleUpdateCategory}
+        // onSubmit={handleUpdateCategory}
         >
             <div className="modal-dialog modal-lg" role="document"  >
                 <div className="modal-content">
@@ -170,22 +253,24 @@ export default function AdminCategory() {
                                             <label>Category Name</label>
                                             <input className={`form-control`} value={item.name}
                                                 onChange={(e) => { handleUpdateCategoryInput('name', e.target.value, index, 'expanded') }} />
+                                            {valueUpdateExpand.errorName ? <div style={{ color: 'red', margin: '10px' }}>{valueUpdateExpand.errorName}</div> : ''}
                                         </div>
                                         {
-                                         
-                                                <div className={`form-group col-6`}>
-                                                    <label>Select Category Group</label>
-                                                    <select className={`form-control`} name="parentId" value={item.parentId}
-                                                        onChange={(e) => { handleUpdateCategoryInput('parentId', e.target.value, index, 'expanded') }}>
-                                                        <option value={``}>New Category</option>
-                                                        {categoryOption.map((option, index) => {
-                                                            return <option key={index} value={option.value}>
-                                                                {option.name}
-                                                            </option>
-                                                        })}
 
-                                                    </select>
-                                                </div>
+                                            <div className={`form-group col-6`}>
+                                                <label>Select Category Group</label>
+                                                <select className={`form-control`} name="parentId" value={item.parentId}
+                                                    onChange={(e) => { handleUpdateCategoryInput('parentId', e.target.value, index, 'expanded') }}>
+                                                    <option value={``}>New Category</option>
+                                                    {categoryOption.map((option, index) => {
+                                                        return <option key={index} value={option.value}>
+                                                            {option.name}
+                                                        </option>
+                                                    })}
+
+                                                </select>
+                                                {valueUpdateExpand.errorSelect ? <div style={{ color: 'red', margin: '10px' }}>{valueUpdateExpand.errorSelect}</div> : ''}
+                                            </div>
                                         }
 
                                         {/* <div className="form-group col-4">
@@ -213,29 +298,30 @@ export default function AdminCategory() {
                         {
                             checkedArray.length > 0 ?
                                 checkedArray.map((item, index) => {
-                                    console.log(item.type);
                                     return <div key={index} className={`row ${classes.expandGroup}`}>
                                         <div className={`form-group col-6`}>
                                             <label>Category Name</label>
                                             <input className={`form-control`} name="name" value={item.name}
                                                 onChange={(e) => { handleUpdateCategoryInput('name', e.target.value, index, 'checked') }} />
+                                            {valueUpdate.errorName ? <div style={{ color: 'red', margin: '10px' }}>{valueUpdate.errorName}</div> : ''}
                                         </div>
                                         {
-                                                <div className={`form-group col-6`}>
-                                                    <label>Select Category Group</label>
-                                                    <select className={`form-control`} name="parentId" value={item.parentId}
-                                                        onChange={(e) => { handleUpdateCategoryInput('parentId', e.target.value, index, 'checked') }}>
-                                                        <option value={``}>New Category</option>
-                                                        {categoryOption.map((option, index) => {
+                                            <div className={`form-group col-6`}>
+                                                <label>Select Category Group</label>
+                                                <select className={`form-control`} name="parentId" value={item.parentId}
+                                                    onChange={(e) => { handleUpdateCategoryInput('parentId', e.target.value, index, 'checked') }}>
+                                                    <option value={``}>New Category</option>
+                                                    {categoryOption.map((option, index) => {
 
-                                                            return <option key={index} value={option.value}>
+                                                        return <option key={index} value={option.value}>
 
-                                                                {option.name}
-                                                            </option>
-                                                        })}
+                                                            {option.name}
+                                                        </option>
+                                                    })}
 
-                                                    </select>
-                                                </div>
+                                                </select>
+                                                {valueUpdate.errorSelect ? <div style={{ color: 'red', margin: '10px' }}>{valueUpdate.errorSelect}</div> : ''}
+                                            </div>
                                         }
 
                                         {/* {
@@ -266,10 +352,10 @@ export default function AdminCategory() {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" className="btn btn-primary" data-dismiss="modal"
-                        onClick={()=>{
-                            handleUpdateCategory(checkedArray,expandedArray)
-                        }}>Save changes</button>
+                        <button type="submit" className="btn btn-primary"
+                            onClick={() => {
+                                handleUpdateCategory(checkedArray, expandedArray)
+                            }}>Save changes</button>
                     </div>
                 </div>
             </div>
@@ -362,6 +448,7 @@ export default function AdminCategory() {
                                     <label className={classes.nameTitle}>Category Name</label>
                                     <input className={`form-control`} name="name" value={category.name}
                                         onChange={handleInput} />
+                                    {error.name ? <div style={{ color: 'red', margin: '10px 0' }}>{error.name}</div> : ''}
                                 </div>
                                 <div className={`form-group`}>
                                     <label className={classes.typeTitle}>Category Group</label>
@@ -382,7 +469,7 @@ export default function AdminCategory() {
                                         name="categoryImage"
                                         onChange={handleInput}
                                     />
-
+                                    {error.categoryImage ? <div style={{ color: 'red', margin: '10px 0' }}>{error.categoryImage}</div> : ''}
                                 </div>
                             </div>
                             <div className="modal-footer">

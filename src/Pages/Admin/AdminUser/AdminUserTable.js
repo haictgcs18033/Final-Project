@@ -4,6 +4,8 @@ import * as action from '../../../redux/action/AdminAction'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { Skeleton } from 'antd'
+
+
 const AdminUserTable = React.memo(
     (props) => {
         let { curPage,
@@ -23,7 +25,7 @@ const AdminUserTable = React.memo(
         const loading = useSelector(state => state.adminReducer.loading)
         useEffect(() => {
             dispatch(action.getUserPaginate(curPage, userPerPage, searchTerm, sortObject))
-        }, [dispatch, curPage, userPerPage,searchTerm,sortObject])
+        }, [dispatch, curPage, userPerPage, searchTerm, sortObject])
         // Handle active class  
         const handleActiveClass = (index) => {
             handleSetActiveClass(index)
@@ -55,7 +57,6 @@ const AdminUserTable = React.memo(
         }
 
         // Update User
-
         const [updateUser, setUpdateUser] = useState({
             userId: '',
             firstName: '',
@@ -63,19 +64,86 @@ const AdminUserTable = React.memo(
             email: '',
             role: ''
         })
+        let [error, setError] = useState({
+            firstName: '',
+            lastName: '',
+            email: '',
+        })
+
+        let initialError = {
+            firstName: '',
+            lastName: '',
+            email: '',
+        }
+        let handleChangeInputUpdate = (e) => {
+            let { name, value } = e.target
+            setUpdateUser({ ...updateUser, [name]: value })
+        }
+        let handleChangeUpdate = (user) => {
+            setUpdateUser({
+                userId: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                role: user.role
+            })
+            setError(initialError)
+        }
+        let validation = () => {
+            let emailMessage = ''
+            let firstNameMessage = ''
+            let lastNameMessage = ''
+            // First Name
+            if (!updateUser.firstName) {
+                firstNameMessage = "First name is not empty"
+            }
+            if (updateUser.firstName.startsWith(" ") || updateUser.firstName.endsWith(" ")) {
+                firstNameMessage = "Not white space"
+            }
+            if (updateUser.firstName.length > 15) {
+                firstNameMessage = "Less than 15 character"
+            }
+            // Last Name
+            if (!updateUser.lastName) {
+                lastNameMessage = "Last name is not empty"
+            }
+            if (updateUser.lastName.startsWith(" ") || updateUser.lastName.endsWith(" ")) {
+                lastNameMessage = "Not white space"
+            }
+            if (updateUser.lastName.length > 15) {
+                lastNameMessage = "Less than 15 character"
+            }
+            // Email
+            const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;//eslint-disable-line
+            if (!re.test(updateUser.email)) {
+                emailMessage = 'Invalid email'
+            }
+            if (updateUser.email.startsWith(" ") || updateUser.email.endsWith(" ")) {
+                emailMessage = "Not white space"
+            }
+            if (!updateUser.email) {
+                emailMessage = 'Email is not empty'
+            }
+            if (emailMessage || firstNameMessage || lastNameMessage) {
+                setError({ firstName: firstNameMessage, email: emailMessage, lastName: lastNameMessage })
+                return false
+            }
+            return true
+        }
+        let updateUserAdmin = (e) => {
+            e.preventDefault()
+            let isValid = validation()
+            if (isValid) {
+                window.$('#exampleModalUpdate').modal('hide'); 
+                dispatch(action.handleUpdateUser(updateUser, curPage, userPerPage))
+            }
+        }
         // Delete User
         const [deleteUser, setDeleteUser] = useState({
             fullName: '',
             userId: ''
         })
-        // UpdateUser
-        let handleChangeInputUpdate = (e) => {
-            let { name, value } = e.target
-            setUpdateUser({ ...updateUser, [name]: value })
-        }
-        let updateUserAdmin = (userUpdate) => {
-            dispatch(action.handleUpdateUser(userUpdate, curPage, userPerPage))
-        }
+
         // Delete User
         let handleDeleteUser = (userId) => {
             dispatch(action.deleteUser(userId, curPage, userPerPage))
@@ -113,13 +181,7 @@ const AdminUserTable = React.memo(
                                     <button className={`mr-2 ${classes.update}`}
                                         data-toggle="modal" data-target="#exampleModalUpdate"
                                         onClick={() => {
-                                            setUpdateUser({
-                                                userId: user._id,
-                                                firstName: user.firstName,
-                                                lastName: user.lastName,
-                                                email: user.email,
-                                                role: user.role
-                                            })
+                                            handleChangeUpdate(user)
                                         }}>Update</button>
                                     <button className={`mr-2 ${classes.delete}`}
                                         data-toggle="modal" data-target="#exampleModalDelete"
@@ -137,10 +199,12 @@ const AdminUserTable = React.memo(
                         })}
                     </tbody>
                 </table>
-                <div className="modal fade"
+                <form className="modal fade"
                     id="exampleModalUpdate"
                     role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true"
+                    onSubmit={updateUserAdmin}
+
                 >
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -153,19 +217,26 @@ const AdminUserTable = React.memo(
                             <div className="modal-body">
                                 <div className="form-group">
                                     <label>First Name</label>
-                                    <input className={`form-control`} name="firstName" value={updateUser.firstName} onChange={handleChangeInputUpdate} />
+                                    <input className={`form-control`} name="firstName" value={updateUser.firstName}
+                                        onChange={handleChangeInputUpdate} />
+                                    {error.firstName ? <div style={{ color: 'red', margin: '10px 0' }}>{error.firstName}</div> : ''}
                                 </div>
                                 <div className="form-group">
                                     <label>Last Name</label>
-                                    <input className={`form-control`} name="lastName" value={updateUser.lastName} onChange={handleChangeInputUpdate} />
+                                    <input className={`form-control`} name="lastName" value={updateUser.lastName}
+                                        onChange={handleChangeInputUpdate} />
+                                    {error.lastName ? <div style={{ color: 'red', margin: '10px 0' }}>{error.lastName}</div> : ''}
                                 </div>
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input className={`form-control`} name="email" value={updateUser.email} onChange={handleChangeInputUpdate} />
+                                    <input className={`form-control`} name="email" value={updateUser.email}
+                                        onChange={handleChangeInputUpdate} />
+                                    {error.email ? <div style={{ color: 'red', margin: '10px 0' }}>{error.email}</div> : ''}
                                 </div>
                                 <div className="form-group">
                                     <label>Role</label>
-                                    <select className="custom-select" name="role" value={updateUser.role} onChange={handleChangeInputUpdate}>
+                                    <select className="custom-select" name="role" value={updateUser.role}
+                                        onChange={handleChangeInputUpdate}>
                                         <option value={`customer`}>Customer</option>
                                         <option value={`admin`}>Admin</option>
                                     </select>
@@ -173,11 +244,12 @@ const AdminUserTable = React.memo(
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-primary" data-dismiss="modal" onClick={() => { updateUserAdmin(updateUser) }} >Save changes</button>
+                                <button type="submit" className="btn btn-primary"
+                                >Save changes</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
                 <div className="modal fade"
                     id="exampleModalDelete"
                     role="dialog"

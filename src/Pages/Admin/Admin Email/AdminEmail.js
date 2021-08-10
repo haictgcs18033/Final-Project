@@ -4,6 +4,7 @@ import classes from '../Admin Email/AdminEmail.module.scss'
 import UserTable from './UserTable'
 import * as action from '../../../redux/action/AdminAction'
 import moment from 'moment'
+
 export default function AdminEmail() {
     const userArray = useSelector(state => state.adminReducer.userArray)
     const emailServer = useSelector(state => state.adminReducer.emailServer)
@@ -18,15 +19,24 @@ export default function AdminEmail() {
         title: '',
         description: ''
     })
+     
+    let [error,setError]=useState({
+        title: '',
+        description: ''
+    })
+    let initialValue={
+        title: '',
+        description: ''
+    }
     // Email Type
     const [emailType, setEmailType] = useState('')
 
     // Data mail all
-    const [mailAll, setMailAll] = useState({
-        title: '',
-        description: '',
-        type: '',
-    })
+    // const [mailAll, setMailAll] = useState({
+    //     title: '',
+    //     description: '',
+    //     type: '',
+    // })
     let [curPage, setCurpage] = useState(1)
     const userPerPage = 3
     useEffect(() => {
@@ -77,11 +87,11 @@ export default function AdminEmail() {
             setEmailType('none')
         } else if (value === 'all') {
             setEmailType('all')
-            setMailAll({
-                title: mailContent.title,
-                description: mailContent.description,
-                type: 'all'
-            })
+            // setMailAll({
+            //     title: mailContent.title,
+            //     description: mailContent.description,
+            //     type: 'all'
+            // })
         } else if (value === 'specific') {
             setEmailType('specific')
 
@@ -93,14 +103,59 @@ export default function AdminEmail() {
     let handleSortOldest = () => {
         dispatch(action.getAllEmail('oldest'))
     }
+    // Send mail
+    let validation = () => {
+        let titleMessage=''
+        let descriptionMessage=""
+        if(!mailContent.title){
+           titleMessage="Please input mail title"
+        }
+        if(mailContent.title.startsWith(" ") || mailContent.title.endsWith(" ")){
+            titleMessage="Not white space"
+         }
+        if(!mailContent.description){
+             descriptionMessage="Please input mail description"
+        }
+        if(mailContent.description.startsWith(" ") || mailContent.description.endsWith(" ")){
+            descriptionMessage="Not white space"
+         }
+         if(titleMessage || descriptionMessage){
+             setError({title:titleMessage,description:descriptionMessage})
+             return false
+         }
+         return true
+    }
     let handleInputMail = (e) => {
         let { name, value } = e.target
-
         setMailContent({ ...mailContent, [name]: value })
     }
     let handleSendMailAll = () => {
+        let isValid = validation()
+        if (isValid) {
+            let dataToServer={
+                title:mailContent.title,
+                description:mailContent.description,
+                type:emailType
+            }
+            setError(initialValue)
+            dispatch(action.sendMailAll(dataToServer))
+        }
 
-        dispatch(action.sendMailAll(mailAll))
+    }
+    let handleSendSpecificMail=(user)=>{
+      
+        let isValid=validation()
+        if(isValid){
+            let dataToApi={
+                title:mailContent.title,
+                description:mailContent.description,
+                type:emailType,
+                emailUser:user.email
+            }
+            setError(initialValue)
+            dispatch(action.sendSpecificEmail(dataToApi))
+         
+        }
     }
 
 
@@ -117,10 +172,12 @@ export default function AdminEmail() {
                         <div className={`form-group`}>
                             <label>Title</label>
                             <input className={`form-control`} name="title" value={mailContent.title} onChange={handleInputMail} />
+                            {error.title ? <div style={{color:'red',margin:'10px 0'}}>{error.title}</div>:''}
                         </div>
                         <div className={`form-group`}>
                             <label>Description</label>
                             <textarea className={`form-control`} name="description" value={mailContent.description} onChange={handleInputMail}></textarea>
+                            {error.description ? <div style={{color:'red',margin:'10px 0'}}>{error.description}</div>:''}
                         </div>
                         <div className={`form-group ${classes.selectGroup}`}>
                             <label>Send type</label>
@@ -203,7 +260,8 @@ export default function AdminEmail() {
                                     handleNextPaginate={handleNextPaginate}
                                     handlePreviousPaginate={handlePreviousPaginate}
                                     userPerPage={userPerPage}
-                                    mailContent={mailContent}
+                                    validation={validation}
+                                    handleSendSpecificMail={handleSendSpecificMail}
                                 ></UserTable>
                             </div>
 
