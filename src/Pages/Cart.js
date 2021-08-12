@@ -4,7 +4,8 @@ import { Redirect } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import * as action from '../redux/action/EcommerceAction'
 import classes from '../sass/Cart.module.scss'
-import { Skeleton } from 'antd';
+import { notification, Skeleton } from 'antd';
+import { WarningOutlined } from '@ant-design/icons';
 export default function Cart() {
     const dispatch = useDispatch()
     const cartArray = useSelector(state => state.ecommerceReducer.cartArray)
@@ -217,7 +218,11 @@ export default function Cart() {
         )
 
     } else {
-        alert('Please login again')
+        notification.open({
+            message: 'Error',
+            description: `Please Login Again`,
+            icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+        });
         return <Redirect to="/login" />
     }
 

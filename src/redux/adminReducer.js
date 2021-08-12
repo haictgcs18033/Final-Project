@@ -93,7 +93,6 @@ let setNewCategory = (categoryList, category, parentId) => {
     }
 }
 export const adminReducer = (state = stateDefault, action) => {
-
     switch (action.type) {
         case 'GET_ALL_USER': {
             return { ...state, userArray: action.users }
@@ -102,7 +101,7 @@ export const adminReducer = (state = stateDefault, action) => {
             return { ...state, paginateUser: action.userPaginate }
         }
         case 'GET_CATEGORY': {
-            return { ...state, categoryList: action.category.category, loading: false }
+            return { ...state, categoryList: action.category.category}
         }
         case 'INPUT': {
             return { ...state, category: action.category, product: action.product, page: action.page }
@@ -164,15 +163,13 @@ export const adminReducer = (state = stateDefault, action) => {
         case 'ADD_CATEGORY': {
             let category = action.payload.category
             let updateCategory = setNewCategory(state.categoryList, category, category.parentId)
-         
-
-            return { ...state, categoryList: updateCategory, loading: false }
+            return { ...state, categoryList: updateCategory}
         }
         case 'GET_PRODUCT': {
-            return { ...state, productList: action.payload.productItems, loading: false }
+            return { ...state, productList: action.payload.productItems }
         }
         case 'GET_PRODUCT_PAGINATE': {
-            return { ...state, paginateProduct: action.payload, loading: false }
+            return { ...state, paginateProduct: action.payload }
         }
         case 'EMPTY_ARRAY':{
             let productUpdate={...state.product}
@@ -199,11 +196,11 @@ export const adminReducer = (state = stateDefault, action) => {
             return { ...state, category: categoryValue, product: productValue }
         }
         case 'GET_CUSTOMER_ORDER': {
-            return { ...state, customerOrders: action.customerOrders, loading: false }
+            return { ...state, customerOrders: action.customerOrders }
         }
 
         case 'GET_ALL_EMAIL': {
-            return { ...state, emailServer: action.email, loading: false }
+            return { ...state, emailServer: action.email }
         }
 
         default: {
