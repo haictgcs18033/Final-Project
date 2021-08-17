@@ -8,7 +8,7 @@ import { Select } from 'antd';
 export default function ProductPage() {
     let productBySlug = useSelector(state => state.ecommerceReducer.productBySlug)
     let [curPage, setCurpage] = useState(1)
-    const limit = 2
+    const limit = 8
     let { slug } = useParams()
     let { categoryName } = useParams()
     let [sortObject, setSortObject] = useState('')
