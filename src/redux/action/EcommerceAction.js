@@ -531,11 +531,6 @@ export const getCartItems = () => {
                     type: 'END_USER_REQUEST'
                 })
             } catch (error) {
-                notification.open({
-                    message: 'Error',
-                    description: `${error.response?.data.message}`,
-                    icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
-                });
                 dispatch({
                     type: 'END_USER_REQUEST'
                 })

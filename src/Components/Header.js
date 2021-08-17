@@ -99,6 +99,9 @@ export default function Header() {
         }
     }
     let userLogout = () => {
+        dispatch({
+            type:'RESET_CART'
+        })
         localStorage.clear()
     }
     const showDrawer = () => {
