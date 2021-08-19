@@ -8,7 +8,7 @@
     background: #642ab5;
     width: 400px;
     border-radius: 12px 0 0 12px;
-    height: 600px;
+    height: 480px;
     padding: 30px;
     text-align: center;
     display: flex;
@@ -24,7 +24,7 @@
     padding: 20px 40px;
     border-radius: 0 12px 12px 0;
     width: 600px;
-    height: 600px;
+    height: 480px;
     background-color: #1f1f1f;
     h3 {
         text-align: center;
@@ -143,7 +143,7 @@
         }
     }
 }
-@media screen  and(max-width:414px){
+@media screen  and(max-width:576px){
     .signupIntro {
         display: none;
     }
@@ -172,6 +172,11 @@
             font-size: 30px;
             letter-spacing: 5px;
         }
+    }
+}
+@media screen and(max-width:576px) {
+    .signupForm{
+        height: 450px;
     }
 }
 @media screen and(min-width:768px) and(max-width:1024px) {

@@ -344,6 +344,9 @@ export const getProductPaginate = (page, limit, searchTerm, sortObject) => {
                 type: 'GET_PRODUCT_PAGINATE',
                 payload: result.data
             })
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (error) {
             console.log(error.response?.data);
         }
@@ -496,7 +499,9 @@ export const getCustomerOrder = () => {
                 customerOrders: result.data.orders,
 
             })
-
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (err) {
             console.log(err.response?.data);
         }

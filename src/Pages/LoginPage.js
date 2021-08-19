@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { loginHome } from '../redux/action/EcommerceAction'
 import { useDispatch } from 'react-redux'
 import GoogleLogin from 'react-google-login'
-import FacebookLogin from 'react-facebook-login'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import axios from 'axios'
 import swal from 'sweetalert'
 import { useFormik } from 'formik';
@@ -139,10 +139,22 @@ export default function LoginPage(props) {
                                 isMobile={false}
                                 autoLoad={false}
                                 fields="name,email,picture"
-                                callback={responseFacebook} />
+                                callback={responseFacebook}
+                                render={renderProps => (
+                                    <button onClick={renderProps.onClick} className={classes.facebookButton}>
+                                         <span><i class="fab fa-facebook-f mr-3"></i></span>
+                                        <span>Login Facebook</span>
+                                    </button>
+                                )}
+                            />
                             <GoogleLogin
                                 clientId="1052309418279-37lkf36gbep0pi8sp9ke0a8uqgl8fogq.apps.googleusercontent.com"
-                                buttonText="Login"
+                                render={renderProps => (
+                                    <button onClick={renderProps.onClick} className={classes.googleButton}>
+                                        <span><i class="fab fa-google mr-3"></i></span>
+                                        <span>Login Google</span>
+                                    </button>
+                                )}
                                 onSuccess={responseGoogleSuccess}
                                 onFailure={responseGoogleFailure}
                                 cookiePolicy={'single_host_origin'} />

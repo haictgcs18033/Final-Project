@@ -50,16 +50,17 @@ export default function ResetPassword() {
     })
 
     return (
-        <form className={classes.loginContainer} onSubmit={formik.handleSubmit}>
-            <div className={classes.loginIntro}>
-                <div className={classes.loginIntroContent}>
+        <form className={classes.resetContainer} onSubmit={formik.handleSubmit}>
+            <div className={classes.resetIntro}>
+                <div className={classes.resetIntroContent}>
                     <h2>FES Reset Password</h2>
                     <p>Please input and confirm your new password</p>
                 </div>
             </div>
-            <div className={classes.loginForm}>
-                {/* <h3 className={`${classes.titleMobile}`}>FES</h3> */}
+            <div className={classes.resetForm}>
+               
                 <div className={classes.formGroup}>
+                <h3 className={`text-center`}>Change Password</h3>
                     <div className={classes.emailContainer}>
                         <div className={`form-group`}>
                             <label>New Password</label>

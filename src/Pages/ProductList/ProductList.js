@@ -74,17 +74,10 @@ export default function ProductList(props) {
                             </div>
                             :
                             productPaginated.paginate?.map((product, index) => {
-                                return <div key={index} className={`col-4 mb-3`}>
+                                return <div key={index} className={`col-6 col-md-6 col-lg-4 col-xl-4 mb-3`}>
                                     <div className={`card text-left ${classes.productCard}`}>
                                         <div className={classes.cardImage}>
                                             <img className="card-img-top" src={`${product.productPictures[0].img}`} alt="Notfound" />
-                                            <div className={`${classes.viewProduct}`}>
-                                                <button>
-                                                    <NavLink to={`/detail/${product.slug}/${product._id}`}>
-                                                        View product
-                                                    </NavLink>
-                                                </button>
-                                            </div>
                                         </div>
                                         <div className={`card-body ${classes.cardBody}`}>
                                             <h4 className="card-title">{product.name}</h4>
@@ -99,8 +92,9 @@ export default function ProductList(props) {
                                                 <span className={`font-weight-bold`}>Price : </span>
                                                 {product.price} $
                                             </p>
-                                            <p className={`font-weight-bold`}>Color</p>
-                                            <div className={`d-flex`}>
+                                            <p className={`font-weight-bold ${classes.colorTitle}`}>Color:</p>
+                                            
+                                            <div className={`d-flex ${classes.colorGroup}`}>
 
                                                 {product.color.length > 0 ?
                                                     product.color.map((color, index) => {
@@ -117,13 +111,20 @@ export default function ProductList(props) {
                                                     }) : ''
                                                 }
                                             </div>
-                                            <p className={`font-weight-bold`}>Size</p>
-                                            <div className={`d-flex`}>
+                                            <p className={`font-weight-bold ${classes.sizeTitle}`}>Size</p>
+                                            <div className={`d-flex ${classes.sizeGroup}`}>
                                                 {product.size.length > 0 ?
                                                     product.size.map((size, index) => {
                                                         return <p className={`${classes.size}`} key={index}>{size}</p>
                                                     }) : ''
                                                 }
+                                            </div>
+                                            <div className={`${classes.viewProduct}`}>
+                                                <button>
+                                                    <NavLink to={`/detail/${product.slug}/${product._id}`}>
+                                                        View product
+                                                    </NavLink>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

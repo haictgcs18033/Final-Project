@@ -5,6 +5,7 @@ import classes from '../../sass/AllProduct.module.scss'
 import * as action from '../../redux/action/EcommerceAction'
 import { Collapse, Radio, Space } from 'antd';
 import ProductList from './ProductList'
+import { Drawer } from 'antd'
 export default function AllProduct() {
     const productAll = useSelector(state => state.ecommerceReducer.productAll)
     let [curPage, setCurpage] = useState(1)
@@ -19,12 +20,13 @@ export default function AllProduct() {
     let [filterColor, setFilterColor] = useState('')
     let [filterSize, setFilterSize] = useState('')
     let [filterRating, setFilterRating] = useState('')
-
+    // Drawer filter
+    let [visible, setVisible] = useState(false)
     // Paginate group
     const [activeClass, setActiveClass] = useState({
         activeObject: 0,
     });
-   
+
     const pageNumber = []
     let totalProduct = productAll.length
     for (let index = 0; index < Math.ceil(totalProduct / limit); index++) {
@@ -47,7 +49,7 @@ export default function AllProduct() {
         setCurpage(curPage = number)
     }
     const { Panel } = Collapse
-    
+
     let handleChangePrice = (e) => {
         setCurpage(1)
         setActiveClass({ ...activeClass, activeObject: 0 })
@@ -73,10 +75,22 @@ export default function AllProduct() {
     let reloadPage = () => {
         window.location.reload()
     }
-
+    // Drawer Mobile
+    let handleOpenDrawer = () => {
+        setVisible(true)
+    }
+    let onClose = () => {
+        setVisible(false)
+    }
     return (
         <div className={`container ${classes.allProductContainer}`}>
-            <h3 className={classes.productTitle}>Product</h3>
+            <div className={classes.productTitleGroup}>
+                <h3 className={classes.productTitle}>All Products</h3>
+                <button onClick={() => {
+                    handleOpenDrawer()
+                }}>Filter</button>
+            </div>
+
             <div className={classes.productPosition}>
                 <div className={classes.productFilter}>
                     <Collapse
@@ -164,11 +178,142 @@ export default function AllProduct() {
                         </Panel>
                     </Collapse>
                 </div>
+                <div className={`drawer-mobile ${classes.drawerMobile}`}>
+                    <Drawer
+                        title="Product Filter"
+                        placement={'right'}
+                        closable={false}
+                        onClose={onClose}
+                        visible={visible}
+                        bodyStyle={{padding:'0'}}
+                        headerStyle={{background:'#642ab5'}}
+                        footer={
+                          <div style={{textAlign:"right"}}>
+                              <button style={
+                                  {
+                                      marginRight:'8px',
+                                      border:'none',
+                                      background:'red',
+                                      borderRadius:'6px',
+                                      padding:"5px 10px",
+                                      fontWeight:'bold'
+                                  }
+                                 
+                              }
+                              onClick={()=>{
+                                  window.location.reload()
+                              }}
+                              >Clear Filter</button>
+                              <button className={classes.viewProduct} 
+                              style={
+                                {
+                                    marginRight:'8px',
+                                    border:'none',
+                                    background:'#642ab5',
+                                    borderRadius:'6px',
+                                    padding:"5px 10px",
+                                    fontWeight:'bold'
+                                }
+                            }
+                              onClick={()=>{
+                                  setVisible(false)
+                              }}>View</button>
+                          </div>
+                        }
+                      
+                    >
+                        <div className={classes.productFilter}>
+                            <Collapse
+                            bordered={false}
+                                defaultActiveKey={['1']}
+                                expandIconPosition={"right"}
+                            >
+                                <Panel header="FILTER BY PRICE" key="1" >
+                                    <div className={classes.price}>
+                                        <Radio.Group id="ALo Group" onChange={handleChangePrice} >
+                                            <Space direction="vertical">
+                                                <Radio value={'under3Dollar'}  >1$ - 3$</Radio>
+                                                <Radio value={'under6Dollar'}>4$ - 6$</Radio>
+                                                <Radio value={'under9Dollar'}>7$ - 9$</Radio>
+                                                <Radio value={'under12Dollar'}>10$ - 12$</Radio>
+                                            </Space>
+                                        </Radio.Group>
+                                    </div>
+                                </Panel>
+                                <Panel header="FILTER BY COLOR" key="2" >
+                                    <div className={classes.color}>
+                                        <Radio.Group onChange={handleChangeColor}>
+                                            <Space direction="vertical">
+                                                <Radio value={'red'}>Red</Radio>
+                                                <Radio value={'green'}>Green</Radio>
+                                                <Radio value={'blue'}>Blue</Radio>
+
+                                            </Space>
+                                        </Radio.Group>
+                                    </div>
+                                </Panel>
+                                <Panel header="FILTER BY SIZE" key="3">
+                                    <div className={classes.size}>
+                                        <Radio.Group onChange={handleChangeSize}>
+                                            <Space direction="vertical">
+                                                <Radio value={'M'}>Size M</Radio>
+                                                <Radio value={'L'}>Size L</Radio>
+                                                <Radio value={'X'}>Size X</Radio>
+                                                <Radio value={'XS'}>Size XS</Radio>
+                                            </Space>
+                                        </Radio.Group>
+                                    </div>
+                                </Panel>
+                                <Panel header="AVERAGE RATING" key="4" >
+                                    <div className={classes.review}>
+                                        <Radio.Group onChange={handleChangeRating}>
+                                            <Space direction="vertical">
+                                                <Radio value={'5'}>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                </Radio>
+                                                <Radio value={'4'}>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                </Radio>
+                                                <Radio value={'3'}>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                </Radio>
+                                                <Radio value={'2'}>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                </Radio>
+                                                <Radio value={'1'}>
+                                                    <span ><i className="fas fa-star mr-1" /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                    <span ><i className={`fas fa-star mr-1 ${classes.nonStar}`} /></span>
+                                                </Radio>
+                                            </Space>
+                                        </Radio.Group>
+                                    </div>
+                                </Panel>
+                            </Collapse>
+                        </div>
+                    </Drawer>
+                </div>
+
                 <div className={classes.product}>
-                    <div className={`productSort ${classes.productSort}`}>
-                        <p className={`mb-0`}>Product List</p>
-                       
-                    </div>
+                
                     <div>
                         {
                             !filterPrice && !filterColor && !filterSize && !filterRating ?

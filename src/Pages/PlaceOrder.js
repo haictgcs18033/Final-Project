@@ -9,6 +9,8 @@ import { useHistory } from 'react-router-dom'
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import PaymentCard from './PaymentCard'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 // Stripe
 const publicKeyStripe = 'pk_test_51J3dHQHJeKAJERAdZNHtez4Gva9DQe0FuFeEEPozUyYGTvfQsQNT1tQK6Djl9AS5039Bwzm52YmEyUyMkotkX8mm00Ew5BhdAN'
 const stripe = loadStripe(publicKeyStripe);
@@ -19,17 +21,16 @@ export default function PlaceOrder() {
     const cartArray = useSelector(state => state.ecommerceReducer.cartArray)
     // History
     let history = useHistory()
-    console.log(cartArray);
-    console.log(selectedAddress);
+   
     // console.log(selectedAddress);
-    let userInfo = useSelector(state => state.ecommerceReducer.userInfo)
+    // let userInfo = useSelector(state => state.ecommerceReducer.userInfo)
     // console.log(userAddress);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const [products, setProducts] = useState(false)
     const [payment, setPayment] = useState(false)
     const [orderSuccess, setOrderSuccess] = useState(false)
-    let { name, phoneNumber, address, city, alternatePhone } = userInfo
+   
     // Cash
     let [cash, setCash] = useState(false)
     // Card Input
@@ -68,18 +69,64 @@ export default function PlaceOrder() {
 
     }
     //    Modal add address
-    let handleInput = (e) => {
-        let { value, name } = e.target
-        let newValues = { ...userInfo }
-        newValues[name] = value
-        dispatch(action.handleInputPlaceOrder(newValues))
-    }
-    let handleAddAddress = (e) => {
-        e.preventDefault()
-        let userData = { ...userInfo }
-        dispatch(action.handleCreateAddress(userData))
-        setIsModalVisible(false);
-    }
+    // let handleInput = (e) => {
+    //     let { value, name } = e.target
+    //     let newValues = { ...userInfo }
+    //     newValues[name] = value
+    //     dispatch(action.handleInputPlaceOrder(newValues))
+    // }
+    // let handleAddAddress = (e) => {
+    //     e.preventDefault()
+    //     let userData = { ...userInfo }
+    //     console.log(userData);
+    //     // dispatch(action.handleCreateAddress(userData))
+    //     // setIsModalVisible(false);
+    // }
+    // Modal Create
+    let validation = Yup.object({
+        name: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .max(50, "Less than 50 character")
+            .required('User name is not empty'),
+        phoneNumber: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .max(50, 'Less than 50 character')
+            .matches(/^[0-9]*$/, "Please input only number")
+            .required('Phone number is not empty'),
+        address: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .max(50, "Less than 50 character")
+            .required('Address is not empty'),
+        city: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .max(50, "Less than 50 character")
+            .required('City is not empty'),
+        alternatePhone: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .max(50, 'Less than 50 character')
+            .matches(/^[0-9]*$/, "Please input only number")
+            .required('Alternative phone number is not empty'),
+    })
+    let formik = useFormik({
+        initialValues: {
+            name: '',
+            phoneNumber: '',
+            address: '',
+            city: '',
+            alternatePhone: ''
+        },
+        validationSchema: validation,
+        onSubmit: (values) => {
+           
+            setIsModalVisible(false);
+            dispatch(action.handleCreateAddress(values))
+        }
+    })
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -187,7 +234,9 @@ export default function PlaceOrder() {
 
     }
     if (loading) {
-        return <Skeleton avatar paragraph={{ rows: 4 }} active />
+        return <div style={{ height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '0 20px' }}>
+            <Skeleton avatar active paragraph={{ rows: 10 }} />
+        </div>
     }
 
     if (localStorage.getItem('USER_LOGIN')) {
@@ -362,32 +411,52 @@ export default function PlaceOrder() {
                                         <Button type="primary" onClick={showModal}>
                                             Add Address
                                         </Button>
-                                        <Modal title="Add Address" visible={isModalVisible} onOk={handleAddAddress} onCancel={handleCancel}>
-                                            <form onSubmit={handleAddAddress}>
+                                        <Modal title="Add Address" visible={isModalVisible} onOk={formik.handleSubmit} onCancel={handleCancel}>
+                                            <form >
                                                 <div className="form-group">
                                                     <label>Name</label>
-                                                    <input className="form-control" name="name" value={name}
-                                                        onChange={handleInput} />
+                                                    <input className="form-control" name="name" value={formik.values.name}
+                                                        onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                                    {formik.errors.name && formik.touched.name ?
+                                                        <p style={{ color: 'red', margin: '10px 0', fontWeight: 'bold' }}>{formik.errors.name}</p> :
+                                                        null
+                                                    }
                                                 </div>
                                                 <div className="form-group" >
                                                     <label>Phone Number</label>
-                                                    <input className="form-control" name="phoneNumber" value={phoneNumber}
-                                                        onChange={handleInput} />
+                                                    <input className="form-control" name="phoneNumber" value={formik.values.phoneNumber}
+                                                        onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                                    {formik.errors.phoneNumber && formik.touched.phoneNumber ?
+                                                        <p style={{ color: 'red', margin: '10px 0', fontWeight: 'bold' }}>{formik.errors.phoneNumber}</p> :
+                                                        null
+                                                    }
                                                 </div>
                                                 <div className="form-group" >
                                                     <label>Address</label>
-                                                    <input className="form-control" name="address" value={address}
-                                                        onChange={handleInput} />
+                                                    <input className="form-control" name="address" value={formik.values.address}
+                                                        onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                                    {formik.errors.address && formik.touched.address ?
+                                                        <p style={{ color: 'red', margin: '10px 0', fontWeight: 'bold' }}>{formik.errors.address}</p> :
+                                                        null
+                                                    }
                                                 </div>
                                                 <div className="form-group">
                                                     <label>City</label>
-                                                    <input className="form-control" name="city" value={city}
-                                                        onChange={handleInput} />
+                                                    <input className="form-control" name="city" value={formik.values.city}
+                                                        onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                                    {formik.errors.city && formik.touched.city ?
+                                                        <p style={{ color: 'red', margin: '10px 0', fontWeight: 'bold' }}>{formik.errors.city}</p> :
+                                                        null
+                                                    }
                                                 </div>
                                                 <div className="form-group">
                                                     <label>Alternative Phone</label>
-                                                    <input className="form-control" name="alternatePhone" value={alternatePhone}
-                                                        onChange={handleInput} />
+                                                    <input className="form-control" name="alternatePhone" value={formik.values.alternatePhone}
+                                                        onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                                                    {formik.errors.alternatePhone && formik.touched.alternatePhone ?
+                                                        <p style={{ color: 'red', margin: '10px 0', fontWeight: 'bold' }}>{formik.errors.alternatePhone}</p> :
+                                                        null
+                                                    }
                                                 </div>
                                             </form>
 

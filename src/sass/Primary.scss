@@ -40,7 +40,16 @@
     color: white !important;
 }
 // ant Drawer
-@media screen and (min-width: 375px) and(max-width:414px) {
+@media screen and (max-width: 576px) {
+    .drawer-mobile {
+        .ant-drawer-content {
+            .ant-drawer-body {
+                padding: 0 !important;
+            }
+            
+           
+        }
+    }
 }
 // Ant Progess
 .progressRatingMobile {
@@ -68,22 +77,22 @@
 }
 // ant select
 .productSort {
-    .ant-select{
+    .ant-select {
         color: #642ab5;
         font-weight: bold !important;
     }
     .ant-select:not(.ant-select-customize-input) .ant-select-selector {
         border: 1px solid #642ab5 !important;
     }
-    .ant-select-arrow{
+    .ant-select-arrow {
         color: #642ab5 !important;
     }
 }
 // Ant radio
-.ant-radio-checked .ant-radio-inner{
+.ant-radio-checked .ant-radio-inner {
     border-color: #642ab5 !important;
 }
-.ant-radio-inner::after{
+.ant-radio-inner::after {
     background: #642ab5 !important;
 }
 // Slick Carousel
@@ -159,7 +168,7 @@
     }
 }
 
-@media screen  and(max-width:576px) {
+@media screen and(max-width:576px) {
     .slick-next,
     .slick-prev {
         display: none !important;
@@ -184,7 +193,7 @@
         z-index: 2;
     }
 }
-@media screen  and (max-width: 767px) {
+@media screen and (max-width: 767px) {
     .productImgMobile {
         .slick-next,
         .slick-prev {
@@ -324,22 +333,23 @@
         }
     }
 }
-@media screen  and(max-width:414px) {
-    .userProfileMobile{
+@media screen and(max-width:414px) {
+    .userProfileMobile {
         .nav-pills {
             border-bottom: none;
         }
-        .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
-            background:#642ab5;
-            color:white;
-            &::before{
+        .nav-pills .nav-link.active,
+        .nav-pills .show > .nav-link {
+            background: #642ab5;
+            color: white;
+            &::before {
                 display: none;
             }
         }
         .nav-pills .nav-link {
             font-weight: bold;
             font-size: 13px;
-            padding: 5px 15px ;
+            padding: 5px 15px;
             border-radius: 6px;
             color: white;
             &:hover {
@@ -416,4 +426,3 @@
         }
     }
 }
-

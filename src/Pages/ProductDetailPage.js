@@ -341,11 +341,11 @@ export default function ProductDetailPage(props) {
                                             productDetailPage.reviews?.map((review, index) => {
                                                 return <Comment
                                                     key={index}
-                                                    author={<p>{review.user.firstName} {review.user.lastName}</p>}
+                                                    author={<p>{review.user?.firstName} {review.user?.lastName}</p>}
                                                     avatar={
-                                                        review.user.profilePicture?
+                                                        review.user?.profilePicture?
                                                         <Avatar
-                                                            src={`${review.user.profilePicture}`}
+                                                            src={`${review.user?.profilePicture}`}
                                                             alt="Han Solo"
                                                         />
                                                         :
@@ -485,11 +485,11 @@ export default function ProductDetailPage(props) {
                                 productDetailPage.reviews?.map((review, index) => {
                                     return <Comment
                                         key={index}
-                                        author={<p>{review.user.firstName} {review.user.lastName}</p>}
+                                        author={<p>{review.user?.firstName} {review.user?.lastName}</p>}
                                         avatar={
-                                            review.user.profilePicture?
+                                            review.user?.profilePicture?
                                             <Avatar
-                                                src={`${review.user.profilePicture}`}
+                                                src={`${review.user?.profilePicture}`}
                                                 alt="Han Solo"
                                             />
                                             :

@@ -8,7 +8,7 @@ export default function Footer() {
             <div className={classes.footerContainer}>
                 <div className={classes.contact}>
                     <h1>FES</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    <p>Providing trending fashion for you</p>
                     <p>
                         <span className={`mr-2 `}>
                             <i className="fas fa-home"></i>
@@ -84,7 +84,7 @@ export default function Footer() {
             <div className={`container-fluid ${classes.footerContainerMobile}`}>
                 <div className={classes.contact}>
                     <h1>FES</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                    <p>Providing trending fashion for you</p>
                     <p>
                         <span className={`mr-2 `}>
                             <i className="fas fa-home"></i>

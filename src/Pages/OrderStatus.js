@@ -94,7 +94,10 @@ export default function OrderStatus() {
         }
     }
     if (loading) {
-        return <Skeleton active avatar paragraph={{ rows: 4 }} />
+        return <div style={{height:'582px',display:'flex',justifyContent:'center',alignItems:'center',margin:'0 20px'}}>
+            <Skeleton avatar active paragraph={{ rows: 10 }} />
+        </div>
+
     }
     return (
 

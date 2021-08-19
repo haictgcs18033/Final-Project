@@ -12,19 +12,22 @@ export default function Cart() {
     const loading = useSelector(state => state.ecommerceReducer.loading)
     // }, [dispatch])
 
-    console.log(cartArray);
+    
     useEffect(() => {
         dispatch(action.getCartItems())
     }, [dispatch])
-    console.log(cartArray);
+  
     if (loading) {
-        return <Skeleton avatar active paragraph={{ rows: 4 }} />
+        return <div style={{height:'582px',display:'flex',justifyContent:'center',alignItems:'center',margin:'0 20px'}}>
+            <Skeleton avatar active paragraph={{ rows: 10 }} />
+        </div>
+
     }
-    let increaseQuantity = (id, quantity, price, limitedPrice,color,size) => {
-        dispatch(action.addProduct(id, quantity, price, limitedPrice,color,size))
+    let increaseQuantity = (id, quantity, price, limitedPrice, color, size) => {
+        dispatch(action.addProduct(id, quantity, price, limitedPrice, color, size))
     }
-    let decreaseQuantity = (id, quantity, price, limitedPrice,color,size) => {
-        dispatch(action.decreaseItem(id, quantity, price, limitedPrice,color,size))
+    let decreaseQuantity = (id, quantity, price, limitedPrice, color, size) => {
+        dispatch(action.decreaseItem(id, quantity, price, limitedPrice, color, size))
     }
     let renderCartItems = () => {
         if (cartArray.length === 0) {
@@ -46,14 +49,14 @@ export default function Cart() {
                         <div className={`d-flex justify-content-between align-items-center`}>
                             <button className={``}
                                 onClick={() => {
-                                    decreaseQuantity(item.product._id, 1, item.price, item.limitedPrice,item.color,item.size)
+                                    decreaseQuantity(item.product._id, 1, item.price, item.limitedPrice, item.color, item.size)
                                 }}>
                                 <i className="fas fa-minus" />
                             </button>
                             <p className={`mb-0`}>{item.quantity}</p>
                             <button className={``}
                                 onClick={() => {
-                                    increaseQuantity(item.product._id, 1, item.price, item.limitedPrice,item.color,item.size)
+                                    increaseQuantity(item.product._id, 1, item.price, item.limitedPrice, item.color, item.size)
                                 }}>
                                 <i className="fas fa-plus" />
                             </button>
@@ -98,14 +101,14 @@ export default function Cart() {
                             <div className={`d-flex justify-content-between align-items-center`}>
                                 <button className={``}
                                     onClick={() => {
-                                        decreaseQuantity(item.product._id, 1, item.price, item.limitedPrice,item.color,item.size)
+                                        decreaseQuantity(item.product._id, 1, item.price, item.limitedPrice, item.color, item.size)
                                     }}>
                                     <i className="fas fa-minus" />
                                 </button>
                                 <span className={`mb-0 mx-2`}>{item.quantity}</span>
                                 <button className={``}
                                     onClick={() => {
-                                        increaseQuantity(item.product._id, 1, item.price, item.limitedPrice,item.color,item.size)
+                                        increaseQuantity(item.product._id, 1, item.price, item.limitedPrice, item.color, item.size)
                                     }}>
                                     <i className="fas fa-plus" />
                                 </button>

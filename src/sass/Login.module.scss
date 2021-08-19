@@ -8,7 +8,7 @@
     background: #642ab5;
     width: 400px;
     border-radius: 12px 0 0 12px;
-    height: 500px;
+    height: 430px;
     padding: 30px;
     text-align: center;
     display: flex;
@@ -24,7 +24,7 @@
     padding: 20px 40px;
     border-radius: 0 12px 12px 0;
     width: 600px;
-    height: 500px;
+    height: 430px;
     background-color: #1f1f1f;
     .titleMobile {
         display: none;
@@ -75,7 +75,7 @@
         border-radius: 6px;
     }
     .emailContainer {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
 
         .email {
             border: none;
@@ -145,11 +145,11 @@
             background: #642ab5;
             color: white;
             font-size: 15px;
-            transition: all 0.5s;
+          
             border-radius: 6px;
             &:hover {
                 cursor: pointer;
-                background: rgb(4, 233, 4);
+              
             }
         }
         .link {
@@ -169,13 +169,31 @@
         }
         .socialMedia {
             display: flex;
-            &:hover {
-                background: #642ab5;
+            margin:20px 0;
+            justify-content: space-around;
+            .googleButton,.facebookButton{
+               font-weight: bold;
+                height:40px;
+               width:250px;
+               background:white;
+               color: #1f1f1f;
+               border: none;
+               border-radius: 6px;
+               &:hover{
+                   cursor:pointer
+               }
+               &:focus{
+                   outline: none;
+               }
+            }
+            .facebookButton{
+                background:#4C69BA;
+                color: white;
             }
         }
     }
 }
-@media screen  and(max-width:479px) {
+@media screen  and(max-width:576px) {
     .loginIntro {
         display: none;
     }
@@ -185,7 +203,8 @@
     .loginForm {
         border-radius: 6px;
         margin: 0 20px;
-        height: 400px;
+        height: 410px;
+        padding:20px 20px;
         h3 {
             font-size: 20px;
         }
@@ -210,9 +229,40 @@
                 }
             }
         }
+        .anotherMedia{
+            .socialMedia{
+                .googleButton,.facebookButton{
+                    width:145px
+                }
+                .googleButton{
+                    margin-left: 5px;
+                }
+                .facebookButton{
+                    margin-right: 5px;
+                }
+            }
+        }
     }
 }
-@media screen and(min-width:768px) and(max-width:1024px) {
+@media screen and(min-width:577px) and(max-width:768px){
+    .loginContainer{
+        margin:30px 20px;
+    }
+   
+   
+    .formGroup {
+      
+        .anotherMedia{
+            .socialMedia{
+                .googleButton,.facebookButton{
+                    width:170px
+                }
+            }
+        }
+       
+    }
+}
+@media screen and(min-width:769px) and(max-width:1024px) {
     .loginContainer {
         margin: 30px;
     }
@@ -231,5 +281,13 @@
                 }
             }
         }
+        .anotherMedia{
+            .socialMedia{
+                .googleButton,.facebookButton{
+                    width:240px
+                }
+            }
+        }
+       
     }
 }

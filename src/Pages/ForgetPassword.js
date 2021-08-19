@@ -37,17 +37,17 @@ export default function ForgetPassword() {
         }
     })
     return (
-        <form className={classes.loginContainer} onSubmit={formik.handleSubmit}>
-            <div className={classes.loginIntro}>
+        <form className={classes.forgetContainer} onSubmit={formik.handleSubmit}>
+            <div className={classes.forgetIntro}>
                 <div className={classes.loginIntroContent}>
                     <h2>FES Forget Password</h2>
                     <p>Please input your email before continuing</p>
                 </div>
             </div>
-            <div className={classes.loginForm}>
-                {/* <h3 className={`${classes.titleMobile}`}>FES</h3> */}
+            <div className={classes.forgetForm}>
                 <div className={classes.formGroup} >
-                    <label>User Email</label>
+                <h3 className={`text-center mb-4`}>Input your email</h3>
+                  
                     <div className={classes.emailContainer}>
                         <div className={classes.envelope}>
                             <i className={`fa fa-envelope `} />

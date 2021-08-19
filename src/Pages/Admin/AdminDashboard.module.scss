@@ -1,0 +1,141 @@
+.adminDashboard {
+    padding-left: 150px;
+    padding-right: 20px;
+    padding-top: 30px;
+    .adminManagement {
+        display: flex;
+        justify-content: space-around;
+        .totalUser,
+        .totalProduct,
+        .totalCategory,
+        .totalOrder {
+            height: 150px;
+            width: 270px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+            display: flex;
+            .content {
+                flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                h5,
+                p {
+                    color: #2370f4;
+                }
+                h5 {
+                    font-size: 25px;
+                }
+            }
+            .symbol {
+                flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                div {
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+
+                    box-shadow: 0 5px 10px #c4cdeb;
+                    line-height: 70px;
+                    font-size: 25px;
+                    text-align: center;
+                }
+                i {
+                    color: white;
+                }
+            }
+        }
+        .totalUser {
+            .symbol {
+                div {
+                    background: linear-gradient(to bottom right, #9e88f5 0%, #6259ca 100%);
+                }
+            }
+        }
+        .totalProduct {
+            .symbol {
+                div {
+                    background: linear-gradient(to bottom right, #f1bf64 0%, #f71d36 100%);
+                }
+            }
+        }
+        .totalCategory {
+            .symbol {
+                div {
+                    background: linear-gradient(to bottom right, #9070ff 0%, #ff5d9e 100%);
+                }
+            }
+        }
+        .totalOrder {
+            .symbol {
+                div {
+                    background: linear-gradient(to bottom right, #4be8d4 0%, #129bd2 100%);
+                }
+            }
+        }
+    }
+    .adminChart {
+        margin: 30px 0;
+        display: flex;
+        justify-content: space-between;
+        .chart {
+            h4 {
+                margin: 20px 0;
+                padding-bottom: 15px;
+                padding-left: 20px;
+                color: #2370f4;
+                border-bottom: 1px solid #e9e9e9;
+            }
+            width: 350px;
+            height: 450px;
+
+            border-radius: 12px;
+            box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+        }
+        .productInStock {
+            flex-grow: 1;
+            height: 450px;
+
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+            margin-left: 20px;
+            .productTable {
+                padding: 0 20px;
+                overflow: auto;
+                height: 380px;
+            }
+            h4 {
+                margin-top: 20px;
+                margin-bottom: 0;
+                padding-bottom: 15px;
+                padding-left: 20px;
+                color: #2370f4;
+                border-bottom: 1px solid #e9e9e9;
+            }
+            .card {
+                display: flex;
+                margin:  20px 0;
+                padding: 10px;
+                border-radius: 6px;
+                border: 1px solid #e9e9e9;
+                p {
+                    margin-left: 20px;
+                    color: #2370f4;
+                    font-weight: bold;
+                    line-height: 50px;
+                    flex-grow: 1;
+                    margin-bottom: 0;
+                }
+                img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: contain;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}

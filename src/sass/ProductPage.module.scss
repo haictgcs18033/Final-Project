@@ -70,55 +70,18 @@
                 height: 385px;
                 &:hover {
                     box-shadow: 0 0 10px 8px #642ab5;
-                    height: 560px;
-                    .cardImage {
-                        .viewProduct {
-                            transform: translateY(0);
-                        }
-                    }
-                    .cardBody {
-                        transform: translateY(0);
-                    }
-                }
-                .cardImage {
-                    position: relative;
-                    overflow: hidden;
-                    .viewProduct {
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        display: flex;
-                        justify-content: center;
-                        padding: 20px 0;
-                        transition: all 0.5s;
+                    // height: 560px;
 
-                        transform: translateY(110px);
-                        button {
-                            width: 200px;
-                            height: 40px;
-                            background: #642ab5;
-                            text-transform: uppercase;
-                            color: white;
-                            letter-spacing: 2px;
-                            border: none;
-                            a {
-                                color: white;
-                            }
-                            &:hover {
-                                cursor: pointer;
-                            }
-                            &:focus {
-                                outline: none;
-                            }
-                        }
+                    .cardBody {
+                        transform: translateY(0px);
                     }
                 }
+
                 .cardBody {
                     background: #1f1f1f;
                     position: absolute;
                     width: 100%;
-                    transform: translateY(178px);
+                    transform: translateY(250px);
                     bottom: 0;
                     left: 0;
                     transition: all 0.5s;
@@ -159,8 +122,152 @@
                             cursor: context-menu;
                         }
                     }
+                    .viewProduct {
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        padding: 15px 0;
+
+                        button {
+                            width: 200px;
+                            height: 40px;
+                            background: #642ab5;
+                            text-transform: uppercase;
+                            color: white;
+                            letter-spacing: 2px;
+                            border: none;
+                            a {
+                                color: white;
+                            }
+                            &:hover {
+                                cursor: pointer;
+                            }
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+}
+@media screen and(max-width:576px) {
+    .productContainer {
+      .productTitle{
+          h3{
+              font-size: 20px;
+              line-height: 32px;
+          }
+      }
+
+        .productListContainer {
+            .productList {
+                // display: none;
+               
+                .productCard {
+                    border: none;
+                    transition: all 0.5s;
+                    border-radius: 0;
+                    position: relative;
+                    overflow: hidden;
+                    height: 242px;
+
+                    &:hover {
+                        box-shadow: 0 0 10px 8px #642ab5;
+                        // height: 560px;
+
+                        .cardBody {
+                            transform: translateY(0);
+                        }
+                    }
+
+                    .cardBody {
+                        background: #1f1f1f;
+                        position: absolute;
+                        width: 100%;
+                        transform: translateY(75px);
+                        bottom: 0;
+                        left: 0;
+                        transition: all 0.5s;
+                        h4 {
+                            font-size: 15px;
+                        }
+                        p {
+                            font-size: 13px;
+                        }
+                        .colorGroup,
+                        .sizeGroup,
+                        .colorTitle,
+                        .sizeTitle {
+                            display: none !important;
+                        }
+                        .viewProduct {
+                            width: 100%;
+                            display: flex;
+                            justify-content: center;
+                            padding: 0;
+
+                            button {
+                                width: 100%;
+                                height: 50px;
+                                padding: 5px 10px;
+                                background: #642ab5;
+                                text-transform: uppercase;
+                                color: white;
+                                letter-spacing: 2px;
+                                border: none;
+                                a {
+                                    color: white;
+                                }
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                                &:focus {
+                                    outline: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and(min-width:577px) and(max-width:768px) {
+    .productContainer{
+        .productListContainer {
+            .productList {
+                .productCard {
+                    height: 385px;
+                   
+                }
+            }
+        }
+    }
+    
+}
+@media screen and(min-width:769px) and(max-width:1024px){
+    .productContainer{
+        .productListContainer {
+            .productList {
+                .productCard {
+                    height: 340px;
+                    &:hover{
+                        .cardBody{
+                            transform: translateY(8px);
+                        }
+                       
+                    }
+                    .cardBody {
+                        transform: translateY(220px);
+                        .viewProduct{
+                           padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 }

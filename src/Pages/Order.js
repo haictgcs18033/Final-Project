@@ -4,11 +4,11 @@ import * as action from '../redux//action/EcommerceAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import Modal from 'antd/lib/modal/Modal'
-import { Rate } from 'antd';
+import { Rate, Skeleton } from 'antd';
 export default function Order() {
     const orderArray = useSelector(state => state.ecommerceReducer.orderArray)
-
-    console.log(orderArray);
+    const loading = useSelector(state => state.ecommerceReducer.loading)
+   
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [star, setStar] = useState({
         value: 3
@@ -19,6 +19,12 @@ export default function Order() {
     let [comment, setComment] = useState({
         text: ''
     })
+    let [error,setError]=useState({
+        text:''
+    })
+    let initialError={
+        text:''
+    }
     let [product, setProduct] = useState({
         _id: '',
         name: '',
@@ -46,8 +52,27 @@ export default function Order() {
 
         setIsModalVisible(true);
     };
+    if (loading) {
+        return <div style={{height:'500px',display:'flex',justifyContent:'center',alignItems:'center',margin:'0 20px'}}>
+            <Skeleton avatar active paragraph={{ rows: 10 }} />
+        </div>
 
+    }
     // console.log(averageStar);
+    let validation=()=>{
+       let textError=''
+       if(!comment.text){
+           textError="Please input your review"
+       }
+       if(comment.text.startsWith(' ')||comment.text.endsWith(' ')){
+           textError="Not white space"
+       }
+       if(textError){
+           setError({text:textError})
+           return false
+       }
+       return true
+    }
     const handleOk = () => {
         let finalTotal = totalStar + star.value
         let average = Math.ceil(finalTotal / totalItem)
@@ -60,8 +85,13 @@ export default function Order() {
             starRating: star.value,
             averageStar: average
         }
-        dispatch(action.addComment(review))
-        // setIsModalVisible(false);
+        let isValid=validation()
+        if(isValid){
+            dispatch(action.addComment(review))
+            setIsModalVisible(false);
+            setError(initialError)
+        }
+      
     };
 
 
@@ -177,6 +207,9 @@ export default function Order() {
                             <textarea className={`form-control ${classes.input}`}
                                 name="text" value={comment.text} onChange={handleInputComment}
                                 placeholder="Add your comment here..."></textarea>
+                            {error.text?<div style={{color:'red',fontWeight:'bold',margin:'10px 0'}}>
+                                {error.text}
+                            </div>:null}
 
                         </div>
                     </div>
