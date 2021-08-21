@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as action from '../../../redux/action/AdminAction'
 import classes from '../Admin Email/AdminEmail.module.scss'
+import userImage from '../../../asset/img/userImage.png'
 export default function UserTable(props) {
     let { curPage,
         userPerPage,
@@ -15,7 +16,7 @@ export default function UserTable(props) {
         activeClass,
         handleSetActiveNextAndPrevious,
         handleSendSpecificMail
-      
+
     } = props
     const dispatch = useDispatch()
     const paginateUser = useSelector(state => state.adminReducer.paginateUser)
@@ -25,17 +26,17 @@ export default function UserTable(props) {
         dispatch(action.getUserPaginate(curPage, userPerPage, searchTerm))
     }, [dispatch, curPage, userPerPage, searchTerm])
 
-  
+
     // useEffect(() => {
     //     // dung use effect without array for handling success situation on onClick event
-    
-      
+
+
     //         console.log(specificMail);
     //         // dispatch(action.sendSpecificEmail(specificMail))
-       
-        
+
+
     // }, [dispatch, specificMail])
-   
+
     // Handle active class  
     const handleActiveClass = (index) => {
         handleSetActiveClass(index)
@@ -75,7 +76,7 @@ export default function UserTable(props) {
 
     let handleSetUser = (user) => {
         handleSendSpecificMail(user)
-       
+
     }
 
     return (
@@ -139,6 +140,47 @@ export default function UserTable(props) {
                     })}
                 </tbody>
             </table>
+            <div className={classes.tableUserMobile}>
+                {
+                    paginateUser.paginate?.map((user, index) => {
+                        let fullNameUser = user.firstName + ' ' + user.lastName
+                        return <div key={index} className={classes.userWrapper}>
+                            <div className={classes.userInfoContainer}>
+                                <div className={classes.userImage}>
+                                    {
+                                        user.profilePicture ? <img src={user.profilePicture} alt="Not found" /> :
+                                            <img src={userImage} alt="Not found" />
+                                    }
+                                </div>
+                                <div className={classes.userInfo}>
+                                    <p>
+                                        <span className={`font-weight-bold`}>Name : </span>
+                                        {fullNameUser}
+                                    </p>
+                                    <p>
+                                        <span className={`font-weight-bold`}>Email : </span>
+                                        {user.email}
+                                    </p>
+                                    <p>
+                                        <span className={`font-weight-bold`}>Role : </span>
+                                        {user.role}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className={classes.userManageButton}>
+                                <div>
+                                    <button className={`mr-2 ${classes.update}`}
+                                        onClick={() => {
+                                            handleSetUser(user)
+                                        }}
+                                    >Send mail</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    })
+                }
+            </div>
         </div>
     )
 }

@@ -2,7 +2,7 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Redirect, useParams } from 'react-router-dom'
 import classes from '../sass/ResetPassword.module.scss'
 import { resetPassword } from '../redux/action/EcommerceAction'
 import { useDispatch } from 'react-redux'
@@ -48,7 +48,9 @@ export default function ResetPassword() {
            dispatch(resetPassword(values,token))
         }
     })
-
+    if(localStorage.getItem('USER_LOGIN')){
+        return <Redirect to="/"/>
+    }
     return (
         <form className={classes.resetContainer} onSubmit={formik.handleSubmit}>
             <div className={classes.resetIntro}>

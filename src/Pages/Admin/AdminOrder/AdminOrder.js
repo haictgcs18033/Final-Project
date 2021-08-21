@@ -45,7 +45,7 @@ export default function AdminOrder() {
         }
     }
     if (loading) {
-        return <div className={classes.orderContainer}>
+        return <div style={{height:'100vh',paddingLeft:'130px',paddingTop:'30px'}}>
             <Skeleton active avatar paragraph={{ rows: 4 }} />
         </div>
 
@@ -177,6 +177,7 @@ export default function AdminOrder() {
                             >
                                 <div className={classes.selectContainer}>
                                     <h3>Order Id : {order?._id}</h3>
+                                   
                                     <Select key={selectKey} defaultValue="Order Status" className={classes.select} onChange={handleChange} onClick={() => { handleChoose(order._id) }}>
                                         {order?.orderStatus.map((status, index) => {
                                             return status.isCompleted === false ?

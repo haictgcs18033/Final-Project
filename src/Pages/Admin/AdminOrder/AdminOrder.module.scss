@@ -139,3 +139,39 @@
         }
     }
 }
+@media screen and(max-width:576px) {
+    .orderContainer{
+        .orderTitle{
+            padding-bottom: 10px;
+            h3{
+                font-size: 25px;
+               
+            }
+           
+        }
+        .orderWrapper{
+            .sortAndSearch{
+                padding:20px;
+            }
+        }
+        .productContainer{
+            padding:20px;
+        }
+    }
+}
+@media screen and(max-width:768px) {
+    .orderContainer{
+        padding-left: 20px;
+       .productContainer{
+           .selectContainer{
+               display: flex;
+               justify-content: flex-end;
+               h3{
+                   display: none;
+               }
+              
+               
+           }
+       }
+    }
+}

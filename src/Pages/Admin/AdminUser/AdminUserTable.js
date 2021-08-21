@@ -5,7 +5,7 @@ import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { Skeleton } from 'antd'
 
-
+import userImage from '../../../asset/img/userImage.png'
 const AdminUserTable = React.memo(
     (props) => {
         let { curPage,
@@ -134,7 +134,7 @@ const AdminUserTable = React.memo(
             e.preventDefault()
             let isValid = validation()
             if (isValid) {
-                window.$('#exampleModalUpdate').modal('hide'); 
+                window.$('#exampleModalUpdate').modal('hide');
                 dispatch(action.handleUpdateUser(updateUser, curPage, userPerPage))
             }
         }
@@ -199,6 +199,59 @@ const AdminUserTable = React.memo(
                         })}
                     </tbody>
                 </table>
+                <div className={classes.tableUserMobile}>
+                    {
+                        paginateUser.paginate?.map((user, index) => {
+                            let fullNameUser = user.firstName + ' ' + user.lastName
+                            return <div key={index} className={classes.userWrapper}>
+                                <div className={classes.userInfoContainer}>
+                                    <div className={classes.userImage}>
+                                        {
+                                            user.profilePicture ? <img src={user.profilePicture} alt="Not found" /> :
+                                                <img src={userImage} alt="Not found" />
+                                        }
+                                    </div>
+                                    <div className={classes.userInfo}>
+                                        <p>
+                                            <span className={`font-weight-bold`}>Name : </span>
+                                            {fullNameUser}
+                                        </p>
+                                        <p>
+                                            <span className={`font-weight-bold`}>Email : </span>
+                                            {user.email}
+                                        </p>
+                                        <p>
+                                            <span className={`font-weight-bold`}>Role : </span>
+                                            {user.role}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className={classes.userManageButton}>
+                                    <div>
+                                        <button className={`mr-2 ${classes.update}`}
+                                            data-toggle="modal" data-target="#exampleModalUpdate"
+                                            onClick={() => {
+                                                handleChangeUpdate(user)
+                                            }}>Update</button>
+                                        <button className={`mr-2 ${classes.delete}`}
+                                            data-toggle="modal" data-target="#exampleModalDelete"
+                                            onClick={() => {
+                                                setDeleteUser(
+                                                    {
+                                                        fullName: fullNameUser,
+                                                        userId: user._id
+                                                    }
+                                                )
+                                            }}
+                                        >Delete</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        })
+                    }
+                </div>
+
                 <form className="modal fade"
                     id="exampleModalUpdate"
                     role="dialog"

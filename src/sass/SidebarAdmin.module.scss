@@ -75,3 +75,8 @@
     width: 7%;
    
 }
+@media screen and( max-width:576px){
+    .sidebarContainer,.sidebarContainerSmall{
+        display: none;
+    }
+}

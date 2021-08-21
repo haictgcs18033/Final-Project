@@ -71,6 +71,7 @@
 .ant-scrolling-effect {
     width: 100% !important;
 }
+
 // Ant Rating
 .ant-rate {
     margin-left: 30px !important;
@@ -425,4 +426,11 @@
             margin-top: 10px;
         }
     }
+}
+// Canvas
+@media screen and(max-width:768px) {
+    canvas{
+        margin-bottom: 20px;
+    }
+    
 }

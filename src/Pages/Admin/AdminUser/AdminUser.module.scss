@@ -25,13 +25,13 @@
             border: none;
             padding: 10px 20px;
             font-weight: bold;
-            border:2px solid #2370f4;
+            border: 2px solid #2370f4;
             border-radius: 6px;
             transition: all 0.5s;
-            &:hover{
-             cursor: pointer;
-             background: white;
-             color: #2370f4;
+            &:hover {
+                cursor: pointer;
+                background: white;
+                color: #2370f4;
             }
             &:focus {
                 outline: none;
@@ -52,29 +52,29 @@
             .dropdownButton {
                 background: #2370f4;
                 color: white;
-                padding: .375rem .75rem;
+                padding: 0.375rem 0.75rem;
                 border: none;
                 height: 38px;
                 font-weight: bold;
-                border-radius:6px ;
+                border-radius: 6px;
                 &::after {
                     display: none;
                 }
-                &:hover{
+                &:hover {
                     cursor: pointer;
                 }
-                &:focus{
+                &:focus {
                     outline: none;
                 }
             }
-            .dropdownContent{
-                p{
+            .dropdownContent {
+                p {
                     font-weight: bold;
-                   transition: all 0.5s;
-                    &:hover{
+                    transition: all 0.5s;
+                    &:hover {
                         cursor: pointer;
                         background: #2370f4;
-                        color:white ;
+                        color: white;
                     }
                 }
             }
@@ -82,55 +82,56 @@
                 .formSearch {
                     position: relative;
                 }
+                input {
+                    padding-left: 30px;
+                }
                 i {
                     position: absolute;
-                    bottom: 13px;
-                    right: 10px;
+                    width: 15px;
+                    height: 15px;
+                    top: 13px;
+                    left: 10px;
                 }
             }
         }
         .tableUser {
-          
-            margin:20px 0;
+            margin: 20px 0;
             table {
                 thead {
                     background: #2370f4;
                     color: white;
-                
                 }
                 tbody {
                     th,
                     td {
                         color: black;
-                       
                     }
-                    .update,.delete,.admin{
-                       background:white;
-                       border: none;
-                       border :2px solid #FF9F00;
-                       padding:5px 10px;
-                       color: #FF9F00;
-                       border-radius: 6px;
-                       font-weight: bold;
-                       transition: all 0.5s;
-                       &:hover{
-                           background: #FF9F00;
-                           color: white;
-                           cursor:pointer;
-                       }
-                       &:focus{
-                           outline: none;
-                       }
+                    .update,
+                    .delete {
+                        background: white;
+                        border: none;
+                        border: 2px solid #ff9f00;
+                        padding: 5px 10px;
+                        color: #ff9f00;
+                        border-radius: 6px;
+                        font-weight: bold;
+                        transition: all 0.5s;
+                        &:hover {
+                            background: #ff9f00;
+                            color: white;
+                            cursor: pointer;
+                        }
+                        &:focus {
+                            outline: none;
+                        }
                     }
-                    .delete{
-                        border :2px solid red;
+                    .delete {
+                        border: 2px solid red;
                         color: red;
-                        &:hover{
+                        &:hover {
                             background: red;
                         }
-                       
                     }
-                    
                 }
             }
         }
@@ -161,7 +162,7 @@
                     color: white;
                 }
             }
-           
+
             .activeClassName {
                 background: #2370f4;
                 color: white;
@@ -171,4 +172,104 @@
             }
         }
     }
+    .tableUserMobile {
+        display: none;
+    }
+}
+@media screen and (max-width: 576px) {
+    .userContainer {
+        padding-left: 20px;
+        .userTitle {
+            padding-bottom: 10px;
+            h3 {
+                font-size: 25px;
+            }
+            button {
+                padding: 5px 10px;
+            }
+        }
+        .userTableWrapper {
+            padding: 15px;
+            height: 700px;
+            .sortAndSearch {
+                .search {
+                    width: 70%;
+                    padding-left: 10px;
+
+                   
+                }
+            }
+            table {
+                display: none;
+            }
+            .paginateGroup{
+              right:10px;
+            }
+        }
+        .tableUserMobile {
+            display: block;
+            .userWrapper {
+                border: 1px solid #e9e9e9;
+                margin-bottom: 10px;
+                border-radius: 6px;
+            }
+            .userInfoContainer {
+                display: flex;
+               padding-top: 10px;
+                p{
+                    margin-bottom: 10px;
+                }
+                .userImage {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 5px;
+                    img {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
+                        object-fit: contain;
+                    }
+                }
+                .userInfo {
+                    padding-left: 10px;
+                    flex-grow: 1;
+                }
+            }
+            .userManageButton{
+                display: flex;
+                justify-content: flex-end;
+                border-top: 1px solid #e9e9e9;
+                padding:10px 0;
+                .update,
+                .delete {
+                    background: #ff9f00;
+                    border: none;
+                    border: 2px solid #ff9f00;
+                    padding: 5px 10px;
+                    color: white;
+                    border-radius: 6px;
+                    font-weight: bold;
+                    transition: all 0.5s;
+                  
+                    &:focus {
+                        outline: none;
+                    }
+                }
+                .delete {
+                    background: red;
+                    border: 2px solid red;
+                    color: white;
+                  
+                }
+            }
+        }
+    }
+}
+
+@media screen and(min-width:577px) and(max-width:768px) {
+    .userContainer {
+        padding-left: 20px;
+    }
+    
 }

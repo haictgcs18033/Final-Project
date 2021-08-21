@@ -5,6 +5,7 @@ import React from 'react'
 import classes from '../sass/ForgetPassword.module.scss'
 import { useDispatch } from 'react-redux'
 import { forgetPassword } from '../redux/action/EcommerceAction'
+import { Redirect } from 'react-router-dom'
 export default function ForgetPassword() {
     // let [emailUser, setEmail] = useState({
     //     email: ''
@@ -36,6 +37,9 @@ export default function ForgetPassword() {
             dispatch(forgetPassword(values))
         }
     })
+    if(localStorage.getItem('USER_LOGIN')){
+        return <Redirect to="/"/>
+    }
     return (
         <form className={classes.forgetContainer} onSubmit={formik.handleSubmit}>
             <div className={classes.forgetIntro}>

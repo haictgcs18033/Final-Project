@@ -14,7 +14,7 @@ export default function AdminProduct() {
     let { name, price, quantity, description, productPictures, color, size } = product
     let [curPage, setCurpage] = useState(1)
 
-    let limit = 4
+    let limit = 8
 
     const [searchTerm, setSearchTerm] = useState({
         text: ''

@@ -4,7 +4,7 @@ import classes from '../Admin/AdminDashboard.module.scss'
 import * as action from '../../redux/action/AdminAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { PolarArea } from 'react-chartjs-2';
-import { Badge } from 'antd';
+import { Badge, Skeleton } from 'antd';
 export default function AdminDashboard() {
     const userArray = useSelector(state => state.adminReducer.userArray)
     const categoryList = useSelector(state => state.adminReducer.categoryList)
@@ -32,7 +32,10 @@ export default function AdminDashboard() {
         return allCategory.length
     }
     if (loading) {
-        return <p>Loadding</p>
+        return <div style={{height:'100vh',paddingLeft:'130px',paddingTop:'30px'}}>
+            <Skeleton active avatar paragraph={{ rows: 4 }} />
+        </div>
+
     }
     // Chart
 
@@ -96,6 +99,7 @@ export default function AdminDashboard() {
                         </div>
                     </div>
                 </div>
+                <div className={classes.flexBreak}></div>
                 <div className={classes.totalCategory}>
                     <div className={classes.content}>
                         <div>
@@ -124,11 +128,49 @@ export default function AdminDashboard() {
                     </div>
                 </div>
             </div>
+            <div className={classes.adminUserDaily}>
+                <div className={classes.userContact}>
+                    <h4>Contact User</h4>
+                </div>
+                <div className={classes.flexBreak}></div>
+                <div className={classes.dailyTask}>
+                    <h4>Daily Task</h4>
+                    <div className={classes.taskContainer}>
+                        <ul className={classes.taskList}>
+                            <li>
+                                <i className={classes.taskIconUser}></i>
+                                <h5>User Management</h5>
+                            </li>
+                            <li>
+                                <i className={classes.taskIconCategory}></i>
+                                <h5>Category Management</h5>
+                            </li>
+                            <li>
+                                <i className={classes.taskIconProduct}></i>
+                                <h5>Product Management</h5>
+                            </li>
+                            <li>
+                                <i className={classes.taskIconOrder}></i>
+                                <h5>Order Management</h5>
+                            </li>
+                            <li>
+                                <i className={classes.taskIconEmail}></i>
+                                <h5>Email Management</h5>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
             <div className={classes.adminChart}>
                 <div className={classes.chart}>
                     <h4>User's order trending</h4>
-                    <PolarArea data={renderCashOrder(customerOrders)} />
+                    <div>
+                        <PolarArea data={renderCashOrder(customerOrders)} />
+                    </div>
+
                 </div>
+                <div className={classes.flexBreak}></div>
                 <div className={classes.productInStock}>
                     <h4>Product In Stock</h4>
                     <div className={classes.productTable} >

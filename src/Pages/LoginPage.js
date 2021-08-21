@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import classes from '../sass/Login.module.scss'
 // import logoBrand from '../asset/img/Brand.png'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import { loginHome } from '../redux/action/EcommerceAction'
 import { useDispatch } from 'react-redux'
 import GoogleLogin from 'react-google-login'
@@ -85,7 +85,9 @@ export default function LoginPage(props) {
             dispatch(loginHome(values, props))
         },
     });
-
+    if(localStorage.getItem('USER_LOGIN')){
+        return <Redirect to="/"/>
+    }
     return (
         <form className={classes.loginContainer} onSubmit={formik.handleSubmit}>
             <div className={classes.loginIntro}>

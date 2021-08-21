@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import * as action from '../redux/action/EcommerceAction'
 import styles from '../sass/Signup.module.scss'
 import { useFormik } from 'formik'
@@ -61,6 +61,9 @@ export default function Signup() {
             dispatch(action.signupUser(values))
         }
     })
+    if(localStorage.getItem('USER_LOGIN')){
+        return <Redirect to="/"/>
+    }
     return (
         <div className={styles.signupContainer}>
             <div className={styles.signupIntro}>

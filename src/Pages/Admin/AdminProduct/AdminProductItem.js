@@ -389,7 +389,7 @@ const AdminProductItem = React.memo((props) => {
             <div className={`row`}>
                 {paginateProduct.paginate?.map((product, index) => {
 
-                    return <div key={index} className={`col-3`}>
+                    return <div key={index} className={`col-12 col-md-4 col-lg-4 col-xl-3 mb-3`}>
                         <div className={`${classes.productItemObject}`}>
                             <div className={`card text-left ${classes.productItem}`}>
                                 <img className="card-img-top"

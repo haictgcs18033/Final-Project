@@ -145,3 +145,39 @@
         }
     }
 }
+@media screen and(max-width:576px) {
+    .categoryContainer {
+        padding-left: 20px;
+        .categoryTitle {
+            padding-bottom: 10px;
+            h3 {
+                font-size: 25px;
+            }
+            .btnCreate {
+                padding: 5px 10px;
+            }
+        }
+        .categoryList{
+            height: 450px;
+            .updateAndDeLete{
+                padding:30px 10px 20px;
+                .updateButton{
+                    background:#ff9f00;
+                    color: white;
+                }
+                .deleteButton{
+                    background:red;
+                    color: white;
+                }
+            }
+        }
+        
+    }
+}
+@media screen and(min-width:577px) and(max-width:768px) {
+    .categoryContainer {
+        padding-left: 20px;
+       
+    }
+    
+}

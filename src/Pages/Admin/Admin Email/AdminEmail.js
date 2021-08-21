@@ -19,12 +19,12 @@ export default function AdminEmail() {
         title: '',
         description: ''
     })
-     
-    let [error,setError]=useState({
+
+    let [error, setError] = useState({
         title: '',
         description: ''
     })
-    let initialValue={
+    let initialValue = {
         title: '',
         description: ''
     }
@@ -105,25 +105,25 @@ export default function AdminEmail() {
     }
     // Send mail
     let validation = () => {
-        let titleMessage=''
-        let descriptionMessage=""
-        if(!mailContent.title){
-           titleMessage="Please input mail title"
+        let titleMessage = ''
+        let descriptionMessage = ""
+        if (!mailContent.title) {
+            titleMessage = "Please input mail title"
         }
-        if(mailContent.title.startsWith(" ") || mailContent.title.endsWith(" ")){
-            titleMessage="Not white space"
-         }
-        if(!mailContent.description){
-             descriptionMessage="Please input mail description"
+        if (mailContent.title.startsWith(" ") || mailContent.title.endsWith(" ")) {
+            titleMessage = "Not white space"
         }
-        if(mailContent.description.startsWith(" ") || mailContent.description.endsWith(" ")){
-            descriptionMessage="Not white space"
-         }
-         if(titleMessage || descriptionMessage){
-             setError({title:titleMessage,description:descriptionMessage})
-             return false
-         }
-         return true
+        if (!mailContent.description) {
+            descriptionMessage = "Please input mail description"
+        }
+        if (mailContent.description.startsWith(" ") || mailContent.description.endsWith(" ")) {
+            descriptionMessage = "Not white space"
+        }
+        if (titleMessage || descriptionMessage) {
+            setError({ title: titleMessage, description: descriptionMessage })
+            return false
+        }
+        return true
     }
     let handleInputMail = (e) => {
         let { name, value } = e.target
@@ -132,29 +132,29 @@ export default function AdminEmail() {
     let handleSendMailAll = () => {
         let isValid = validation()
         if (isValid) {
-            let dataToServer={
-                title:mailContent.title,
-                description:mailContent.description,
-                type:emailType
+            let dataToServer = {
+                title: mailContent.title,
+                description: mailContent.description,
+                type: emailType
             }
             setError(initialValue)
             dispatch(action.sendMailAll(dataToServer))
         }
 
     }
-    let handleSendSpecificMail=(user)=>{
-      
-        let isValid=validation()
-        if(isValid){
-            let dataToApi={
-                title:mailContent.title,
-                description:mailContent.description,
-                type:emailType,
-                emailUser:user.email
+    let handleSendSpecificMail = (user) => {
+
+        let isValid = validation()
+        if (isValid) {
+            let dataToApi = {
+                title: mailContent.title,
+                description: mailContent.description,
+                type: emailType,
+                emailUser: user.email
             }
             setError(initialValue)
             dispatch(action.sendSpecificEmail(dataToApi))
-         
+
         }
     }
 
@@ -164,7 +164,59 @@ export default function AdminEmail() {
         <div className={classes.emailContainer}>
             <div className={classes.emailTitle}>
                 <h3>Email</h3>
+                <button data-toggle="modal" data-target="#exampleModalProductCreate">View sent email</button>
+                <div className="modal fade" id="exampleModalProductCreate"
+                    tabIndex={-1} role="dialog"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                // onSubmit={handleSubmit}
+                >
+                    <div className="modal-dialog modal-lg" role="document"  >
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">
+                                    <button className={`button dropdown-toggle ${classes.dropdownButton}`} type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                                        Sort
+                                    </button>
+                                    <div className={`dropdown-menu dropdown-menu-right ${classes.dropdownContent}`} aria-labelledby="dropdownMenuButton">
 
+                                        <p className="dropdown-item"
+                                            onClick={() => {
+                                                handleSortNewest()
+                                            }}>Newest</p>
+                                        <p className="dropdown-item"
+                                            onClick={() => {
+                                                handleSortOldest()
+                                            }}>Oldest</p>
+                                    </div>
+                                </h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div className="modal-body" >
+                                <div className={classes.email}>
+                                    {
+                                        emailServer.map((email, index) => {
+                                            return <div key={index} className={classes.emailObject}>
+                                                <div className={`d-flex justify-content-between`}>
+                                                    <p className={`font-weight-bold`}>{email.title}</p>
+                                                    <p>{moment(email.createdAt).format('LL')}</p>
+                                                </div>
+                                                <p className={`mb-0`}>
+                                                    <span className={`mr-2 font-weight-bold`}>Description :</span>
+                                                    {email.description}
+                                                </p>
+                                            </div>
+                                        })
+                                    }
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className={classes.emailWrapper}>
                 <div className={classes.emailArea}>
@@ -172,12 +224,12 @@ export default function AdminEmail() {
                         <div className={`form-group`}>
                             <label>Title</label>
                             <input className={`form-control`} name="title" value={mailContent.title} onChange={handleInputMail} />
-                            {error.title ? <div style={{color:'red',margin:'10px 0'}}>{error.title}</div>:''}
+                            {error.title ? <div style={{ color: 'red', margin: '10px 0' }}>{error.title}</div> : ''}
                         </div>
                         <div className={`form-group`}>
                             <label>Description</label>
                             <textarea className={`form-control`} name="description" value={mailContent.description} onChange={handleInputMail}></textarea>
-                            {error.description ? <div style={{color:'red',margin:'10px 0'}}>{error.description}</div>:''}
+                            {error.description ? <div style={{ color: 'red', margin: '10px 0' }}>{error.description}</div> : ''}
                         </div>
                         <div className={`form-group ${classes.selectGroup}`}>
                             <label>Send type</label>

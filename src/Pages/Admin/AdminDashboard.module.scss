@@ -76,6 +76,79 @@
             }
         }
     }
+    .adminUserDaily {
+        display: flex;
+        margin: 30px 0;
+        .userContact,
+        .dailyTask {
+            flex-grow: 1;
+            height: 300px;
+            width: 270px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+            h4 {
+                margin: 20px 0;
+                padding-bottom: 15px;
+                padding-left: 20px;
+                color: #2370f4;
+                border-bottom: 1px solid #e9e9e9;
+            }
+        }
+        .dailyTask {
+            .taskContainer{
+                margin:0 20px;
+            }
+            .taskList {
+                position: relative;
+                list-style-type: none;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 4px;
+                    bottom: 0;
+                    height: 90%;
+                    left: 15px;
+                    border-left: 1px solid #aeb7be;
+                }
+                li {
+                     margin-bottom: 20px;
+                    .taskIconUser,.taskIconCategory,.taskIconProduct,.taskIconOrder,.taskIconEmail {
+                        content: "";
+                        position: absolute;
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                        top: 0;
+                        left: 10px;
+                        display: block;
+                        background: #6259ca;
+                    }
+                    .taskIconCategory{
+                        top:40px;
+                        background:#f71d36 ;
+                    }
+                    .taskIconProduct{
+                        top:80px;
+                        background:#ff5d9e
+                    }
+                    .taskIconOrder{
+                        top:120px;
+                        background: #4be8d4;
+                    }
+                    .taskIconEmail{
+                        top:160px;
+                        background: #129bd2;
+                    }
+                   
+                }
+            }
+            margin-left: 30px;
+            h5 {
+                font-size: 16px;
+                color: #2370f4;
+            }
+        }
+    }
     .adminChart {
         margin: 30px 0;
         display: flex;
@@ -90,7 +163,7 @@
             }
             width: 350px;
             height: 450px;
-
+             margin-bottom: 30px;
             border-radius: 12px;
             box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
         }
@@ -117,7 +190,7 @@
             }
             .card {
                 display: flex;
-                margin:  20px 0;
+                margin: 20px 0;
                 padding: 10px;
                 border-radius: 6px;
                 border: 1px solid #e9e9e9;
@@ -135,6 +208,135 @@
                     object-fit: contain;
                     border-radius: 50%;
                 }
+            }
+        }
+    }
+}
+@media screen and (max-width:576px){
+    .adminDashboard{
+        padding-left: 20px;
+        .adminManagement{
+            display: flex;
+            flex-flow: wrap;
+            .flexBreak{
+                width: 100%;
+            }
+            .totalUser,
+            .totalProduct,
+            .totalCategory,
+            .totalOrder{
+                width: 550px;
+                height: 100px;
+            }
+            .totalUser,.totalProduct,.totalCategory{
+                margin-bottom: 20px;
+            }
+        }
+        .adminUserDaily{
+            display: flex;
+            flex-flow: wrap;
+            .flexBreak{
+                width: 100%;
+            }
+            .userContact{
+                margin-bottom:20px;
+            }
+            .dailyTask{
+                margin-left: 0;
+            }
+        }
+        .adminChart{
+            display: flex;
+            flex-flow: wrap;
+            .flexBreak{
+                width: 100%;
+            }
+            .chart{
+               
+                width: 600px;
+                height: 300px;
+                overflow: hidden;
+                h4{
+                    margin-bottom: 0;
+                }
+                div{
+                    height: 80%;
+                    overflow: auto;
+                }
+            }
+            .productInStock{
+                margin-left: 0;
+                height: 350px;
+                margin-bottom: 20px;
+                .productTable{
+                    height:290px;
+                }
+            }
+        }
+    }
+}
+@media screen and(min-width:577px) and(max-width:768px){
+    .adminDashboard{
+        .adminManagement{
+            display: flex;
+            flex-flow: wrap;
+            .flexBreak{
+                width: 100%;
+            }
+            .totalUser,
+            .totalProduct,
+            .totalCategory,
+            .totalOrder{
+                width: 550px;
+                height: 100px;
+            }
+            .totalUser,.totalProduct,.totalCategory{
+                margin-bottom: 20px;
+            }
+        }
+        .adminChart{
+            display: flex;
+            flex-flow: wrap;
+            .flexBreak{
+                width: 100%;
+            }
+            .chart{
+               
+                width: 600px;
+                height: 400px;
+                overflow: hidden;
+                h4{
+                    margin-bottom: 0;
+                }
+                div{
+                    height: 85%;
+                    overflow: auto;
+                }
+            }
+            .productInStock{
+                margin-left: 0;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+@media screen and(min-width:769) and(max-width:1024px) {
+    .adminDashboard{
+        .adminManagement{
+            display: flex;
+            flex-flow: wrap;
+            .flexBreak{
+                width: 100%;
+            }
+            .totalUser,
+            .totalProduct,
+            .totalCategory,
+            .totalOrder{
+                width: 400px;
+            }
+            
+            .totalUser,.totalProduct{
+                margin-bottom: 20px;
             }
         }
     }
