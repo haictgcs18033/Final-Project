@@ -32,7 +32,7 @@ export default function AdminDashboard() {
         return allCategory.length
     }
     if (loading) {
-        return <div style={{height:'100vh',paddingLeft:'130px',paddingTop:'30px'}}>
+        return <div className={classes.load}>
             <Skeleton active avatar paragraph={{ rows: 4 }} />
         </div>
 

@@ -175,7 +175,11 @@
     }
     .headerFunctionMobile {
         display: flex !important;
+       i{
+           font-size: 20px;
+       }
     }
+   
     .headerContainer {
         display: flex;
         justify-content: space-between;

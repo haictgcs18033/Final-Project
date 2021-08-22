@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { getCatgory } from '../redux/action/AdminAction'
 import classes from '../sass/Header.module.scss'
-import { Menu, Dropdown, Affix, Drawer } from 'antd';
+import { Menu, Dropdown, Affix, Drawer, Badge } from 'antd';
 // import 'antd/dist/antd.css';
 import Intro from './Intro'
 import { getAllProduct, getCartItems } from '../redux/action/EcommerceAction'
@@ -222,7 +222,10 @@ export default function Header() {
                     <div className={`d-flex ${classes.headerFunctionMobile}`}>
                         {renderLoginMobile()}
                         <NavLink className={`nav-link ml-2 ${classes.cart}`} to="/cart">
+                            <Badge count={cartArray.length}  style={{ backgroundColor: '#52c41a' ,boxShadow:'none'}}>
                             <i className="fas fa-shopping-cart" />
+                            </Badge>
+                           
                         </NavLink>
                     </div>
                     <div className={classes.flexBreak}></div>

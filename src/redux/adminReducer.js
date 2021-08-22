@@ -52,6 +52,14 @@ const stateDefault = {
     orderId: '',
     // Email
     emailServer: [],
+    // Admin Account
+    adminDetail:{
+        firstName:'',
+        lastName:'',
+        userImage:''
+      
+    },
+    userImage:'',
     // Loading
     loading: false
 }
@@ -202,7 +210,12 @@ export const adminReducer = (state = stateDefault, action) => {
         case 'GET_ALL_EMAIL': {
             return { ...state, emailServer: action.email }
         }
-
+        case 'GET_ADMIN_DETAIL':{
+            return {...state,adminDetail:action.adminDetail,userImage:action.adminDetail.profilePicture}
+        }
+        case 'INPUT_UPDATE_ADMIN':{
+            return{...state,adminDetail:action.value}
+        }
         default: {
             return { ...state }
         }

@@ -135,7 +135,9 @@ export default function ProductDetailPage(props) {
                                 productDetailPage._id,
                                 quantity,
                                 productDetailPage.price,
-                                productDetailPage.price
+                                productDetailPage.price,
+                                color,
+                                size
                             )
                         }}>Add to cart</button>
                 </div>

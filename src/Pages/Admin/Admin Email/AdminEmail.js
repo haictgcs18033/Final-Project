@@ -164,7 +164,8 @@ export default function AdminEmail() {
         <div className={classes.emailContainer}>
             <div className={classes.emailTitle}>
                 <h3>Email</h3>
-                <button data-toggle="modal" data-target="#exampleModalProductCreate">View sent email</button>
+                <button data-toggle="modal" data-target="#exampleModalProductCreate"
+                className={classes.viewSentMail}>View sent email</button>
                 <div className="modal fade" id="exampleModalProductCreate"
                     tabIndex={-1} role="dialog"
                     aria-labelledby="exampleModalLabel"
@@ -194,7 +195,7 @@ export default function AdminEmail() {
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div className="modal-body" >
+                            <div className={`modal-body ${classes.modalEmail}`} >
                                 <div className={classes.email}>
                                     {
                                         emailServer.map((email, index) => {

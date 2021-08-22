@@ -9,6 +9,8 @@ import Carousel from '../Components/CarouselEcommerce'
 import { getCatgory } from '../redux/action/AdminAction'
 import menFashion1 from '../asset/img/men-fashion1.jpg'
 import menFashion2 from '../asset/img/men-fashion2.jpg'
+import womenFashion1 from '../asset/img/women-fashion1.jpg'
+import womenFashion2 from '../asset/img/women-fashion2.jpg'
 import Slider from "react-slick";
 import ProductIndex from '../Components/ProductIndex'
 import { NavLink } from 'react-router-dom'
@@ -41,7 +43,22 @@ export default function HomePage() {
         slidesToShow: 3,
         slidesToScroll: 3,
     };
-    console.log(productList)
+    console.log(categoryList)
+    let allCategory=[
+
+    ]
+    let renderAllCategory=(categoryList)=>{
+       
+        for(let item of categoryList){
+            allCategory.push(item)
+            if(item.children.length>0){
+                 renderAllCategory(item.children)
+            }
+         
+        }
+        
+        return allCategory
+    }
     return (
         <div>
             <Carousel></Carousel>
@@ -83,15 +100,16 @@ export default function HomePage() {
                         </NavLink>
                     </button>
                 </div>
+               
                 <div >
-                    <div data-aos="fade-right" className={`container p-0 ${classes.popularFashion}`}>
+                    <div data-aos="fade-right" className={`container p-0 ${classes.menFashion}`}>
                         <div className={`${classes.category}`}>
                             <div className={`${classes.title}`}>
-                                <h3>Popular Fashion</h3>
+                                <h3>Porpular Fashion</h3>
                             </div>
                             <div className={`${classes.categoryItem}`}>
                                 {
-                                    categoryList?.map((category, index) => {
+                                    renderAllCategory(categoryList).map((category, index) => {
                                         return <NavLink to={`/productItem/${category.slug}/${category._id}/${category.type}`} key={index}>
                                             {category.name}
                                         </NavLink>
@@ -99,11 +117,33 @@ export default function HomePage() {
                                 }
                             </div>
                         </div>
-                        <div className={`${classes.productList}`}>
+                        <div className={`${classes.introSlider}`}>
+                            <div id="carouselMenIndicators" className="carousel slide" data-ride="carousel">
+                                <ol className="carousel-indicators">
+                                    <li data-target="#carouselMenIndicators" data-slide-to={0} className="active" />
+                                    <li data-target="#carouselMenIndicators" data-slide-to={1} />
+                                    <li data-target="#carouselMenIndicators" data-slide-to={2} />
+
+                                </ol>
+                                <div className={`carousel-inner ${classes.sliderOne}`}>
+                                    <div className={`carousel-item active ${classes.carouselItem}`}>
+                                        <img className="d-block w-100" src={menFashion1} alt="First slide" />
+                                    </div>
+                                    <div className={`carousel-item ${classes.sliderTwo}`}>
+                                        <img className="d-block w-100" src={menFashion2} alt="Second slide" />
+                                    </div>
+                                    <div className={`carousel-item ${classes.sliderThree}`}>
+                                        <img className="d-block w-100" src={womenFashion1} alt="Second slide" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className={`${classes.product}`}>
                             <div className={`row`}>
                                 {
                                     productList.map((product, index) => {
-                                        return <div key={index} className={`col-3 p-0 `}>
+                                        return <div key={index} className={`col-4 p-0 `}>
                                             <NavLink to={`/detail/${product.slug}/${product._id}`} className={`card text-left ${classes.card} mb-2`}>
                                                 <img className="card-img-top" src={`${product.productPictures[0]?.img}`} alt="Not found" />
                                                 <div className="card-body">
@@ -120,98 +160,8 @@ export default function HomePage() {
 
                     </div>
                 </div>
-                <div >
-                    <div data-aos="fade-right" className={`container p-0 ${classes.menFashion}`}>
-                        <div className={`${classes.category}`}>
-                            <div className={`${classes.title}`}>
-                                <h3>Men Fashion</h3>
-                            </div>
-                            <div className={`${classes.categoryItem}`}>
-                                {
-                                    categoryList?.map((category, index) => {
-                                        return <NavLink to={`/productItem/${category.slug}/${category._id}/${category.type}`} key={index}>
-                                            {category.name}
-                                        </NavLink>
-                                    })
-                                }
-                            </div>
-                        </div>
-                        <div className={`${classes.introSlider}`}>
-                            <div id="carouselMenIndicators" className="carousel slide" data-ride="false" data-interval="false">
-                                <ol className="carousel-indicators">
-                                    <li data-target="#carouselMenIndicators" data-slide-to={0} className="active" />
-                                    <li data-target="#carouselMenIndicators" data-slide-to={1} />
-                                </ol>
-                                <div className={`carousel-inner ${classes.sliderOne}`}>
-                                    <div className={`carousel-item active ${classes.carouselItem}`}>
-                                        <img className="d-block w-100" src={menFashion1} alt="First slide" />
-                                    </div>
-                                    <div className={`carousel-item ${classes.sliderTwo}`}>
-                                        <img className="d-block w-100" src={menFashion2} alt="Second slide" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={`${classes.product}`}>
-                            <div id="carouselMenProduct" className="carousel slide" data-ride="false" data-interval="false">
-                                <ol className="carousel-indicators">
-                                    <li data-target="#carouselMenProduct" data-slide-to={0} className="active" />
-                                    <li data-target="#carouselMenProduct" data-slide-to={1} />
-                                </ol>
-                                <div className={`carousel-inner ${classes.sliderOne}`}>
-                                    <div className={`carousel-item active ${classes.carouselItem}`}>
-                                        <div className={`row`}>
-                                            {
-                                                productList.slice(0, 8).map((product, index) => {
-                                                    return <div key={index} className={`col-md-3 col-lg-3 col-xl-4 p-0 `}>
-                                                        <NavLink to={`/detail/${product.slug}/${product._id}`} className={`card text-left ${classes.card} mb-2`}>
-                                                            <img className="card-img-top" src={`${product.productPictures[0]?.img}`} alt="Not found" />
-                                                            <div className="card-body">
-                                                                <h4 className="card-title">{product.name}</h4>
-                                                                <p className="card-text">{product.price}</p>
 
-                                                            </div>
-                                                        </NavLink>
 
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className={`carousel-item ${classes.sliderTwo}`}>
-                                        <div className={`row`}>
-                                            {
-                                                productList.slice(0, 8).map((product, index) => {
-                                                    return <div key={index} className={`col-md-3 col-lg-3 col-xl-4 p-0 `}>
-                                                        <NavLink to={`/detail/${product.slug}/${product._id}`} className={`card text-left ${classes.card} mb-2`}>
-                                                            <img className="card-img-top" src={`${product.productPictures[0]?.img}`} alt="Not found" />
-                                                            <div className="card-body">
-                                                                <h4 className="card-title">{product.name}</h4>
-                                                                <p className="card-text">{product.price}</p>
-                                                            </div>
-                                                        </NavLink>
-
-                                                    </div>
-                                                })
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                <a className="carousel-control-prev" href="#carouselMenProduct" role="button" data-slide="prev">
-                                    <i className="fa fa-angle-left" />
-                                    <span className="sr-only">Previous</span>
-                                </a>
-                                <a className="carousel-control-next" href="#carouselMenProduct" role="button" data-slide="next">
-                                    <i className="fa fa-angle-right" />
-                                    <span className="sr-only">Next</span>
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                
-               
                 <div className={`container ${classes.mobileLayoutProduct}`}>
                     <div className={classes.popularFashionMobile}>
                         <div className={`${classes.title}`}>
@@ -287,8 +237,8 @@ export default function HomePage() {
                         </div>
 
                     </div>
-                   
-                   
+
+
                 </div>
             </div>
             <ProductIndex></ProductIndex>

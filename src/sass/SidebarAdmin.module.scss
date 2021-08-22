@@ -75,8 +75,16 @@
     width: 7%;
    
 }
-@media screen and( max-width:576px){
+@media screen and( max-width:768px){
     .sidebarContainer,.sidebarContainerSmall{
         display: none;
+    }
+}
+@media screen and(min-width:769px) and(max-width:1024px) {
+    .sidebarContainerSmall{
+        width: 10%;
+    }
+    .sidebarContainer{
+        width: 20%;
     }
 }

@@ -82,7 +82,7 @@ export default function PaymentCard(props) {
                             options={{
                                 style: {
                                     base: {
-                                        fontSize: '18px',
+                                        fontSize: '15px',
                                         color: '#FFF',
                                         '::placeholder': {
                                             color: '#aab7c4',

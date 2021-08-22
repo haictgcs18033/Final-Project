@@ -139,7 +139,16 @@
         }
     }
 }
+.load{
+    height:100vh;
+    padding-left: 130px;
+    padding-top: 30px;
+}
 @media screen and(max-width:576px) {
+    .load{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
     .orderContainer{
         .orderTitle{
             padding-bottom: 10px;

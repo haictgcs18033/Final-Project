@@ -330,8 +330,9 @@
         }
     }
 }
-@media screen  and (max-width: 500px) {
+@media screen  and (max-width: 576px) {
     .placeOrderContainer {
+        margin:30px 20px 20px;
         .userAccount,
         .address,
         .productList,

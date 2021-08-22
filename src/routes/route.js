@@ -22,6 +22,7 @@ import UserProfile from "../Pages/UserDetail/UserProfile";
 import SuccessOrder from "../Pages/SuccessOrder";
 import ForgetPassword from "../Pages/ForgetPassword";
 import ResetPassword from "../Pages/ResetPassword";
+import AdminAccount from "../Pages/Admin/AdminAccount/AdminAccount";
 
 
 export const CustomerRoute = [
@@ -151,6 +152,11 @@ export const AdminRoute = [
         path: '/admin/product',
         component: AdminProduct,
         exact: false
+    },
+    {
+        path:'/admin/account',
+        component:AdminAccount,
+        exact:false
     }
 
 ]

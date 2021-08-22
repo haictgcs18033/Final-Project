@@ -1,4 +1,4 @@
-.emailContainer{
+.emailContainer {
     background: white;
     max-width: 100%;
     height: 160vh;
@@ -7,7 +7,7 @@
     padding-bottom: 20px;
     padding-left: 130px;
     padding-right: 20px;
-    .emailTitle{
+    .emailTitle {
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid #e9e9e9;
@@ -19,66 +19,67 @@
             text-transform: uppercase;
             line-height: 42px;
         }
-       
+        button{
+            display: none;
+        }
     }
-    .emailArea{
+    .emailArea {
         display: flex;
-        margin:30px 0;
-        .emailContent, .sentEmail{
+        margin: 30px 0;
+        .emailContent,
+        .sentEmail {
             flex-grow: 1;
-            margin:0 20px;
+            margin: 0 20px;
             border: 1px solid #e9e9e9;
             height: 100%;
-            padding:10px;
-            .customSelect{
+            padding: 10px;
+            .customSelect {
                 background: none !important;
-            
             }
-            .selectGroup{
+            .selectGroup {
                 position: relative;
-                i{
+                i {
                     position: absolute;
                     bottom: 10px;
-                    right: .75rem;
+                    right: 0.75rem;
                     color: black;
                 }
             }
-           
         }
-        .emailContent{
-            textarea{
+        .emailContent {
+            textarea {
                 height: 100px;
                 resize: none;
             }
-            button{
+            button {
                 background: #2370f4;
                 color: white;
                 border: none;
-                padding:5px 10px ;
+                padding: 5px 10px;
                 font-weight: bold;
-                border:2px solid #2370f4;
+                border: 2px solid #2370f4;
                 border-radius: 6px;
                 transition: all 0.5s;
-                &:hover{
-                 cursor: pointer;
-                 background: white;
-                 color: #2370f4;
+                &:hover {
+                    cursor: pointer;
+                    background: white;
+                    color: #2370f4;
                 }
                 &:focus {
                     outline: none;
                 }
             }
         }
-        .sentEmail{
+        .sentEmail {
             padding: 0;
             height: 100%;
-            .sentEmailTitle{
-                padding:10px;
+            .sentEmailTitle {
+                padding: 10px;
                 display: flex;
                 justify-content: space-between;
                 border-bottom: 1px solid #e9e9e9;
             }
-            h3{
+            h3 {
                 color: #2370f4;
                 font-size: 20px;
                 margin-bottom: 0;
@@ -88,15 +89,15 @@
                 background: #2370f4;
                 color: white;
                 border: none;
-                padding: 10px ;
+                padding: 10px;
                 font-weight: bold;
-                border:2px solid #2370f4;
+                border: 2px solid #2370f4;
                 border-radius: 6px;
                 transition: all 0.5s;
-                &:hover{
-                 cursor: pointer;
-                 background: white;
-                 color: #2370f4;
+                &:hover {
+                    cursor: pointer;
+                    background: white;
+                    color: #2370f4;
                 }
                 &:focus {
                     outline: none;
@@ -104,70 +105,69 @@
                 &::after {
                     display: none;
                 }
-               
             }
-            .dropdownContent{
-                p{
+            .dropdownContent {
+                p {
                     font-weight: bold;
-                   transition: all 0.5s;
-                    &:hover{
+                    transition: all 0.5s;
+                    &:hover {
                         cursor: pointer;
                         background: #2370f4;
-                        color:white ;
+                        color: white;
                     }
                 }
             }
-            .email{
-                padding:20px;
+            .email {
+                padding: 20px;
                 overflow: auto;
                 height: 268px;
-                .emailObject{
-                   border : 1px solid #2370f4;
-                   margin-bottom: 10px;
-                   padding:10px;
-                   border-radius: 6px;
+                .emailObject {
+                    border: 1px solid #2370f4;
+                    margin-bottom: 10px;
+                    padding: 10px;
+                    border-radius: 6px;
                 }
             }
         }
     }
     .tableUser {
-        margin:0 20px;
-        border:1px solid #e9e9e9;
-        .tableUserTitle{
+        margin: 0 20px;
+        border: 1px solid #e9e9e9;
+        .tableUserTitle {
             border-bottom: 1px solid #e9e9e9;
             display: flex;
             justify-content: space-between;
             padding: 10px;
-            h3{
+            h3 {
                 color: #2370f4;
-                margin-bottom:0 ;
-                width:300px;
-              
+                margin-bottom: 0;
+                width: 300px;
             }
-            .search{
-               position: relative;
-               input{
-                   width: 300px;
-               }
-               i{
-                   position: absolute;
-                   bottom:10px;  
-                   right: .75rem;
-                   font-size: 20px;
-               }
+            .search {
+                position: relative;
+                input {
+                    padding-left: 30px;
+                }
+                i {
+                    position: absolute;
+                    width: 15px;
+                    height: 15px;
+                    top: 13px;
+                    left: 10px;
+                }
             }
         }
-        .userTableWrapper{
+        .userTableWrapper {
             height: 300px;
         }
-        .userTableGroup{
-            margin:20px;
+        .userTableGroup {
+            margin: 20px;
             position: relative;
             height: 100%;
-            .paginateGroup{
+            .paginateGroup {
                 position: absolute;
-                top:0;
-                left:0;
+                top: 0;
+                left: 0;
                 p {
                     margin-bottom: 0;
                     color: #68728c;
@@ -190,7 +190,7 @@
                         color: white;
                     }
                 }
-               
+
                 .activeClassName {
                     background: #2370f4;
                     color: white;
@@ -199,71 +199,188 @@
                     }
                 }
             }
-            table { 
+            .tableUserMobile{
+                display: none;
+            }
+            table {
                 position: absolute;
-                top:50px;
-                left :0;
+                top: 50px;
+                left: 0;
                 thead {
                     background: #2370f4;
                     color: white;
-                
                 }
                 tbody {
                     th,
                     td {
                         color: black;
-                       
                     }
-                    
-                    .update,.delete,.admin{
-                       background:white;
-                       border: none;
-                       border :2px solid #2370f4;
-                       padding:5px 10px;
-                       color: #2370f4;
-                       border-radius: 6px;
-                       font-weight: bold;
-                       transition: all 0.5s;
-                       &:hover{
-                           background: #2370f4;
-                           color: white;
-                           cursor:pointer;
-                       }
-                       &:focus{
-                           outline: none;
-                       }
+
+                    .update,
+                    .delete,
+                    .admin {
+                        background: white;
+                        border: none;
+                        border: 2px solid #2370f4;
+                        padding: 5px 10px;
+                        color: #2370f4;
+                        border-radius: 6px;
+                        font-weight: bold;
+                        transition: all 0.5s;
+                        &:hover {
+                            background: #2370f4;
+                            color: white;
+                            cursor: pointer;
+                        }
+                        &:focus {
+                            outline: none;
+                        }
                     }
-                    .delete{
-                        border :2px solid red;
+                    .delete {
+                        border: 2px solid red;
                         color: red;
-                        &:hover{
+                        &:hover {
                             background: red;
                         }
-                       
                     }
-                    
                 }
             }
         }
-       
     }
 }
-@media screen and (max-width:576px){
-    .emailContainer{
-        .sentEmail{
+@media screen and (max-width: 576px) {
+    .emailContainer {
+        .sentEmail {
             display: none;
         }
+        .emailTitle {
+            .viewSentMail {
+                display: block;
+                padding: 5px 10px;
+                background: #2370f4;
+                color: white;
+                border: none;
+                font-weight: bold;
+                border-radius: 6px;
+            }
+            .dropdownButton {
+
+                background: #2370f4;
+                color: white;
+                border: none;
+                padding: 5px 20px;
+                font-weight: bold;
+                border: 2px solid #2370f4;
+                border-radius: 6px;
+                &::after {
+                    display: none;
+                }
+            }
+            .modalEmail {
+                height: 300px;
+                overflow: auto;
+                .emailObject {
+                    border: 1px solid #2370f4;
+                    margin-bottom: 10px;
+                    border-radius: 6px;
+                    padding: 10px;
+                }
+            }
+        }
+        .emailArea {
+            .emailContent,
+            .sentEmail {
+                margin: 0;
+            }
+        }
+        .tableUser {
+            margin: 0;
+            .tableUserTitle {
+                h3 {
+                    font-size: 20px;
+                    line-height: 38px;
+                }
+                input {
+                    width: 150px;
+                }
+            }
+            .userTableGroup {
+                margin: 0;
+                position: relative;
+                overflow:auto;
+                padding:10px;
+                .paginateGroup{
+                    position: absolute;
+                    top: 10px;
+                    left:10px;
+                }
+                .tableUserMobile {
+                    display: block;
+                    margin-top: 40px;
+                    .userWrapper {
+                        border: 1px solid #e9e9e9;
+                        margin-bottom: 10px;
+                        border-radius: 6px;
+                    }
+                    .userInfoContainer {
+                        display: flex;
+                        padding-top: 10px;
+                        p {
+                            margin-bottom: 10px;
+                        }
+                        .userImage {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            padding: 5px;
+                            img {
+                                width: 80px;
+                                height: 80px;
+                                border-radius: 50%;
+                                object-fit: contain;
+                            }
+                        }
+                        .userInfo {
+                            padding-left: 10px;
+                            flex-grow: 1;
+                        }
+                    }
+                    .userManageButton {
+                        display: flex;
+                        justify-content: flex-end;
+                        border-top: 1px solid #e9e9e9;
+                        padding: 10px 0;
+                        .update {
+                            background: #2370f4;
+                            border: none;
+                            border: 2px solid #2370f4;
+                            padding: 5px 10px;
+                            color: white;
+                            border-radius: 6px;
+                            font-weight: bold;
+                            transition: all 0.5s;
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         table {
             display: none;
         }
     }
 }
-@media screen and (max-width:768px){
-    .emailContainer{
+@media screen and (max-width: 768px) {
+    .emailContainer {
         padding-left: 20px;
-        .emailTitle{
-            h3{
-
+        .emailTitle {
+            padding-bottom: 10px;
+            h3 {
+                font-size: 25px;
             }
         }
     }
