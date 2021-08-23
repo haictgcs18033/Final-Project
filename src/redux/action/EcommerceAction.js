@@ -944,7 +944,7 @@ export const contactEmail = (email) => {
         })
         try {
              await axios({
-                url: 'http://localhost:4000/user/emailContact',
+                url: 'https://fes-backend-server.herokuapp.com/user/emailContact',
                 method: 'POST',
                 data: email,
             })
