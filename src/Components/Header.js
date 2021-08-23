@@ -11,10 +11,10 @@ import { getAllProduct, getCartItems } from '../redux/action/EcommerceAction'
 
 
 export default function Header() {
-    let categoryList = useSelector(state => state.adminReducer.categoryList)
+    // let categoryList = useSelector(state => state.adminReducer.categoryList)
     let productList = useSelector(state => state.ecommerceReducer.productList)
     let cartArray = useSelector(state => state.ecommerceReducer.cartArray)
-    const [dropdown, setDropdown] = useState(false)
+    // const [dropdown, setDropdown] = useState(false)
     const [visible, setVisible] = useState(false);
     let dispatch = useDispatch()
     // Search
@@ -27,7 +27,7 @@ export default function Header() {
     useEffect(() => {
         dispatch(getAllProduct())
     }, [dispatch])
-   
+
     useEffect(() => {
         dispatch(getCartItems())
     }, [dispatch])
@@ -42,22 +42,22 @@ export default function Header() {
     //     }
     // }
     let user = JSON.parse(localStorage.getItem('USER_LOGIN'))
-    let renderCategory = (categoryList) => {
-        return categoryList.map((categories, index) => {
-            return <li key={index} className={classes.childCategory}>
+    // let renderCategory = (categoryList) => {
+    //     return categoryList.map((categories, index) => {
+    //         return <li key={index} className={classes.childCategory}>
 
-                <NavLink to={`/productItem/${categories.slug}/${categories._id}/${categories.type}`} >{categories.name}</NavLink>
-                {categories.children.length > 0 ?
-                    <ul className={classes.childContainer}>
-                        {
-                            renderCategory(categories.children)
-                        }
-                    </ul> : ''
-                }
-            </li>
+    //             <NavLink to={`/productItem/${categories.slug}/${categories._id}/${categories.type}`} >{categories.name}</NavLink>
+    //             {categories.children.length > 0 ?
+    //                 <ul className={classes.childContainer}>
+    //                     {
+    //                         renderCategory(categories.children)
+    //                     }
+    //                 </ul> : ''
+    //             }
+    //         </li>
 
-        })
-    }
+    //     })
+    // }
     const menu = (
         <Menu className={`text-center`}>
             <Menu.Item key="0">
@@ -74,10 +74,10 @@ export default function Header() {
 
     let renderLogin = () => {
         if (localStorage.getItem("USER_LOGIN")) {
-            let userLogin = JSON.parse(localStorage.getItem('USER_LOGIN'))
+            // let userLogin = JSON.parse(localStorage.getItem('USER_LOGIN'))
             return <Dropdown overlay={menu} trigger={['click']}>
                 <p className={`ant-dropdown-link nav-link ${classes.helloUser}`} onClick={e => e.preventDefault()}>
-                   {userLogin.firstName} {userLogin.lastName}
+                    Hello Customer
                 </p>
             </Dropdown>
 
@@ -88,7 +88,7 @@ export default function Header() {
     }
     let renderLoginMobile = () => {
         if (localStorage.getItem("USER_LOGIN")) {
-         
+
             return <p className={`ant-dropdown-link nav-link ${classes.helloUserMobile}`} onClick={e => e.preventDefault()}>
                 <i className="fas fa-user mr-2" />
                 Welcome back !
@@ -100,7 +100,7 @@ export default function Header() {
     }
     let userLogout = () => {
         dispatch({
-            type:'RESET_CART'
+            type: 'RESET_CART'
         })
         localStorage.clear()
     }
@@ -191,7 +191,7 @@ export default function Header() {
                         </div>
                     </div>
                     <div className={`d-flex ${classes.headerFunction}`}>
-                        <div className={`${classes.category}`}>
+                        {/* <div className={`${classes.category}`}>
                             <p className={`nav-link mb-0 ${classes.dropdown}`}
                                 onClick={() => {
                                     setDropdown(!dropdown)
@@ -206,7 +206,7 @@ export default function Header() {
                                     }
                                 </ul>
                             </div>
-                        </div>
+                        </div> */}
                         {
                             renderLogin()
                         }
@@ -222,10 +222,10 @@ export default function Header() {
                     <div className={`d-flex ${classes.headerFunctionMobile}`}>
                         {renderLoginMobile()}
                         <NavLink className={`nav-link ml-2 ${classes.cart}`} to="/cart">
-                            <Badge count={cartArray.length}  style={{ backgroundColor: '#52c41a' ,boxShadow:'none'}}>
-                            <i className="fas fa-shopping-cart" />
+                            <Badge count={cartArray.length} style={{ backgroundColor: '#52c41a', boxShadow: 'none' }}>
+                                <i className="fas fa-shopping-cart" />
                             </Badge>
-                           
+
                         </NavLink>
                     </div>
                     <div className={classes.flexBreak}></div>

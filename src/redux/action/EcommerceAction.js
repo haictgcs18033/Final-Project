@@ -462,6 +462,11 @@ export const updateUserData = (userUpdate, history) => {
             dispatch(getUserDetail())
             // history.push('/login')
             // localStorage.clear()
+            swal({
+                title: `Update Profile successfully`,
+                text: "",
+                icon: "success",
+            })
         } catch (error) {
             notification.open({
                 message: 'Error',
@@ -673,11 +678,6 @@ export const getAddress = () => {
                 type: 'END_USER_REQUEST'
             })
         } catch (error) {
-            notification.open({
-                message: 'Error',
-                description: `${error.response?.data.message}`,
-                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
-            });
             dispatch({
                 type: 'END_USER_REQUEST'
             })
@@ -920,6 +920,40 @@ export const getOrderStatus = (orderId) => {
                 orderStatus: result.data.order,
 
             })
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
+        } catch (error) {
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
+        }
+    }
+}
+// Email Contact
+export const contactEmail = (email) => {
+  
+    return async dispatch => {
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
+        try {
+             await axios({
+                url: 'http://localhost:4000/user/emailContact',
+                method: 'POST',
+                data: email,
+            })
+            swal({
+                title: `Contact successfully`,
+                text: "",
+                icon: "success",
+            });
+           
             dispatch({
                 type: 'END_USER_REQUEST'
             })

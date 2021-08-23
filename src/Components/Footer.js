@@ -67,13 +67,9 @@ export default function Footer() {
                 </div>
                 <div className={classes.flexBreak}></div>
                 <div className={classes.newsletter}>
-                    <h3>newsletter</h3>
-                    <p>Subscribe to our mailing list to get the new updates!</p>
-                    <div className={`${classes.signupBox}`}>
-                        <i className="far fa-envelope" />
-                        <input placeholder="Enter your email" />
-                        <button>Signup</button>
-                    </div>
+                    <h3>  Social Network</h3>
+                    <p>Contact with us through social media</p>
+                   
                     <div className={classes.social}>
                         <i className="fab fa-facebook-square" />
                         <i className="fab fa-twitter" />
@@ -191,7 +187,7 @@ export default function Footer() {
                             <h5 className="mb-0">
                                 <button className="w-100 btn btn-link d-flex justify-content-between" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" >
                                     <div>
-                                        Newsletter
+                                        Social Network
                                     </div>
                                     <div className={``}>
                                         <i className="fa fa-angle-down" />
@@ -202,12 +198,8 @@ export default function Footer() {
                         <div id="collapseFour" className="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                             <div className="card-body">
                                 <div className={classes.newsletter}>
-                                    <p>Subscribe to our mailing list to get the new updates!</p>
-                                    <div className={`${classes.signupBox}`}>
-                                        <i className="far fa-envelope" />
-                                        <input placeholder="Enter your email" />
-                                        <button>Signup</button>
-                                    </div>
+                                    <p>Contact with us through social media</p>
+                                  
                                     <div className={classes.social}>
                                         <i className="fab fa-facebook-square" />
                                         <i className="fab fa-twitter" />

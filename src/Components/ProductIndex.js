@@ -56,10 +56,42 @@ export default function ProductIndex() {
                 <div className={`${classes.flexBreak}`}></div>
                 <div className={` ${classes.topView}`}>
                     <h3> Top View</h3>
+                    <div className={`${classes.productContainer}`}>
+                        {
+                            productList.slice(0, 5).map((product, index) => {
+                                return <NavLink to={`/detail/${product.slug}/${product._id}`} key={index} className={`${classes.product}`}>
+                                    <div className={classes.imgProduct}>
+                                        <img src={`${product.productPictures[0].img}`} alt="Not found" />
+                                    </div>
+                                    <div className={classes.productContent}>
+                                        <h5>{product.name}</h5>
+                                        <p className="badge badge-success">5</p>
+                                        <p>{product.price}</p>
+                                    </div>
+                                </NavLink>
+                            })
+                        }
+                    </div>
                 </div>
                 <div className={`${classes.flexBreak}`}></div>
                 <div className={` ${classes.freeShip}`}>
                     <h3>Free Ship</h3>
+                    <div className={`${classes.productContainer}`}>
+                        {
+                            productList.slice(0, 5).map((product, index) => {
+                                return <NavLink to={`/detail/${product.slug}/${product._id}`} key={index} className={`${classes.product}`}>
+                                    <div className={classes.imgProduct}>
+                                        <img src={`${product.productPictures[0].img}`} alt="Not found" />
+                                    </div>
+                                    <div className={classes.productContent}>
+                                        <h5>{product.name}</h5>
+                                        <p className="badge badge-success">5</p>
+                                        <p>{product.price}</p>
+                                    </div>
+                                </NavLink>
+                            })
+                        }
+                    </div>
                 </div>
                 <div className={`${classes.flexBreak}`}></div>
             </div>

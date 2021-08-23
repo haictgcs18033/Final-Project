@@ -55,6 +55,8 @@
             button {
                 background: #642ab5;
                 border: none;
+                padding:5px 15px;
+                font-weight: bold;
                 &:focus {
                     outline: none;
                 }

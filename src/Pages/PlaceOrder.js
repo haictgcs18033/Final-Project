@@ -21,7 +21,7 @@ export default function PlaceOrder() {
     const cartArray = useSelector(state => state.ecommerceReducer.cartArray)
     // History
     let history = useHistory()
-   
+
     // console.log(selectedAddress);
     // let userInfo = useSelector(state => state.ecommerceReducer.userInfo)
     // console.log(userAddress);
@@ -30,7 +30,7 @@ export default function PlaceOrder() {
     const [products, setProducts] = useState(false)
     const [payment, setPayment] = useState(false)
     const [orderSuccess, setOrderSuccess] = useState(false)
-   
+
     // Cash
     let [cash, setCash] = useState(false)
     // Card Input
@@ -122,7 +122,7 @@ export default function PlaceOrder() {
         },
         validationSchema: validation,
         onSubmit: (values) => {
-           
+
             setIsModalVisible(false);
             dispatch(action.handleCreateAddress(values))
         }
@@ -180,17 +180,25 @@ export default function PlaceOrder() {
                             <span className="font-weight-bold">Quantity : </span>
                             <span>{item.quantity}</span>
                         </p>
+                        <p>
+                            <span className="font-weight-bold">Color : </span>
+                            <span>{item.color}</span>
+                        </p>
+                        <p>
+                            <span className="font-weight-bold">Size : </span>
+                            <span>{item.size}</span>
+                        </p>
                         <div className={`d-flex my-2 ${classes.quantity}`}>
                             <button
                                 onClick={() => {
-                                    decreaseQuantity(item.product._id, 1, item.price, item.limitedPrice)
+                                    decreaseQuantity(item.product._id, 1, item.price, item.limitedPrice, item.color, item.size)
                                 }}>
                                 <i className="fas fa-minus" />
                             </button>
                             <p className={`mx-4`}>{item.quantity}</p>
                             <button
                                 onClick={() => {
-                                    increaseQuantity(item.product._id, 1, item.price, item.limitedPrice)
+                                    increaseQuantity(item.product._id, 1, item.price, item.limitedPrice, item.color, item.size)
                                 }}>
                                 <i className="fas fa-plus" />
                             </button>
@@ -204,14 +212,12 @@ export default function PlaceOrder() {
                 <p>There are {`${cartArray.length}`} products ordered</p>
             </div>
         }
-
-
     }
-    let increaseQuantity = (id, quantity, price, limitedPrice) => {
-        dispatch(action.addProduct(id, quantity, price, limitedPrice))
+    let increaseQuantity = (id, quantity, price, limitedPrice,color,size) => {
+        dispatch(action.addProduct(id, quantity, price, limitedPrice,color,size))
     }
-    let decreaseQuantity = (id, quantity, price, limitedPrice) => {
-        dispatch(action.decreaseItem(id, quantity, price, limitedPrice))
+    let decreaseQuantity = (id, quantity, price, limitedPrice,color,size) => {
+        dispatch(action.decreaseItem(id, quantity, price, limitedPrice,color,size))
     }
     let confirmProduct = () => {
         setPayment(true)
