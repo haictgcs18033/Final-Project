@@ -233,9 +233,7 @@
     }
 }
 // Boostrap Carousel
-#carouselMenProduct,
-#carouselWomenProduct,
-#carouselKidProduct {
+#carouselExampleIndicators {
     .carousel-indicators {
         display: none;
     }
@@ -243,13 +241,13 @@
     .carousel-control-prev {
         width: 40px;
         height: 40px;
-        background: #1f1f1f;
-        color: #642ab5;
+        background: #642ab5;
+        color: white;
         font-size: 20px;
-        opacity: 0;
+        opacity: 1;
         border-radius: 50%;
         top: 45%;
-        left: -10px;
+        left:80px;
         transition: all 0.5s;
     }
     .carousel-control-prev {
@@ -259,17 +257,12 @@
     }
     .carousel-control-next {
         left: unset;
-        right: -10px;
+        right: 80px;
         &:hover {
             box-shadow: 0 0 5px 5px;
         }
     }
-    &:hover {
-        .carousel-control-next,
-        .carousel-control-prev {
-            opacity: 1;
-        }
-    }
+   
 }
 @media screen and (min-width: 992px) {
     #carouselMenIndicators,

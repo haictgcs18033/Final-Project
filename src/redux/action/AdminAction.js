@@ -34,15 +34,23 @@ export const getAllUser = () => {
                 headers: { 'Authorization': "Bearer " + localStorage.getItem('ACCESS_TOKEN') }
             })
             dispatch({
-                type: 'END_USER_REQUEST'
-            })
-            dispatch({
                 type: 'GET_ALL_USER',
                 users: result.data
             })
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
+
 
         } catch (error) {
-            console.log(error.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -69,7 +77,14 @@ export const getUserPaginate = (page, limit, searchTerm, sortType) => {
                 type: 'END_USER_REQUEST'
             })
         } catch (error) {
-            console.log(error.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -79,40 +94,67 @@ export const createUser = (user, page, limit) => {
             type: 'GET_USER_REQUEST'
         })
         try {
-            let result = await axios({
+            await axios({
                 url: 'https://fes-backend-server.herokuapp.com/admin/addUser',
                 method: 'POST',
                 data: user,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
+            swal({
+                title: `Create User Successfully`,
+                text: "",
+                icon: "success",
+            });
+            dispatch(getUserPaginate(page, limit))
+            dispatch(getAllUser())
             dispatch({
                 type: 'END_USER_REQUEST'
             })
-            dispatch(getUserPaginate(page, limit))
-            dispatch(getAllUser())
-            console.log(result.data);
+
         } catch (error) {
-            console.log(error.response?.data.message);
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
 export const handleUpdateUser = (userUpdate, page, limit) => {
     return async dispatch => {
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
         try {
-            let result = await axios({
+            await axios({
                 url: 'https://fes-backend-server.herokuapp.com/admin/updateUser',
                 method: 'POST',
                 data: userUpdate,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
-            console.log(result.data);
+            swal({
+                title: `Update Successfully`,
+                text: "",
+                icon: "success",
+            });
+            dispatch(getUserPaginate(page, limit))
+            dispatch(getAllUser())
             dispatch({
                 type: 'END_USER_REQUEST'
             })
-            dispatch(getUserPaginate(page, limit))
-            dispatch(getAllUser())
+
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -125,26 +167,36 @@ export const deleteUser = (userId, page, limit) => {
             type: 'GET_USER_REQUEST'
         })
         try {
-            let result = await axios({
+            await axios({
                 url: 'https://fes-backend-server.herokuapp.com/admin/deleteUser',
                 method: 'POST',
                 data: dataToApi,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
-            console.log(result.data);
+            swal({
+                title: `Delete Successfully`,
+                text: "",
+                icon: "success",
+            });
             dispatch({
                 type: 'END_USER_REQUEST'
             })
             dispatch(getUserPaginate(page, limit))
             dispatch(getAllUser())
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
 // Email
 export const getAllEmail = (sortObject) => {
-
     return async dispatch => {
         try {
             dispatch({
@@ -159,9 +211,19 @@ export const getAllEmail = (sortObject) => {
                 type: 'GET_ALL_EMAIL',
                 email: result.data
             })
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
 
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -177,13 +239,25 @@ export const sendSpecificEmail = (specificObject) => {
                 data: specificObject,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
+            swal({
+                title: `Email has sent`,
+                text: "",
+                icon: "success",
+            });
             dispatch(getAllEmail())
             dispatch({
                 type: 'END_USER_REQUEST'
             })
 
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -199,22 +273,34 @@ export const sendMailAll = (mailAll) => {
                 data: mailAll,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
+            swal({
+                title: `Email has sent`,
+                text: "",
+                icon: "success",
+            });
             dispatch(getAllEmail())
             dispatch({
                 type: 'END_USER_REQUEST'
             })
 
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
 // Category
 export const getCatgory = () => {
     return async dispatch => {
-        // dispatch({
-        //     type:'GET_USER_REQUEST'
-        // })
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
         try {
             let result = await axios({
                 url: 'https://fes-backend-server.herokuapp.com/category',
@@ -225,9 +311,18 @@ export const getCatgory = () => {
                 type: 'GET_CATEGORY',
                 category: result.data
             })
-
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -237,9 +332,9 @@ export const createCategory = (formInput) => {
         formData.append(item, formInput[item])
     }
     return async dispatch => {
-        // dispatch({
-        //     type:'GET_USER_REQUEST'
-        // })
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
         try {
             let result = await axios({
                 url: 'https://fes-backend-server.herokuapp.com/category/add',
@@ -248,13 +343,28 @@ export const createCategory = (formInput) => {
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
             // console.log(result.data);
+            swal({
+                title: `Create Successfully`,
+                text: "",
+                icon: "success",
+            });
             dispatch({
                 type: 'ADD_CATEGORY',
                 payload: result.data
             })
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
             dispatch(getCatgory())
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -276,25 +386,45 @@ export const UpdateCategory = (checkedCategory, expandedCategory) => {
         form.append('type', item.type)
     })
     return async dispatch => {
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
         try {
-            let result = await axios({
+            await axios({
                 url: 'https://fes-backend-server.herokuapp.com/category/update',
                 method: 'POST',
                 data: form,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
-            console.log(result.data);
+            swal({
+                title: `Update Successfully`,
+                text: "",
+                icon: "success",
+            });
             dispatch(getCatgory())
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (error) {
-            console.log(error.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
 export const deleteCategory = (items) => {
-    console.log(items);
+   
     return async dispatch => {
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
         try {
-            let result = await axios({
+            await axios({
                 url: 'https://fes-backend-server.herokuapp.com/category/delete',
                 method: 'POST',
                 data: {
@@ -302,17 +432,33 @@ export const deleteCategory = (items) => {
                 },
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
-            console.log(result);
+            swal({
+                title: `Delete Successfully`,
+                text: "",
+                icon: "success",
+            });
             dispatch(getCatgory())
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (error) {
-            console.log(error.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
 // Product
 export const getProduct = () => {
     return async dispatch => {
-
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
         try {
             let result = await axios({
                 url: 'https://fes-backend-server.herokuapp.com/initialData',
@@ -324,8 +470,18 @@ export const getProduct = () => {
                 type: 'GET_PRODUCT',
                 payload: result.data
             })
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (error) {
-            console.log(error.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -351,7 +507,14 @@ export const getProductPaginate = (page, limit, searchTerm, sortObject) => {
                 type: 'END_USER_REQUEST'
             })
         } catch (error) {
-            console.log(error.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -371,21 +534,24 @@ export const createProduct = (productInfo, page, limit) => {
     for (let img of productPictures) {
         formData.append('productPicture', img)
     }
-
     return async dispatch => {
         dispatch({
             type: 'GET_USER_REQUEST'
         })
         try {
 
-            let result = await axios({
+             await axios({
                 url: 'https://fes-backend-server.herokuapp.com/product/add',
                 method: 'POST',
                 data: formData,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
-            console.log(result.data);
-            alert('Them thanh cong')
+           
+            swal({
+                title: `Create Successfully`,
+                text: "",
+                icon: "success",
+            });
             dispatch({
                 type: 'RESET_FORM'
             })
@@ -398,13 +564,20 @@ export const createProduct = (productInfo, page, limit) => {
                 type: 'END_USER_REQUEST'
             })
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
 export const updateProduct = (productUpdate, page, limit) => {
     let { productId, name, price, quantity, description, category, productPictures, color, size } = productUpdate
-    console.log(productPictures);
+   
     let formData = new FormData()
     //   Cach cho nhieu hinh trong form
     formData.append('productId', productId)
@@ -418,23 +591,38 @@ export const updateProduct = (productUpdate, page, limit) => {
     for (let img of productPictures) {
         formData.append('productPicture', img)
     }
-    for (let value of formData) {
-        console.log(value);
-    }
+   
     return async dispatch => {
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
         try {
-            let result = await axios({
+            await axios({
                 url: 'https://fes-backend-server.herokuapp.com/product/productUpdate',
                 method: 'POST',
                 data: formData,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
-            console.log(result.data);
-            alert('Cap nhat thanh cong')
+           
+            swal({
+                title: `Update Successfully`,
+                text: "",
+                icon: "success",
+            });
             dispatch(getProductPaginate(page, limit))
             dispatch(getProduct())
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -443,6 +631,9 @@ export const deleteProduct = (id, page, limit) => {
         productId: id
     }
     return async dispatch => {
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
         try {
             await axios({
                 url: "https://fes-backend-server.herokuapp.com/product/productDelete",
@@ -450,10 +641,25 @@ export const deleteProduct = (id, page, limit) => {
                 data: dataToApi,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
+            swal({
+                title: `Delete Successfully`,
+                text: "",
+                icon: "success",
+            });
             dispatch(getProductPaginate(page, limit))
             dispatch(getProduct())
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (error) {
-            console.log(error.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -506,12 +712,22 @@ export const getCustomerOrder = () => {
                 type: 'END_USER_REQUEST'
             })
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
 export const handleOrderStatus = (payload) => {
     return async dispatch => {
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
         try {
             await axios({
                 url: 'https://fes-backend-server.herokuapp.com/admin/orderStatus',
@@ -519,9 +735,54 @@ export const handleOrderStatus = (payload) => {
                 data: payload,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
+            swal({
+                title: `Handling Successfully`,
+                text: "",
+                icon: "success",
+            });
             dispatch(getCustomerOrder())
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (err) {
-            console.log(err.response?.data);
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
+        }
+    }
+}
+export const getEmailContact = () => {
+    return async dispatch => {
+        dispatch({
+            type: "GET_USER_REQUEST"
+        })
+        try {
+            let result = await axios({
+                url: 'https://fes-backend-server.herokuapp.com/admin/emailUser',
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
+            })
+            dispatch({
+                type: 'GET_EMAIL_CONTACT',
+                email: result.data
+            })
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
+        } catch (error) {
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         }
     }
 }
@@ -536,7 +797,7 @@ export const getAdminDetail = () => {
                 method: 'POST',
                 headers: { 'Authorization': "Bearer " + localStorage.getItem('ACCESS_TOKEN') }
             })
-            
+
             dispatch({
                 type: 'GET_ADMIN_DETAIL',
                 adminDetail: result.data
@@ -545,11 +806,11 @@ export const getAdminDetail = () => {
                 type: 'END_USER_REQUEST'
             })
         } catch (error) {
-            // notification.open({
-            //     message: 'Error',
-            //     description: `${error.response?.data.message}`,
-            //     icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
-            // });
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
             dispatch({
                 type: 'END_USER_REQUEST'
             })
@@ -573,15 +834,21 @@ export const updateAdminData = (userUpdate, history) => {
                 data: formData,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
+            swal({
+                title: `Update Successfully`,
+                text: "",
+                icon: "success",
+            });
             dispatch(getAdminDetail())
-            // history.push('/login')
-            // localStorage.clear()
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (error) {
-            // notification.open({
-            //     message: 'Error',
-            //     description: `${error.response?.data.message}`,
-            //     icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
-            // });
+            notification.open({
+                message: 'Error',
+                description: `${error.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
             dispatch({
                 type: 'END_USER_REQUEST'
             })

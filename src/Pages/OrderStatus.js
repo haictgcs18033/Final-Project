@@ -51,7 +51,7 @@ export default function OrderStatus() {
                 return <tr key={index}>
                     <td><img src={`${product.product.productPictures[0].img}`} alt="Not found" /></td>
                     <td>{product.product.name}</td>
-                    <td>{product.payPrice}</td>
+                    <td>{product.payPrice} $</td>
                     <td>{product.purchaseQuantity}</td>
                     <td>
                         <span>{moment(orderStatus.updateAt).format('L')} - </span>
@@ -77,7 +77,7 @@ export default function OrderStatus() {
                         </p>
                         <p>
                             <span className={`font-weight-bold`}>Price : </span>
-                            {product.payPrice}
+                            {product.payPrice} $
                         </p>
                         <p>
                             <span className={`font-weight-bold`}>Quantity : </span>

@@ -8,8 +8,10 @@ import { WarningOutlined } from '@ant-design/icons';
 import { Comment, Avatar, Collapse } from 'antd';
 import Slider from "react-slick";
 import userImageNone from '../asset/img/userImage.png'
+import { useHistory } from 'react-router-dom'
 
 export default function ProductDetailPage(props) {
+    let history = useHistory()
     let productDetailPage = useSelector(state => state.ecommerceReducer.productDetailPage)
     let { productId } = useParams()
     const dispatch = useDispatch()
@@ -37,6 +39,13 @@ export default function ProductDetailPage(props) {
     }, [productMainImg])
 
     let addToCart = (_id, quantity, price, limitedPrice, color, size) => {
+        if (!localStorage.getItem('USER_LOGIN')) {
+            notification.open({
+                message: 'Error',
+                description: 'Please login before adding product to cart',
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+        }
         if (!color) {
             notification.open({
                 message: 'Error',
@@ -53,7 +62,30 @@ export default function ProductDetailPage(props) {
             dispatch(action.addProduct(_id, quantity, price, limitedPrice, color, size))
         }
     }
-    console.log(productDetailPage);
+    let buyNow = (_id, quantity, price, limitedPrice, color, size) => {
+        if (!localStorage.getItem('USER_LOGIN')) {
+            notification.open({
+                message: 'Error',
+                description: 'Please login before adding product to cart',
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+        }
+        if (!color) {
+            notification.open({
+                message: 'Error',
+                description: 'Please choose color',
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+        } else if (!size) {
+            notification.open({
+                message: 'Error',
+                description: 'Please choose size',
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+        } else {
+            dispatch(action.buyNowApi(_id, quantity, price, limitedPrice, color, size, history))
+        }
+    }
     // Slick
     const settings = {
         dots: true,
@@ -112,7 +144,7 @@ export default function ProductDetailPage(props) {
             return classes.activeSize
         }
     }
-  
+
     return (
         <div>
             <div className={`container my-5`}>
@@ -128,7 +160,18 @@ export default function ProductDetailPage(props) {
                     </Slider>
                 </div>
                 <div className={`${classes.purchaseMobile}`}>
-                    <button className={`  ${classes.buyNow}`}>Buy Now</button>
+
+                    <button className={` ${classes.buyNow}`}
+                        onClick={() => {
+                            buyNow(
+                                productDetailPage._id,
+                                quantity,
+                                productDetailPage.price,
+                                productDetailPage.price,
+                                color,
+                                size
+                            )
+                        }}>Buy Now</button>
                     <button className={`${classes.addToCart}`}
                         onClick={() => {
                             addToCart(
@@ -184,7 +227,7 @@ export default function ProductDetailPage(props) {
                                             productDetailPage.color?.map((color, index) => {
                                                 if (color === "red") {
                                                     return <button key={index} className={`${classes.redColor} ${handleChangeActiveObject(index)}`} onClick={() => {
-                                                        handleChooseColor("red",index)
+                                                        handleChooseColor("red", index)
                                                     }}></button>
                                                 } else if (color === "green") {
                                                     return <button key={index} className={`${classes.greenColor} ${handleChangeActiveObject(index)}`} onClick={() => {
@@ -230,7 +273,17 @@ export default function ProductDetailPage(props) {
                                     </div>
                                 </div>
                                 <div className={classes.purchase}>
-                                    <button className={` mr-2 ${classes.buyNow}`}>Buy Now</button>
+                                    <button className={` mr-2 ${classes.buyNow}`}
+                                        onClick={() => {
+                                            buyNow(
+                                                productDetailPage._id,
+                                                quantity,
+                                                productDetailPage.price,
+                                                productDetailPage.price,
+                                                color,
+                                                size
+                                            )
+                                        }}>Buy Now</button>
                                     <button className={`${classes.addToCart}`}
                                         onClick={() => {
                                             addToCart(
@@ -345,16 +398,16 @@ export default function ProductDetailPage(props) {
                                                     key={index}
                                                     author={<p>{review.user?.firstName} {review.user?.lastName}</p>}
                                                     avatar={
-                                                        review.user?.profilePicture?
-                                                        <Avatar
-                                                            src={`${review.user?.profilePicture}`}
-                                                            alt="Han Solo"
-                                                        />
-                                                        :
-                                                        <Avatar
-                                                            src={userImageNone}
-                                                            alt="Han Solo"
-                                                        />
+                                                        review.user?.profilePicture ?
+                                                            <Avatar
+                                                                src={`${review.user?.profilePicture}`}
+                                                                alt="Han Solo"
+                                                            />
+                                                            :
+                                                            <Avatar
+                                                                src={userImageNone}
+                                                                alt="Han Solo"
+                                                            />
                                                     }
                                                     content={
                                                         <p>
@@ -489,16 +542,16 @@ export default function ProductDetailPage(props) {
                                         key={index}
                                         author={<p>{review.user?.firstName} {review.user?.lastName}</p>}
                                         avatar={
-                                            review.user?.profilePicture?
-                                            <Avatar
-                                                src={`${review.user?.profilePicture}`}
-                                                alt="Han Solo"
-                                            />
-                                            :
-                                            <Avatar
-                                                src={userImageNone}
-                                                alt="Han Solo"
-                                            />
+                                            review.user?.profilePicture ?
+                                                <Avatar
+                                                    src={`${review.user?.profilePicture}`}
+                                                    alt="Han Solo"
+                                                />
+                                                :
+                                                <Avatar
+                                                    src={userImageNone}
+                                                    alt="Han Solo"
+                                                />
                                         }
                                         content={
                                             <p>

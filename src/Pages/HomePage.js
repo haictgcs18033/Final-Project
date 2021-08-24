@@ -21,10 +21,11 @@ export default function HomePage() {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.ecommerceReducer.productList)
     let categoryList = useSelector(state => state.adminReducer.categoryList)
+
     let [email, setEmail] = useState({
         emailUser: ''
     })
-  
+
     useEffect(() => {
         dispatch(getCatgory())
     }, [dispatch])
@@ -111,7 +112,7 @@ export default function HomePage() {
         if (!re.test(email.emailUser)) {
             emailMessage = 'Invalid email'
         }
-        if (email.emailUser.startsWith(" ") ||email.emailUser.endsWith(" ")) {
+        if (email.emailUser.startsWith(" ") || email.emailUser.endsWith(" ")) {
             emailMessage = "Not white space"
         }
         if (!email.emailUser) {
@@ -140,7 +141,7 @@ export default function HomePage() {
         let { name, value } = e.target
         setEmail({ ...email, [name]: value })
     }
-   
+
     return (
         <div>
             <Carousel></Carousel>
@@ -297,6 +298,13 @@ export default function HomePage() {
                                                 <img className="card-img-top" src={`${product.productPictures[0]?.img}`} alt="Not found" />
                                                 <div className="card-body">
                                                     <h4 className="card-title">{product.name}</h4>
+                                                    <p >
+                                                        <span className={`badge badge-warning py-2 px-2 mr-2`}
+                                                            style={{ color: 'white' }}>
+                                                            {product.averageStar}  <i className="fas fa-star" />
+                                                        </span>
+                                                        <span>({product.reviews.length})</span>
+                                                    </p>
                                                     <p className="card-text">{product.price} $</p>
                                                 </div>
                                             </NavLink>
@@ -340,6 +348,13 @@ export default function HomePage() {
                                                 <img className="card-img-top" src={`${product.productPictures[0]?.img}`} alt="Not found" />
                                                 <div className="card-body">
                                                     <h4 className="card-title">{product.name}</h4>
+                                                    <p >
+                                                        <span className={`badge badge-warning py-2 px-2 mr-2`}
+                                                            style={{ color: 'white' }}>
+                                                            {product.averageStar}  <i className="fas fa-star" />
+                                                        </span>
+                                                        <span>({product.reviews.length})</span>
+                                                    </p>
                                                     <p className="card-text">{product.price} $</p>
                                                 </div>
                                             </NavLink>

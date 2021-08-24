@@ -16,7 +16,7 @@ export default function Cart() {
     useEffect(() => {
         dispatch(action.getCartItems())
     }, [dispatch])
-  
+
     if (loading) {
         return <div style={{height:'582px',display:'flex',justifyContent:'center',alignItems:'center',margin:'0 20px'}}>
             <Skeleton avatar active paragraph={{ rows: 10 }} />
@@ -62,7 +62,7 @@ export default function Cart() {
                             </button>
                         </div>
                     </td>
-                    <td><p className={`ml-3`}>{item.price}</p></td>
+                    <td><p className={`ml-3`}>{item.price} $</p></td>
                     <td className={`${classes.deleteProduct}`} >
                         <button onClick={() => {
                             removeItem(item._id)
@@ -133,7 +133,7 @@ export default function Cart() {
                         <p>{item.product?.name}</p>
                     </div>
                     <div className="price">
-                        <p>{item.price}</p>
+                        <p>{item.price} $</p>
                     </div>
                 </div>
             })
@@ -180,7 +180,7 @@ export default function Cart() {
                                                 let result = tongtien + product.price
                                                 return result
                                             }, 0)
-                                        }
+                                        } $
                                     </div>
 
                                 </div>
@@ -203,7 +203,7 @@ export default function Cart() {
                                             let result = tongtien + product.price
                                             return result
                                         }, 0)
-                                    }
+                                    } $
                                 </div>
 
                             </div>

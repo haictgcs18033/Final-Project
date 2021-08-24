@@ -60,6 +60,8 @@ const stateDefault = {
       
     },
     userImage:'',
+    // Contact user
+    emailContact:[],
     // Loading
     loading: false
 }
@@ -215,6 +217,9 @@ export const adminReducer = (state = stateDefault, action) => {
         }
         case 'INPUT_UPDATE_ADMIN':{
             return{...state,adminDetail:action.value}
+        }
+        case 'GET_EMAIL_CONTACT':{
+            return {...state,emailContact:action.email}
         }
         default: {
             return { ...state }

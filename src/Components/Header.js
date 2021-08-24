@@ -231,9 +231,21 @@ export default function Header() {
                     <div className={classes.flexBreak}></div>
                     <div className={` ${classes.searchGroupMobile}`}>
                         <div className={`${classes.search}`}>
-                            <input placeholder="Search for product and category" />
+                            <input placeholder="Search for product and category" value={textSearch}
+                                onChange={handleSearchProduct} />
                             <i className={`fa fa-search ${classes.searchIcon}`} />
+                            <div className={`${classes.searchResult}`}>
+                                <div className={classes.searchSuggestion}>
+                                    {suggestion.length > 0 && textSearch.length > 0 ? suggestion.map((suggest, index) => {
+                                        return <NavLink key={index} to={`/detail/${suggest.slug}/${suggest._id}`}>{suggest.name}</NavLink>
+                                    }) : ''
+
+                                    }
+                                </div>
+
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </Affix>

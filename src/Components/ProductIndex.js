@@ -24,8 +24,14 @@ export default function ProductIndex() {
                                     </div>
                                     <div className={classes.productContent}>
                                         <h5>{product.name}</h5>
-                                        <p className="badge badge-success">5</p>
-                                        <p>{product.price}</p>
+                                        <p >
+                                            <span className={`badge badge-warning py-2 px-2 mr-2`}
+                                            >
+                                                {product.averageStar}  <i className="fas fa-star" />
+                                            </span>
+                                            <span>({product.reviews.length})</span>
+                                        </p>
+                                        <p>{product.price} $</p>
                                     </div>
                                 </NavLink>
                             })
@@ -45,8 +51,14 @@ export default function ProductIndex() {
                                     </div>
                                     <div className={classes.productContent}>
                                         <h5>{product.name}</h5>
-                                        <p className="badge badge-success">5</p>
-                                        <p>{product.price}</p>
+                                        <p >
+                                            <span className={`badge badge-warning py-2 px-2 mr-2`}
+                                            >
+                                                {product.averageStar}  <i className="fas fa-star" />
+                                            </span>
+                                            <span>({product.reviews.length})</span>
+                                        </p>
+                                        <p>{product.price} $</p>
                                     </div>
                                 </NavLink>
                             })
@@ -65,8 +77,14 @@ export default function ProductIndex() {
                                     </div>
                                     <div className={classes.productContent}>
                                         <h5>{product.name}</h5>
-                                        <p className="badge badge-success">5</p>
-                                        <p>{product.price}</p>
+                                        <p >
+                                            <span className={`badge badge-warning py-2 px-2 mr-2`}
+                                            >
+                                                {product.averageStar}  <i className="fas fa-star" />
+                                            </span>
+                                            <span>({product.reviews.length})</span>
+                                        </p>
+                                        <p>{product.price} $</p>
                                     </div>
                                 </NavLink>
                             })
@@ -85,8 +103,14 @@ export default function ProductIndex() {
                                     </div>
                                     <div className={classes.productContent}>
                                         <h5>{product.name}</h5>
-                                        <p className="badge badge-success">5</p>
-                                        <p>{product.price}</p>
+                                        <p >
+                                            <span className={`badge badge-warning py-2 px-2 mr-2`}
+                                            >
+                                                {product.averageStar}  <i className="fas fa-star" />
+                                            </span>
+                                            <span>({product.reviews.length})</span>
+                                        </p>
+                                        <p>{product.price} $</p>
                                     </div>
                                 </NavLink>
                             })

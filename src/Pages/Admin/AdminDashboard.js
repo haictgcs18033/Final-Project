@@ -5,12 +5,14 @@ import * as action from '../../redux/action/AdminAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { PolarArea } from 'react-chartjs-2';
 import { Badge, Skeleton } from 'antd';
+import moment from 'moment';
 export default function AdminDashboard() {
     const userArray = useSelector(state => state.adminReducer.userArray)
     const categoryList = useSelector(state => state.adminReducer.categoryList)
     const productList = useSelector(state => state.adminReducer.productList)
     const customerOrders = useSelector(state => state.adminReducer.customerOrders)
     let loading = useSelector(state => state.adminReducer.loading)
+    let emailContact = useSelector(state => state.adminReducer.emailContact)
 
     let dispatch = useDispatch()
     useEffect(() => {
@@ -20,7 +22,9 @@ export default function AdminDashboard() {
         dispatch(action.getCustomerOrder())
 
     }, [dispatch])
-
+    useEffect(() => {
+        dispatch(action.getEmailContact())
+    }, [dispatch])
     let allCategory = []
     let renderAllCategory = (categoryList) => {
         for (let item of categoryList) {
@@ -68,7 +72,7 @@ export default function AdminDashboard() {
         };
         return data
     }
-    console.log(productList);
+
 
     return (
         <div className={classes.adminDashboard}>
@@ -131,6 +135,23 @@ export default function AdminDashboard() {
             <div className={classes.adminUserDaily}>
                 <div className={classes.userContact}>
                     <h4>Contact User</h4>
+                    <div className={classes.userContactGroup}>
+                        {
+                            emailContact?.map((email, index) => {
+                                return <Badge.Ribbon text="Signup" >
+                                    <div key={index} className={classes.card}>
+                                        <h5>{email.email}</h5>
+                                        <p>
+                                            {moment(email.createdAt).format('L')}
+                                        </p>
+                                    </div>
+                                </Badge.Ribbon>
+
+                            })
+                        }
+                         
+                         
+                    </div>
                 </div>
                 <div className={classes.flexBreak}></div>
                 <div className={classes.dailyTask}>

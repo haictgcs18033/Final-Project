@@ -4,13 +4,14 @@
 .carouselItem {
     width: 100%;
     height: 500px;
-    button {
+    .button {
         padding: 5px 25px;
-        color: #642ab5;
+        color: white;
         font-size: 15px;
         font-weight: bold;
         background: none;
         border: 2px solid #642ab5;
+        background:#642ab5;
         transition: all 0.5s;
         border-radius: 6px;
         &:hover {

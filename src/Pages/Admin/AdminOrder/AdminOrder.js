@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as action from '../../../redux/action/AdminAction'
 import classes from '../AdminOrder/AdminOrder.module.scss'
-import { message, Progress, Skeleton } from 'antd';
+import { Progress, Skeleton } from 'antd';
 import { Select } from 'antd';
 
 import Modal from 'antd/lib/modal/Modal';
@@ -53,7 +53,7 @@ export default function AdminOrder() {
     
    
     const handleOk = () => {
-        message.success('Handling this order successfully');
+       
         dispatch(action.handleOrderStatus(payload))
         setModalOrderStatus(false);
     };

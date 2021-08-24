@@ -560,27 +560,60 @@ export const addProduct = (id, quantity, price, limitedPrice, color, size) => {
         }
 
     }
-
     return async dispatch => {
         dispatch({
             type: 'GET_USER_REQUEST'
         })
         try {
-            let result = await axios({
+             await axios({
                 url: 'https://fes-backend-server.herokuapp.com/cart/user/add-to-cart',
                 method: 'POST',
                 data: item,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
             })
-            console.log(result.data);
-            dispatch(getCartItems())
 
+            dispatch(getCartItems())
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
         } catch (error) {
-            notification.open({
-                message: 'Error',
-                description: `${error.response?.data.message}`,
-                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
-            });
+
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
+        }
+
+
+    }
+}
+export const buyNowApi = (id, quantity, price, limitedPrice, color, size, history) => {
+    const item = {
+        cartItems: {
+            product: id,
+            quantity: quantity,
+            price: price,
+            limitedPrice: limitedPrice,
+            color: color,
+            size: size
+        }
+
+    }
+    return async dispatch => {
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
+        try {
+            await axios({
+                url: 'https://fes-backend-server.herokuapp.com/cart/user/add-to-cart',
+                method: 'POST',
+                data: item,
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ACCESS_TOKEN') }
+            })
+
+            dispatch(getCartItems())
+            history.push('/placeOrder')
+        } catch (error) {
+
             dispatch({
                 type: 'END_USER_REQUEST'
             })
@@ -937,13 +970,13 @@ export const getOrderStatus = (orderId) => {
 }
 // Email Contact
 export const contactEmail = (email) => {
-  
+
     return async dispatch => {
         dispatch({
             type: 'GET_USER_REQUEST'
         })
         try {
-             await axios({
+            await axios({
                 url: 'https://fes-backend-server.herokuapp.com/user/emailContact',
                 method: 'POST',
                 data: email,
@@ -953,7 +986,7 @@ export const contactEmail = (email) => {
                 text: "",
                 icon: "success",
             });
-           
+
             dispatch({
                 type: 'END_USER_REQUEST'
             })
