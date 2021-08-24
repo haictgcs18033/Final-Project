@@ -63,14 +63,14 @@ export default function ProductDetailPage(props) {
         }
     }
     let buyNow = (_id, quantity, price, limitedPrice, color, size) => {
+      
         if (!localStorage.getItem('USER_LOGIN')) {
             notification.open({
                 message: 'Error',
                 description: 'Please login before adding product to cart',
                 icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
             });
-        }
-        if (!color) {
+        }else if (!color) {
             notification.open({
                 message: 'Error',
                 description: 'Please choose color',

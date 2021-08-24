@@ -250,17 +250,11 @@
         left:80px;
         transition: all 0.5s;
     }
-    .carousel-control-prev {
-        &:hover {
-            box-shadow: 0 0 5px 5px;
-        }
-    }
+   
     .carousel-control-next {
         left: unset;
         right: 80px;
-        &:hover {
-            box-shadow: 0 0 5px 5px;
-        }
+      
     }
    
 }

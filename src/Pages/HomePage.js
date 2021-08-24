@@ -6,7 +6,7 @@ import classes from '../sass/Homepage.module.scss'
 import * as action from '../redux/action/EcommerceAction'
 import { BackTop } from 'antd';
 import Carousel from '../Components/CarouselEcommerce'
-import { getCatgory } from '../redux/action/AdminAction'
+
 import menFashion1 from '../asset/img/men-fashion1.jpg'
 import menFashion2 from '../asset/img/men-fashion2.jpg'
 import womenFashion1 from '../asset/img/women-fashion1.jpg'
@@ -20,14 +20,15 @@ import { WarningOutlined } from '@ant-design/icons';
 export default function HomePage() {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.ecommerceReducer.productList)
-    let categoryList = useSelector(state => state.adminReducer.categoryList)
-
+    let categoryList = useSelector(state => state.ecommerceReducer.categoryList)
+   
+   
     let [email, setEmail] = useState({
         emailUser: ''
     })
 
     useEffect(() => {
-        dispatch(getCatgory())
+        dispatch(action.getCategoryHomepage())
     }, [dispatch])
 
     // console.log(productList);
@@ -141,6 +142,7 @@ export default function HomePage() {
         let { name, value } = e.target
         setEmail({ ...email, [name]: value })
     }
+   
 
     return (
         <div>

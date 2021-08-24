@@ -15,7 +15,8 @@ const stateDefault = {
         userImage:''
     },
     userImage:'',
-  
+    // Category
+    categoryList:[],
   
     // Product
     productAll:[],
@@ -53,6 +54,9 @@ const stateDefault = {
 export const ecommerceReducer = (state = stateDefault, action) => {
     
     switch (action.type) {
+        case 'GET_CATEGORY_HOMEPAGE':{
+           return {...state,categoryList:action.category.category}
+        }
         case 'GET_USER_REQUEST':{
             return {...state,loading:true}
         }

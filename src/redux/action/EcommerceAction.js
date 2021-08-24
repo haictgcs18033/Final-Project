@@ -2,6 +2,36 @@ import { notification } from "antd"
 import { WarningOutlined } from '@ant-design/icons';
 import axios from "axios"
 import swal from "sweetalert"
+export const getCategoryHomepage=()=>{
+    return async dispatch => {
+        dispatch({
+            type: 'GET_USER_REQUEST'
+        })
+        try {
+            let result = await axios({
+                url: 'https://fes-backend-server.herokuapp.com/category',
+                method: 'GET',
+
+            })
+            dispatch({
+                type: 'GET_CATEGORY_HOMEPAGE',
+                category: result.data
+            })
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
+        } catch (err) {
+            notification.open({
+                message: 'Error',
+                description: `${err.response?.data.message}`,
+                icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+            });
+            dispatch({
+                type: 'END_USER_REQUEST'
+            })
+        }
+    }
+}
 // Product
 export const getProduct = () => {
     return async dispatch => {
