@@ -88,7 +88,10 @@ export default function AdminProduct() {
         if (name === "productPictures") {
             if (!value) {
                 newValues[name] = []
-            } else {
+            }else if(e.target.files[0] && !e.target.files[0].name?.match(/^.*\.(jpg|jpeg|png|gif)$/)){
+                return  alert('Please choose image')
+            } 
+            else {
                 newValues[name] = [...productPictures, e.target.files[0]]
             }
         }

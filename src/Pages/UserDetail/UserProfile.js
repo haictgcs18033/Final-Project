@@ -5,7 +5,8 @@ import * as action from '../../redux/action/EcommerceAction'
 import userImageNone from '../../asset/img/userImage.png'
 import ChangePassword from './ChangePassword'
 import UserAddress from './UserAddress'
-
+import { notification } from 'antd'
+import { WarningOutlined } from '@ant-design/icons';
 
 
 
@@ -95,14 +96,27 @@ export default function UserProfile() {
         newValues[name] = value
 
         if (name === "userImage") {
-            newValues[name] = e.target.files[0]
+            if (e.target.files[0] && !e.target.files[0].name?.match(/^.*\.(jpg|jpeg|png|gif)$/)) {
+                return  notification.open({
+                    message: 'Error',
+                    description: `Please choose image`,
+                    icon: <WarningOutlined style={{ color: '#ff9f00' }} />,
+                });
+               
+
+            } else {
+                newValues[name] = e.target.files[0]
+            }
+
         }
         dispatch(action.infoUpdateUser(newValues))
     }
+    console.log(userDetail);
     let validation = () => {
         let emailMessage = ''
         let firstNameMessage = ''
         let lastNameMessage = ''
+
         // First Name
         if (!userDetail.firstName) {
             firstNameMessage = "First name is not empty"
@@ -165,7 +179,7 @@ export default function UserProfile() {
                                         <img src={userImageNone} alt={`Not found`} />
                                 }
                             </label>
-                            <input type="file" name="userImage" onChange={handleInput} />
+                            <input type="file"  name="userImage" onChange={handleInput} />
                         </div>
                     </div>
                     <div className={`form-group`}>

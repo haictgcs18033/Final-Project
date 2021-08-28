@@ -1,4 +1,4 @@
-import {  Skeleton } from 'antd'
+import { Skeleton } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import * as action from '../../../redux/action/AdminAction'
@@ -207,7 +207,16 @@ const AdminProductItem = React.memo((props) => {
         let { name, value } = e.target
         setProductUpdate({ ...productUpdate, [name]: value })
         if (name === 'productPictures') {
-            setProductUpdate({ ...productUpdate, [name]: [...productPictures, e.target.files[0]] })
+            if (e.target.files[0] && !e.target.files[0].name?.match(/^.*\.(jpg|jpeg|png|gif)$/)) {
+                setProductUpdate({...productUpdate})
+                return alert('Please choose image')
+
+            }else if(!value){
+                setProductUpdate({...productUpdate})
+            } else {
+                setProductUpdate({ ...productUpdate, [name]: [...productPictures, e.target.files[0]] })
+            }
+
         }
 
     }
@@ -334,7 +343,7 @@ const AdminProductItem = React.memo((props) => {
         let isValid = validation()
         if (isValid) {
             console.log(productUpdate);
-            window.$('#exampleModalUpdate').modal('hide'); 
+            window.$('#exampleModalUpdate').modal('hide');
             dispatch(action.updateProduct(productUpdate, curPage, productPerPage))
             setProductUpdate({
                 ...productUpdate, color: [], size: [], productPictures: []
@@ -349,7 +358,7 @@ const AdminProductItem = React.memo((props) => {
     let handleDeleteProduct = (id) => {
         dispatch(action.deleteProduct(id, curPage, productPerPage))
     }
-    // console.log(productPictures);
+  
 
     return (
         <div className={`${classes.productItemContainer}`}>
@@ -597,9 +606,9 @@ const AdminProductItem = React.memo((props) => {
                                                 name="productPictures"
                                                 onChange={handleInputUpdate}
                                             />
-                                            {productPictures.length > 0 ?
+                                            {productPictures.length>0 ?
                                                 productPictures.map((img, index) => {
-                                                    
+
                                                     return <div className={`d-flex justify-content-between`} key={index}>
                                                         <p className={`mb-0`}
                                                             style={{ lineHeight: '31px' }}
@@ -607,16 +616,15 @@ const AdminProductItem = React.memo((props) => {
                                                         <button
                                                             className={`${classes.deleteFile}`}
                                                             onClick={() => {
-                                                                handleDeleteFile(img.name)
+                                                                handleDeleteFile(img?.name)
                                                             }}
                                                         >
                                                             <i className="fas fa-times" />
 
                                                         </button>
                                                     </div>
-                                                })
-                                                :
-                                                ''
+                                                }):
+                                                null
                                             }
 
                                             {error.productPictures ? <div style={{ color: 'red', margin: '10px 0' }}>{error.productPictures}</div> : ''}

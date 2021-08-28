@@ -65,7 +65,12 @@ export default function AdminAccount() {
         let newValues = { ...adminDetail }
         newValues[name] = value
         if (name === "userImage") {
-            newValues[name] = e.target.files[0]
+            if (e.target.files[0] && !e.target.files[0].name?.match(/^.*\.(jpg|jpeg|png|gif)$/)) {
+                return alert('Please choose image')
+            } else {
+                newValues[name] = e.target.files[0]
+            }
+           
         }
         dispatch({
             type: 'INPUT_UPDATE_ADMIN',

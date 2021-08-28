@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import classes from '../sass/LoginAdmin.module.scss'
 import * as action from '../redux/action/EcommerceAction'
+import { NavLink } from 'react-router-dom'
 export default function AdminLogin(props) {
     const dispatch = useDispatch()
     let [admin, setAdmin] = useState({
@@ -42,6 +43,10 @@ export default function AdminLogin(props) {
                             }} />
                         </div>
 
+                    </div>
+                    <div className={classes.link}>
+                        <NavLink to="/">Don't have account ?</NavLink>
+                        <NavLink to="/forget-password">Forget Password ?</NavLink>
                     </div>
                     <button className={classes.button}>
                         Login

@@ -4,6 +4,7 @@ import classes from '../AdminCategory/AdminCategory.module.scss'
 import * as action from '../../../redux/action/AdminAction'
 import CheckboxTree from 'react-checkbox-tree';
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+import {  Skeleton } from 'antd';
 
 export default function AdminCategory() {
     const categoryList = useSelector(state => state.adminReducer.categoryList)
@@ -38,9 +39,11 @@ export default function AdminCategory() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(action.getCatgory())
-    }, [dispatch, loading])
+    }, [dispatch])
     if (loading) {
-        return <p>Data is loading ...</p>
+        return <div className={classes.load}>
+        <Skeleton active avatar paragraph={{ rows: 4 }} />
+    </div>
     }
     let renderCategory = (categoryList) => {
         let myCategory = []
@@ -78,7 +81,11 @@ export default function AdminCategory() {
         let newValues = { ...category }
         newValues[name] = value
         if (name === "categoryImage") {
-            newValues[name] = e.target.files[0]
+            if (e.target.files[0] && !e.target.files[0].name?.match(/^.*\.(jpg|jpeg|png|gif)$/)) {
+                return  alert('Please choose image')
+            } else {
+                newValues[name] = e.target.files[0]
+            }
         }
         dispatch(action.handleInputAdmin(newValues))
     }
