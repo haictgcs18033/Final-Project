@@ -3,45 +3,61 @@ import { useDispatch } from 'react-redux'
 import classes from '../sass/LoginAdmin.module.scss'
 import * as action from '../redux/action/EcommerceAction'
 import { NavLink } from 'react-router-dom'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 export default function AdminLogin(props) {
     const dispatch = useDispatch()
-    let [admin, setAdmin] = useState({
-        email: '',
-        password: ''
-    })
+   
     let [typeText, setTypeText] = useState(false)
-    let handleInput = (e) => {
-        let { name, value } = e.target
-        setAdmin({ ...admin, [name]: value })
-    }
-
-    let handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(action.loginAdmin(admin, props))
-    }
-
-
+    
+    // Validation
+    let validate = Yup.object({
+        email: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .email('Invalid email')
+            .required('Email is not empty'),
+        password: Yup.string()
+            .trim('Not white space')
+            .strict()
+            .required("Password is not empty")
+    })
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        validationSchema: validate,
+        onSubmit: values => {
+            console.log(values);
+            dispatch(action.loginAdmin(values, props))
+        },
+    });
 
     return (
         <div className={classes.loginAdminContainers}>
-            <form className={classes.loginContainer} onSubmit={handleSubmit}>
+            <form className={classes.loginContainer} onSubmit={formik.handleSubmit}>
                 <div className={classes.loginWrapper}>
                     <h3 className="text-center">FES</h3>
                     <p>Welcome back !</p>
                     <div className={`form-group ${classes.formGroup}`}>
                         <label>Email</label>
                         <input className={`form-control`} name='email'
-                            value={admin.email} onChange={handleInput} />
+                            value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                      
                     </div>
+                    {formik.errors.email && formik.touched.email ? <div style={{ color: "red", marginBottom: '10px' }}>{formik.errors.email}</div> : null}
                     <div className={`form-group`}>
                         <label>Password</label>
                         <div className={classes.password}>
                             <input type={`${typeText ? 'text' : 'password'}`} name="password"
-                                value={admin.password} onChange={handleInput} />
+                                value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             <i className={`fa fa-eye ${classes.eye}`} onClick={() => {
                                 setTypeText(!typeText)
                             }} />
+                            
                         </div>
+                        {formik.errors.password && formik.touched.password ? <div style={{ color: "red", marginTop: '10px' }}>{formik.errors.password}</div> : null}
 
                     </div>
                     <div className={classes.link}>
