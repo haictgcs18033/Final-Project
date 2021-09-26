@@ -2,7 +2,7 @@ import { notification } from "antd"
 import { WarningOutlined } from '@ant-design/icons';
 import axios from "axios"
 import swal from "sweetalert"
-export const getCategoryHomepage=()=>{
+export const getCategoryHomepage = () => {
     return async dispatch => {
         dispatch({
             type: 'GET_USER_REQUEST'
@@ -595,7 +595,7 @@ export const addProduct = (id, quantity, price, limitedPrice, color, size) => {
             type: 'GET_USER_REQUEST'
         })
         try {
-             await axios({
+            await axios({
                 url: 'https://fes-backend-server.herokuapp.com/cart/user/add-to-cart',
                 method: 'POST',
                 data: item,
