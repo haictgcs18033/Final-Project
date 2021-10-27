@@ -1,293 +1,293 @@
 .loginContainer {
-    margin: 30px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  height: 480px;
+  align-items: center;
 }
 .loginIntro {
-    background: #642ab5;
-    width: 400px;
-    border-radius: 12px 0 0 12px;
-    height: 430px;
-    padding: 30px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    h2 {
-        padding-left: 0;
-        font-size: 25px;
-        border-bottom: 0;
-    }
+  background: #642ab5;
+  width: 400px;
+  border-radius: 12px 0 0 12px;
+  height: 100%;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    padding-left: 0;
+    font-size: 25px;
+    border-bottom: 0;
+  }
 }
 .loginForm {
-    padding: 20px 40px;
-    border-radius: 0 12px 12px 0;
-    width: 600px;
-    height: 430px;
-    background-color: #1f1f1f;
-    .titleMobile {
-        display: none;
+  padding: 20px 40px;
+  border-radius: 0 12px 12px 0;
+  width: 600px;
+  height: 100%;
+  background-color: #1f1f1f;
+  .titleMobile {
+    display: none;
+  }
+  .imgContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    img {
+      width: 100px;
+      height: 100px;
     }
-    .imgContainer {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-        img {
-            width: 100px;
-            height: 100px;
-        }
-    }
+  }
 
-    h3 {
-        text-align: center;
-        font-weight: 700;
-        font-size: 28px;
-        margin: 0 0 20px;
-    }
-    p {
-        text-align: center;
-        font-weight: normal;
-        font-size: 14px;
-        color: white;
-    }
+  h3 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 0 0 20px;
+  }
+  p {
+    text-align: center;
+    font-weight: normal;
+    font-size: 14px;
+    color: white;
+  }
 }
 .navigateGroup {
-    display: flex;
-    margin: 10px 0;
-    justify-content: center;
-    .loginUser,
-    .signup {
-        margin-right: 20px;
-        color: white;
-        &:hover {
-            color: #642ab5;
-        }
+  display: flex;
+  margin: 10px 0;
+  justify-content: center;
+  .loginUser,
+  .signup {
+    margin-right: 20px;
+    color: white;
+    &:hover {
+      color: #642ab5;
     }
+  }
 }
 .formGroup {
+  margin: 20px 0;
+  .emailContainer,
+  .passwordContainer {
+    padding: 0 0;
+    display: flex;
+    border: 1px solid rgb(151, 150, 150);
+    border-radius: 6px;
+  }
+  .emailContainer {
+    margin-bottom: 20px;
+
+    .email {
+      border: none;
+      width: 100%;
+
+      background: #1f1f1f;
+      border-radius: 0 6px 6px 0;
+      padding: 10px 5px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+    .envelope {
+      height: 100%;
+      padding: 0 10px;
+      font-size: 20px;
+      line-height: 44px;
+      color: white;
+    }
+  }
+  .passwordContainer {
+    position: relative;
+    .password {
+      border: none;
+      width: 100%;
+
+      background: #1f1f1f;
+      border-radius: 0 6px 6px 0;
+      padding: 10px 5px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+    .lock {
+      height: 100%;
+      padding: 0 12px;
+      font-size: 20px;
+      line-height: 44px;
+      color: white;
+    }
+    .eye {
+      position: absolute;
+      line-height: 44px;
+      height: 100%;
+      padding: 0 20px;
+      border-radius: 0 6px 6px 0;
+
+      right: 0;
+      // font-size: 20px;
+      background-color: #642ab5;
+      transition: all 0.5s;
+      &:hover {
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+  .groupButton {
+    display: flex;
     margin: 20px 0;
-    .emailContainer,
-    .passwordContainer {
-        padding: 0 0;
-        display: flex;
-        border: 1px solid rgb(151, 150, 150);
+    justify-content: space-between;
+    .button {
+      padding: 10px 40px;
+      border: none;
+      background: #642ab5;
+      color: white;
+      font-size: 15px;
+
+      border-radius: 6px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .link {
+      color: white;
+      transition: all 0.5s;
+      margin-bottom: 0;
+      line-height: 43px;
+      &:hover {
+        cursor: pointer;
+        color: #642ab5;
+      }
+    }
+  }
+  .anotherMedia {
+    h5 {
+      text-align: center;
+    }
+    .socialMedia {
+      display: flex;
+      margin: 20px 0;
+      justify-content: space-around;
+      .googleButton,
+      .facebookButton {
+        font-weight: bold;
+        height: 40px;
+        width: 250px;
+        background: white;
+        color: #1f1f1f;
+        border: none;
         border-radius: 6px;
+        &:hover {
+          cursor: pointer;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+      .facebookButton {
+        background: #4c69ba;
+        color: white;
+      }
     }
-    .emailContainer {
-        margin-bottom: 20px;
-
-        .email {
-            border: none;
-            width: 100%;
-
-            background: #1f1f1f;
-            border-radius: 0 6px 6px 0;
-            padding: 10px 5px;
-
-            &:focus {
-                outline: none;
-            }
-        }
-        .envelope {
-            height: 100%;
-            padding: 0 10px;
-            font-size: 20px;
-            line-height: 44px;
-            color: white;
-        }
+  }
+}
+@media screen and(max-width:576px) {
+  .loginIntro {
+    display: none;
+  }
+  .navigateGroup {
+    margin-left: 20px;
+  }
+  .loginForm {
+    border-radius: 6px;
+    margin: 0 20px;
+    height: 410px;
+    padding: 20px 20px;
+    h3 {
+      font-size: 20px;
     }
-    .passwordContainer {
-        position: relative;
-        .password {
-            border: none;
-            width: 100%;
-
-            background: #1f1f1f;
-            border-radius: 0 6px 6px 0;
-            padding: 10px 5px;
-
-            &:focus {
-                outline: none;
-            }
-        }
-        .lock {
-            height: 100%;
-            padding: 0 12px;
-            font-size: 20px;
-            line-height: 44px;
-            color: white;
-        }
-        .eye {
-            position: absolute;
-            line-height: 44px;
-            height: 100%;
-            padding: 0 20px;
-            border-radius: 0 6px 6px 0;
-
-            right: 0;
-            // font-size: 20px;
-            background-color: #642ab5;
-            transition: all 0.5s;
-            &:hover {
-                color: white;
-                cursor: pointer;
-            }
-        }
+    .titleMobile {
+      color: #642ab5;
+      font-size: 30px;
+      letter-spacing: 5px;
     }
+  }
+  .formGroup {
     .groupButton {
-        display: flex;
-        margin: 20px 0;
-        justify-content: space-between;
-        .button {
-            padding: 10px 40px;
-            border: none;
-            background: #642ab5;
-            color: white;
-            font-size: 15px;
-          
-            border-radius: 6px;
-            &:hover {
-                cursor: pointer;
-              
-            }
+      .button {
+        &:hover {
+          cursor: pointer;
+          background: #642ab5;
         }
-        .link {
-            color: white;
-            transition: all 0.5s;
-            margin-bottom: 0;
-            line-height: 43px;
-            &:hover {
-                cursor: pointer;
-                color: #642ab5;
-            }
+      }
+      .link {
+        &:hover {
+          cursor: pointer;
+          color: white;
         }
+      }
     }
     .anotherMedia {
-        h5 {
-            text-align: center;
+      .socialMedia {
+        .googleButton,
+        .facebookButton {
+          width: 145px;
         }
-        .socialMedia {
-            display: flex;
-            margin:20px 0;
-            justify-content: space-around;
-            .googleButton,.facebookButton{
-               font-weight: bold;
-                height:40px;
-               width:250px;
-               background:white;
-               color: #1f1f1f;
-               border: none;
-               border-radius: 6px;
-               &:hover{
-                   cursor:pointer
-               }
-               &:focus{
-                   outline: none;
-               }
-            }
-            .facebookButton{
-                background:#4C69BA;
-                color: white;
-            }
+        .googleButton {
+          margin-left: 5px;
         }
+        .facebookButton {
+          margin-right: 5px;
+        }
+      }
     }
+  }
 }
-@media screen  and(max-width:576px) {
-    .loginIntro {
-        display: none;
-    }
-    .navigateGroup {
-        margin-left: 20px;
-    }
-    .loginForm {
-        border-radius: 6px;
-        margin: 0 20px;
-        height: 410px;
-        padding:20px 20px;
-        h3 {
-            font-size: 20px;
+@media screen and(min-width:577px) and(max-width:768px) {
+  .loginContainer {
+    margin: 30px 20px;
+  }
+
+  .formGroup {
+    .anotherMedia {
+      .socialMedia {
+        .googleButton,
+        .facebookButton {
+          width: 170px;
         }
-        .titleMobile {
-            color: #642ab5;
-            font-size: 30px;
-            letter-spacing: 5px;
-        }
+      }
     }
-    .formGroup {
-        .groupButton {
-            .button {
-                &:hover {
-                    cursor: pointer;
-                    background: #642ab5;
-                }
-            }
-            .link {
-                &:hover {
-                    cursor: pointer;
-                    color: white;
-                }
-            }
-        }
-        .anotherMedia{
-            .socialMedia{
-                .googleButton,.facebookButton{
-                    width:145px
-                }
-                .googleButton{
-                    margin-left: 5px;
-                }
-                .facebookButton{
-                    margin-right: 5px;
-                }
-            }
-        }
-    }
-}
-@media screen and(min-width:577px) and(max-width:768px){
-    .loginContainer{
-        margin:30px 20px;
-    }
-   
-   
-    .formGroup {
-      
-        .anotherMedia{
-            .socialMedia{
-                .googleButton,.facebookButton{
-                    width:170px
-                }
-            }
-        }
-       
-    }
+  }
 }
 @media screen and(min-width:769px) and(max-width:1024px) {
-    .loginContainer {
-        margin: 30px;
-    }
-    .formGroup {
-        .groupButton {
-            .button {
-                &:hover {
-                    cursor: pointer;
-                    background: #642ab5;
-                }
-            }
-            .link {
-                &:hover {
-                    cursor: pointer;
-                    color: white;
-                }
-            }
+  .loginContainer {
+    margin: 30px;
+  }
+  .formGroup {
+    .groupButton {
+      .button {
+        &:hover {
+          cursor: pointer;
+          background: #642ab5;
         }
-        .anotherMedia{
-            .socialMedia{
-                .googleButton,.facebookButton{
-                    width:240px
-                }
-            }
+      }
+      .link {
+        &:hover {
+          cursor: pointer;
+          color: white;
         }
-       
+      }
     }
+    .anotherMedia {
+      .socialMedia {
+        .googleButton,
+        .facebookButton {
+          width: 240px;
+        }
+      }
+    }
+  }
 }
