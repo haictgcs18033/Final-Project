@@ -353,7 +353,7 @@ export const forgetPassword = (emailUser) => {
     });
     try {
       await axios({
-        url: "http://localhost:4000/user/forget-password",
+        url: "https://fes-backend-server.herokuapp.com/user/forget-password",
         method: "POST",
         data: emailUser,
       });
