@@ -194,9 +194,9 @@ export const adminReducer = (state = stateDefault, action) => {
     }
     case "EMPTY_ARRAY": {
       let productUpdate = { ...state.product };
-      productUpdate.color?.length = 0;
-      productUpdate.size?.length = 0;
-      productUpdate.productPictures?.length = 0;
+      productUpdate.color.length = 0;
+      productUpdate.size.length = 0;
+      productUpdate.productPictures.length = 0;
       return { ...state, product: productUpdate };
     }
     case "RESET_FORM": {
